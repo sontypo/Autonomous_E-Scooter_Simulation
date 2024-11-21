@@ -1,0 +1,8 @@
+prefix=/home/saun/E-scooter_ws/install
+
+Name: escooter_msgs
+Description: Description of escooter_msgs
+Version: 0.1.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: message_runtime

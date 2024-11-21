@@ -1,0 +1,487 @@
+<?xml version="1.0" ?>
+<robot name="e-scooter" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <gazebo reference="base_link">
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+  <gazebo reference="reaction_motor">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="rotational_plate">
+    <material>Gazebo/BlackTransparent</material>
+  </gazebo>
+  <gazebo reference="handle_bar_chasis">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="front_wheel">
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+  <gazebo reference="back_wheel">
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+  <!-- ############################################################################################################### -->
+  <!-- ROBOT BASE -->
+  <link name="base_link">
+    <inertial>
+      <origin
+        xyz="0 0 0.054163"
+        rpy="0 0 0" />
+      <mass
+        value="9.4259" />
+      <inertia
+        ixx="0.013523"
+        ixy="-0.0012195"
+        ixz="-0.020036"
+        iyy="0.16754"
+        iyz="-0.00023682"
+        izz="0.16201" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/base_link.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.72549 0.35294 0.023529 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/base_link.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Dummy link -->
+  <link name="dummy"/>
+  <joint name="dummy_joint" type="fixed">
+    <parent link="dummy"/>
+    <child link="base_link"/>
+  </joint>
+
+  <!-- ############################################################################################################### -->
+  <!-- IMU -->
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="-0.0254 0.02032 0.048" rpy="1.570796327 0 0"/>
+  </joint>
+
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1e-7" ixy="0" ixz="0" iyy="1e-7" iyz="0" izz="1e-7"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://escooter_simulation/meshes/sensors/imu.stl" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <material>Gazebo/Grass</material>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <serviceName>imu_service</serviceName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <imu>
+          <noise>
+            <type>gaussian</type>
+            <rate>
+              <mean>0.0</mean>
+              <stddev>2e-4</stddev>
+              <bias_mean>0.0000075</bias_mean>
+              <bias_stddev>0.0000008</bias_stddev>
+            </rate>
+            <accel>
+              <mean>0.0</mean>
+              <stddev>1.7e-2</stddev>
+              <bias_mean>0.1</bias_mean>
+              <bias_stddev>0.001</bias_stddev>
+            </accel>
+          </noise>
+        </imu>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+  <!-- ############################################################################################################### -->
+  <!-- REACTION MOTOR -->
+  <link name="reaction_motor">
+    <inertial>
+      <origin
+        xyz="0.026073 0.0052211 0.10676"
+        rpy="0 0 0" />
+      <mass
+        value="1.8503" />
+      <inertia
+        ixx="0.0023146"
+        ixy="-2.7263E-07"
+        ixz="-6.7193E-06"
+        iyy="0.0013885"
+        iyz="2.9376E-06"
+        izz="0.0014608" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/reaction_motor.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/reaction_motor.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="reaction_motor_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="reaction_motor" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <!-- ############################################################################################################### -->
+  <!-- ROTATIONAL PLATE -->
+  <link name="rotational_plate">
+    <inertial>
+      <origin
+        xyz="0.16669 0.0060936 0.12078"
+        rpy="0 0 0" />
+      <mass
+        value="2.18948" />
+      <inertia
+        ixx="0.002376"
+        ixy="-9.1964E-08"
+        ixz="-2.0166E-06"
+        iyy="0.0014054"
+        iyz="3.5371E-07"
+        izz="0.0014131" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/rotational_plate.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.62745 0.62745 0.62745 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/rotational_plate.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rotational_plate_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="reaction_motor" />
+    <child
+      link="rotational_plate" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+  <transmission name="transmission_1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotational_plate_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- ############################################################################################################### -->
+  <!-- HANDLE BAR CHASIS -->
+  <link name="handle_bar_chasis">
+    <inertial>
+      <origin
+        xyz="0.50296 0.01759 0.51096"
+        rpy="0 0 0" />
+      <mass
+        value="3.5678" />
+      <inertia
+        ixx="0.029755"
+        ixy="-1.9292E-05"
+        ixz="-0.00044746"
+        iyy="0.02445"
+        iyz="-0.00054684"
+        izz="0.0089788" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/handle_bar_chasis.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/handle_bar_chasis.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="handle_bar_chasis_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="handle_bar_chasis" />
+
+    <!-- xyz="0 0 0.054163" base_link -->
+    <!-- <axis
+      xyz="0 0.040541 0.99918" /> -->
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-0.785398163"
+      upper="0.785398163"
+      effort="3"
+      velocity="1" />
+  </joint>
+
+  <transmission name="transmission_2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="handle_bar_chasis_joint">
+      <!-- <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface> -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_2">
+      <!-- <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface> -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- ############################################################################################################### -->
+  <!-- FRONT WHEEL -->
+  <link name="front_wheel">
+    <inertial>
+      <origin
+        xyz="0.48947 -0.0016462 -0.060516"
+        rpy="0 0 0" />
+      <mass
+        value="2.0732" />   <!-- 1.0732 -->
+      <inertia
+        ixx="0.0044381"
+        ixy="1.0276E-07"
+        ixz="-3.2882E-08"
+        iyy="0.0083199"
+        iyz="-0.00014291"
+        izz="0.0044433" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/front_wheel.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/front_wheel.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="front_wheel_joint"
+    type="revolute">
+    <!-- xyz="0 0 0.054163" base_link -->
+    <!-- <origin
+      xyz="0 0 0"
+      rpy="0 0 0" /> -->
+    <origin
+      xyz="0.48947 -0.0016462 -0.060516"
+      rpy="0 0 0" />
+    <parent
+      link="handle_bar_chasis" />
+    <child
+      link="front_wheel" />
+    <!-- <axis
+      xyz="-2.6729E-05 -0.99932 0.036798" /> -->
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="5"
+      velocity="1" />
+  </joint>
+
+  <transmission name="transmission_3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_wheel_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <!-- <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface> -->
+    </joint>
+    <actuator name="motor_3">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <!-- <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface> -->
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- ############################################################################################################### -->
+  <!-- BACK WHEEL -->
+  <link name="back_wheel">
+    <inertial>
+      <origin
+        xyz="-0.50339 -0.0028676 -0.053822"
+        rpy="0 0 0" />
+      <mass
+        value="0.79986" />
+      <inertia
+        ixx="0.0042488"
+        ixy="2.3246E-09"
+        ixz="2.3616E-08"
+        iyy="0.0079015"
+        iyz="-0.0001482"
+        izz="0.0042548" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/back_wheel.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://escooter_simulation/new_meshes/back_wheel.STL" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="back_wheel_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_wheel" />
+    <!-- xyz="0 0 0.054163" base_link -->
+    <!-- <axis
+      xyz="0 -0.99918 0.040547" /> -->
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+  <!-- ############################################################################################################### -->
+  <!-- GAZEBO CONTROLLER PLUGIN -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+      <robotNamespace>/e_scooter</robotNamespace>
+      <publishOdomTF>true</publishOdomTF>
+      <alwaysOn>true</alwaysOn>
+      <!-- <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame> -->
+    </plugin>
+  </gazebo>
+</robot>

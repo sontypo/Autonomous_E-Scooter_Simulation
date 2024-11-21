@@ -1,0 +1,3 @@
+float64 handle_bar
+float64 rotational_plate
+float64 front_wheel

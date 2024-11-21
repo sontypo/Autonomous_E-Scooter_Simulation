@@ -1,0 +1,754 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6369a/fast && /usr/bin/make -f CMakeFiles/cmTC_6369a.dir/build.make CMakeFiles/cmTC_6369a.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6369a.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_6369a.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_6369a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6369a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_6369a.dir/src.c.o  -o cmTC_6369a 
+/usr/bin/ld: CMakeFiles/cmTC_6369a.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_6369a.dir/build.make:87: cmTC_6369a] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_6369a/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_50436/fast && /usr/bin/make -f CMakeFiles/cmTC_50436.dir/build.make CMakeFiles/cmTC_50436.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_50436.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_50436.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_50436
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_50436.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_50436.dir/CheckFunctionExists.c.o  -o cmTC_50436  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_50436.dir/build.make:87: cmTC_50436] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_50436/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2fc21/fast && /usr/bin/make -f CMakeFiles/cmTC_2fc21.dir/build.make CMakeFiles/cmTC_2fc21.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2fc21.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_2fc21.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_2fc21
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2fc21.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_2fc21.dir/src.c.o  -o cmTC_2fc21 
+/usr/bin/ld: CMakeFiles/cmTC_2fc21.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_2fc21.dir/build.make:87: cmTC_2fc21] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_2fc21/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d380f/fast && /usr/bin/make -f CMakeFiles/cmTC_d380f.dir/build.make CMakeFiles/cmTC_d380f.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d380f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d380f.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d380f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d380f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_d380f.dir/CheckFunctionExists.c.o  -o cmTC_d380f  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_d380f.dir/build.make:87: cmTC_d380f] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_d380f/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_85f0b/fast && /usr/bin/make -f CMakeFiles/cmTC_85f0b.dir/build.make CMakeFiles/cmTC_85f0b.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_85f0b.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_85f0b.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_85f0b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_85f0b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_85f0b.dir/src.c.o  -o cmTC_85f0b 
+/usr/bin/ld: CMakeFiles/cmTC_85f0b.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_85f0b.dir/build.make:87: cmTC_85f0b] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_85f0b/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2a2ca/fast && /usr/bin/make -f CMakeFiles/cmTC_2a2ca.dir/build.make CMakeFiles/cmTC_2a2ca.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2a2ca.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_2a2ca.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2a2ca
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2a2ca.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_2a2ca.dir/CheckFunctionExists.c.o  -o cmTC_2a2ca  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_2a2ca.dir/build.make:87: cmTC_2a2ca] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_2a2ca/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1aadf/fast && /usr/bin/make -f CMakeFiles/cmTC_1aadf.dir/build.make CMakeFiles/cmTC_1aadf.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1aadf.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_1aadf.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_1aadf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1aadf.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_1aadf.dir/src.c.o  -o cmTC_1aadf 
+/usr/bin/ld: CMakeFiles/cmTC_1aadf.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_1aadf.dir/build.make:87: cmTC_1aadf] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_1aadf/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_92aaf/fast && /usr/bin/make -f CMakeFiles/cmTC_92aaf.dir/build.make CMakeFiles/cmTC_92aaf.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_92aaf.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_92aaf.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_92aaf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_92aaf.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_92aaf.dir/CheckFunctionExists.c.o  -o cmTC_92aaf  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_92aaf.dir/build.make:87: cmTC_92aaf] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_92aaf/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_843c8/fast && /usr/bin/make -f CMakeFiles/cmTC_843c8.dir/build.make CMakeFiles/cmTC_843c8.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_843c8.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_843c8.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_843c8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_843c8.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_843c8.dir/src.c.o  -o cmTC_843c8 
+/usr/bin/ld: CMakeFiles/cmTC_843c8.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_843c8.dir/build.make:87: cmTC_843c8] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_843c8/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9ac29/fast && /usr/bin/make -f CMakeFiles/cmTC_9ac29.dir/build.make CMakeFiles/cmTC_9ac29.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9ac29.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_9ac29.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_9ac29
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9ac29.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_9ac29.dir/CheckFunctionExists.c.o  -o cmTC_9ac29  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_9ac29.dir/build.make:87: cmTC_9ac29] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_9ac29/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_32e9f/fast && /usr/bin/make -f CMakeFiles/cmTC_32e9f.dir/build.make CMakeFiles/cmTC_32e9f.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_32e9f.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_32e9f.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_32e9f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_32e9f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_32e9f.dir/src.c.o  -o cmTC_32e9f 
+/usr/bin/ld: CMakeFiles/cmTC_32e9f.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_32e9f.dir/build.make:87: cmTC_32e9f] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_32e9f/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_285e4/fast && /usr/bin/make -f CMakeFiles/cmTC_285e4.dir/build.make CMakeFiles/cmTC_285e4.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_285e4.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_285e4.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_285e4
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_285e4.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_285e4.dir/CheckFunctionExists.c.o  -o cmTC_285e4  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_285e4.dir/build.make:87: cmTC_285e4] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_285e4/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a5dad/fast && /usr/bin/make -f CMakeFiles/cmTC_a5dad.dir/build.make CMakeFiles/cmTC_a5dad.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a5dad.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_a5dad.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_a5dad
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a5dad.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_a5dad.dir/src.c.o  -o cmTC_a5dad 
+/usr/bin/ld: CMakeFiles/cmTC_a5dad.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_a5dad.dir/build.make:87: cmTC_a5dad] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_a5dad/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fd4d4/fast && /usr/bin/make -f CMakeFiles/cmTC_fd4d4.dir/build.make CMakeFiles/cmTC_fd4d4.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fd4d4.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_fd4d4.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fd4d4
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fd4d4.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_fd4d4.dir/CheckFunctionExists.c.o  -o cmTC_fd4d4  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_fd4d4.dir/build.make:87: cmTC_fd4d4] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_fd4d4/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8a945/fast && /usr/bin/make -f CMakeFiles/cmTC_8a945.dir/build.make CMakeFiles/cmTC_8a945.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8a945.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_8a945.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_8a945
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8a945.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_8a945.dir/src.c.o  -o cmTC_8a945 
+/usr/bin/ld: CMakeFiles/cmTC_8a945.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_8a945.dir/build.make:87: cmTC_8a945] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_8a945/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_94d07/fast && /usr/bin/make -f CMakeFiles/cmTC_94d07.dir/build.make CMakeFiles/cmTC_94d07.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_94d07.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_94d07.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_94d07
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_94d07.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_94d07.dir/CheckFunctionExists.c.o  -o cmTC_94d07  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_94d07.dir/build.make:87: cmTC_94d07] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_94d07/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9c473/fast && /usr/bin/make -f CMakeFiles/cmTC_9c473.dir/build.make CMakeFiles/cmTC_9c473.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9c473.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_9c473.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_9c473
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9c473.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_9c473.dir/src.c.o  -o cmTC_9c473 
+/usr/bin/ld: CMakeFiles/cmTC_9c473.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_9c473.dir/build.make:87: cmTC_9c473] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_9c473/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0b83f/fast && /usr/bin/make -f CMakeFiles/cmTC_0b83f.dir/build.make CMakeFiles/cmTC_0b83f.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0b83f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_0b83f.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_0b83f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0b83f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_0b83f.dir/CheckFunctionExists.c.o  -o cmTC_0b83f  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_0b83f.dir/build.make:87: cmTC_0b83f] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_0b83f/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_5a9be/fast && /usr/bin/make -f CMakeFiles/cmTC_5a9be.dir/build.make CMakeFiles/cmTC_5a9be.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5a9be.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_5a9be.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_5a9be
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5a9be.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_5a9be.dir/src.c.o  -o cmTC_5a9be 
+/usr/bin/ld: CMakeFiles/cmTC_5a9be.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_5a9be.dir/build.make:87: cmTC_5a9be] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_5a9be/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_da9cd/fast && /usr/bin/make -f CMakeFiles/cmTC_da9cd.dir/build.make CMakeFiles/cmTC_da9cd.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_da9cd.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_da9cd.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_da9cd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_da9cd.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_da9cd.dir/CheckFunctionExists.c.o  -o cmTC_da9cd  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_da9cd.dir/build.make:87: cmTC_da9cd] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_da9cd/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7007b/fast && /usr/bin/make -f CMakeFiles/cmTC_7007b.dir/build.make CMakeFiles/cmTC_7007b.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7007b.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_7007b.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_7007b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7007b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_7007b.dir/src.c.o  -o cmTC_7007b 
+/usr/bin/ld: CMakeFiles/cmTC_7007b.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_7007b.dir/build.make:87: cmTC_7007b] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_7007b/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_95f1a/fast && /usr/bin/make -f CMakeFiles/cmTC_95f1a.dir/build.make CMakeFiles/cmTC_95f1a.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_95f1a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_95f1a.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_95f1a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_95f1a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_95f1a.dir/CheckFunctionExists.c.o  -o cmTC_95f1a  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_95f1a.dir/build.make:87: cmTC_95f1a] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_95f1a/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ada89/fast && /usr/bin/make -f CMakeFiles/cmTC_ada89.dir/build.make CMakeFiles/cmTC_ada89.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ada89.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_ada89.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_ada89
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ada89.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_ada89.dir/src.c.o  -o cmTC_ada89 
+/usr/bin/ld: CMakeFiles/cmTC_ada89.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_ada89.dir/build.make:87: cmTC_ada89] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_ada89/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8428a/fast && /usr/bin/make -f CMakeFiles/cmTC_8428a.dir/build.make CMakeFiles/cmTC_8428a.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8428a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_8428a.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_8428a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8428a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_8428a.dir/CheckFunctionExists.c.o  -o cmTC_8428a  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_8428a.dir/build.make:87: cmTC_8428a] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_8428a/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1584e/fast && /usr/bin/make -f CMakeFiles/cmTC_1584e.dir/build.make CMakeFiles/cmTC_1584e.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1584e.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_1584e.dir/src.c.o   -c /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_1584e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1584e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_1584e.dir/src.c.o  -o cmTC_1584e 
+/usr/bin/ld: CMakeFiles/cmTC_1584e.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_1584e.dir/build.make:87: cmTC_1584e] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_1584e/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0c761/fast && /usr/bin/make -f CMakeFiles/cmTC_0c761.dir/build.make CMakeFiles/cmTC_0c761.dir/build
+make[1]: Entering directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0c761.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_0c761.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_0c761
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0c761.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_0c761.dir/CheckFunctionExists.c.o  -o cmTC_0c761  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_0c761.dir/build.make:87: cmTC_0c761] Error 1
+make[1]: Leaving directory '/home/saun/E-scooter_ws/src/escooter_simulation/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_0c761/fast] Error 2
+
+
+
