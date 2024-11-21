@@ -22,6 +22,9 @@ Dynamics::Dynamics(void)
     ros::param::get( "WHEEL_SEPARATION_DIS", WHEEL_SEPARATION_DIS );
     ros::param::get( "UNCERTAINTIES", UNCERTAINTIES );
     ros::param::get( "B_WHEEL_TO_COM", B_WHEEL_TO_COM );
+    ros::param::get( "PD_PDplus", PD_PDplus );
+    ros::param::get( "KP", KP );
+    ros::param::get( "KD", KD );
 }
 
 //=============================================================================
@@ -42,7 +45,7 @@ Trig Dynamics::getSinCos( double angle_rad )
 // Dynamics Model
 //=============================================================================
 
-void Dynamics::updateDynamics(const escooter_msgs::Pose &body_frame, escooter_msgs::Joints *joints, double tau, double Vx)
+void Dynamics::updateDynamics(double theta, escooter_msgs::Joints *joints, double tau, double Vx)
 {
     current_time_dynamics_ = ros::Time::now();
     double dt = ( current_time_dynamics_ - last_time_dynamics_ ).toSec();
@@ -52,8 +55,7 @@ void Dynamics::updateDynamics(const escooter_msgs::Pose &body_frame, escooter_ms
     I_rp_y = 0.0;
     I_rp_z = pow(0.076,2) * R_PLATE_WEIGHT * UNCERTAINTIES;
 
-    theta_ = body_frame.orientation.roll;
-    Trig T = getSinCos(theta_);          
+    Trig T = getSinCos(theta);          
     double cos_theta = T.cosine;
     double sin_theta = T.sine;
 
@@ -71,6 +73,32 @@ void Dynamics::constraints(double Vx, double Vx_dot, double delta, double delta_
 {
     psi_dot_ = tan(delta) * Vx / WHEEL_SEPARATION_DIS;
     psi_2dot_ = delta_dot * (1 + tan(delta) * tan(delta)) / WHEEL_SEPARATION_DIS + Vx_dot * tan(delta) / WHEEL_SEPARATION_DIS;
+}
+
+void Dynamics::balancingController(const escooter_msgs::Pose &body_frame, double Vx)
+{
+    current_time_blc_ = ros::Time::now();
+    double dt = ( current_time_blc_ - last_time_blc_ ).toSec();
+
+    theta_ = body_frame.orientation.roll;
+    double delta_theta = theta_ - pre_theta_;
+    double theta_dot_imu = delta_theta / dt;
+    last_time_blc_ = current_time_blc_;
+    pre_theta_ = theta_;
+
+    Trig T = getSinCos(theta_);          
+    double cos_theta = T.cosine;
+    double sin_theta = T.sine;
+
+    C_ = ( WHOLE_BODY_WEIGHT * COM_POS_Z * B_WHEEL_TO_COM * psi_2dot_ ) 
+                       + ( WHOLE_BODY_WEIGHT * COM_POS_Z * psi_dot_ * ( Vx - COM_POS_Z * psi_dot_ * sin_theta ) );
+    G_ = WHOLE_BODY_WEIGHT * g * COM_POS_Z;
+    CpG_ = C_ * cos_theta + G_ * sin_theta;
+
+    double error_p = 0.0 - theta_;
+    double error_d = 0.0 - theta_dot_imu;
+
+    tau_ = ( PD_PDplus * CpG_ ) + ( KP * error_p ) + ( KD * error_d );
 }
 
 double Dynamics::computeCOMVelocity(double Vx, double theta, double theta_dot, double psi, double psi_dot)

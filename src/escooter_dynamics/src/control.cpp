@@ -196,8 +196,8 @@ void Control::publishJointCommand(const escooter_msgs::Joints &joints)
     jvc_command.data = joint_orientation_array_[2] * joints.front_wheel;
     front_wheel_jvc.publish(jvc_command);
 
-    ROS_INFO_STREAM("handle_bar_jpc: "<<joints.handle_bar<<"");
-    ROS_INFO_STREAM("front_wheel_jvc: "<<joints.front_wheel<<"");
+    // ROS_INFO_STREAM("handle_bar_jpc: "<<joints.handle_bar<<"");
+    // ROS_INFO_STREAM("front_wheel_jvc: "<<joints.front_wheel<<"");
 }
 
 //==============================================================================
