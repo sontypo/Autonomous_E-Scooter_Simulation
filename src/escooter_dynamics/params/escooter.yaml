@@ -59,6 +59,47 @@ BASE_TO_COM: 0.195 # COM_POS_Z - OG_POS_Z
 # Body maximum steering angle
 MAX_STEERING_ANGLE: 0.785398163     # 45 degrees
 
+# How cmd_vel.angular.z becomes a steering angle.
+#   yaw_rate  angular.z is a yaw rate, inverted through the bicycle model:
+#             delta = atan(WHEEL_SEPARATION_DIS * w / v). The ROS convention,
+#             and centring is immediate because w = 0 gives delta = 0.
+#   angle     angular.z is the steering angle itself, in rad.
+#   rate      the old behaviour: angular.z is a steering *rate* and is
+#             integrated. Teleop holds its value, so one key press ramped the
+#             bars to the 45 degree stop over ~8 s and releasing froze them
+#             there instead of centring.
+STEERING_MODE: "yaw_rate"
+# The inversion is singular at standstill, so the speed used in it is floored
+# here. Keeps the bars responsive while parked.
+STEERING_MIN_SPEED: 0.5     # m/s
+# Slew limit on the steering angle, rad/s. 0 disables it.
+MAX_STEERING_RATE: 6.0
+
+# Acceleration limit on the speed command, m/s^2. front_wheel_joint is velocity
+# controlled, so a step makes its PID slam the drive torque and the reaction tips
+# a vehicle balanced on two in-line wheels. 0 disables it.
+MAX_LINEAR_ACCEL: 1.5
+
+# cmd_vel.linear.x is a ground speed in m/s but front_wheel_joint takes a wheel
+# rate in rad/s. Unconverted the scooter moved at v*WHEEL_RADIUS, 7.4 times
+# slower than commanded, while the dynamics read the same number as a speed.
+WHEEL_RATE_FROM_SPEED: true
+
+# Steer-to-balance, as a wanted roll torque in N.m/rad and N.m/(rad/s); the
+# controller turns it into a steering angle with delta = atan(L*tau/(M*h*v^2)),
+# which scales with speed by itself.
+#
+# DEFAULT OFF, because it does not yet work: implemented and sign-checked, gated
+# by speed so it cannot fight at walking pace, and measured not to rescue the
+# scooter while driving. One PD on the lean angle mapped through the steering is
+# not enough when lean and steer are coupled states. Set to e.g. 100.0 / 20.0 to
+# experiment.
+STEER_BALANCE_KP: 0.0
+STEER_BALANCE_KD: 0.0
+STEER_BALANCE_MAX: 0.35         # rad it may add on top of the operator's
+STEER_BALANCE_MIN_SPEED: 1.0    # m/s, authority fades in from here
+STEER_BALANCE_FULL_SPEED: 2.0   # m/s, ...to full here
+
 # Initialized angle for each joints available in e-scooter
 INIT_HANLDE_BAR_ANGLE: 0.0
 INIT_R_PLATE_ANGLE: 0.0 # optional

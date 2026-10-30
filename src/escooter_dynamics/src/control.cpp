@@ -1,4 +1,6 @@
 #include <cmath>
+#include <algorithm>
+#include <limits>
 #include <string>
 #include <escooter_dynamics/control.h>
 
@@ -25,6 +27,32 @@ Control::Control(void)
     ros::param::get( "WHEEL_SEPARATION_DIS", WHEEL_SEPARATION_DIS );
     ros::param::get( "MAX_STEERING_ANGLE", MAX_STEERING_ANGLE );
 
+    // Defaults, so these stay defined when the YAML predates them.
+    STEERING_MODE            = "yaw_rate";
+    STEERING_MIN_SPEED       = 0.5;
+    MAX_STEERING_RATE        = 6.0;
+    MAX_LINEAR_ACCEL         = 1.5;
+    WHEEL_RATE_FROM_SPEED    = true;
+    STEER_BALANCE_KP         = 0.0;
+    STEER_BALANCE_KD         = 0.0;
+    STEER_BALANCE_MAX        = 0.35;
+    STEER_BALANCE_MIN_SPEED  = 1.0;
+    STEER_BALANCE_FULL_SPEED = 2.0;
+    WHOLE_BODY_WEIGHT        = 18.90654;
+    COM_POS_Z                = 0.392;
+    ros::param::get( "STEERING_MODE", STEERING_MODE );
+    ros::param::get( "STEERING_MIN_SPEED", STEERING_MIN_SPEED );
+    ros::param::get( "MAX_STEERING_RATE", MAX_STEERING_RATE );
+    ros::param::get( "MAX_LINEAR_ACCEL", MAX_LINEAR_ACCEL );
+    ros::param::get( "WHEEL_RATE_FROM_SPEED", WHEEL_RATE_FROM_SPEED );
+    ros::param::get( "STEER_BALANCE_KP", STEER_BALANCE_KP );
+    ros::param::get( "STEER_BALANCE_KD", STEER_BALANCE_KD );
+    ros::param::get( "STEER_BALANCE_MAX", STEER_BALANCE_MAX );
+    ros::param::get( "STEER_BALANCE_MIN_SPEED", STEER_BALANCE_MIN_SPEED );
+    ros::param::get( "STEER_BALANCE_FULL_SPEED", STEER_BALANCE_FULL_SPEED );
+    ros::param::get( "WHOLE_BODY_WEIGHT", WHOLE_BODY_WEIGHT );
+    ros::param::get( "COM_POS_Z", COM_POS_Z );
+
     // Find out how many servos/joints we have
     for( int i = 0; i < NUMBER_OF_JOINTS; i++ )
     {
@@ -40,6 +68,8 @@ Control::Control(void)
     last_time_odometry_ = ros::Time::now();
     current_time_cmd_vel_ = ros::Time::now();
     last_time_cmd_vel_ = ros::Time::now();
+    current_time_steer_ = ros::Time::now();
+    last_time_steer_ = ros::Time::now();
 
     prev_scooter_state_ = false;
     scooter_state_ = false;
@@ -182,6 +212,77 @@ void Control::publishTwist( const geometry_msgs::Twist &com_vel )
     twist_pub_.publish( twistStamped );
 }
 
+//==============================================================================
+// Steering and speed, every control cycle
+//==============================================================================
+
+void Control::updateSteering()
+{
+    current_time_steer_ = ros::Time::now();
+    double dt = ( current_time_steer_ - last_time_steer_ ).toSec();
+    last_time_steer_ = current_time_steer_;
+
+    // Ramp the speed command. front_wheel_joint is velocity controlled, so a
+    // step makes its PID slam the drive torque, and the reaction tips a vehicle
+    // balanced on two in-line wheels: stepping straight to 2 m/s took the wheel
+    // from 0 to -11.5 rad/s in 200 ms and had the scooter at -67 degrees 200 ms
+    // later.
+    if (MAX_LINEAR_ACCEL > 0.0 && dt > 0.0) {
+        const double max_step = MAX_LINEAR_ACCEL * dt;
+        Vx_ += std::max(-max_step, std::min(max_step, rider_speed_ - Vx_));
+    } else {
+        Vx_ = rider_speed_;
+    }
+    // FIX: a real acceleration. This used to be Vx_/dt, a speed over a sample
+    // interval - 40 m/s^2 at a steady 2 m/s with cmd_vel at 20 Hz, which
+    // constraints() turned into a phantom 114 N.m of balancing feed-forward
+    // whenever the scooter was driven and steered at once.
+    Vx_dot_ = (dt > 0.0) ? ((Vx_ - prev_Vx_) / dt) : 0.0;
+    prev_Vx_ = Vx_;
+
+    // FIX: cmd_vel.linear.x is a ground speed in m/s but front_wheel_joint takes
+    // a wheel rate in rad/s - the author's `TODO: need to convert to joint
+    // command later`. Unconverted the scooter moved at v*WHEEL_RADIUS, 7.4 times
+    // slower than asked, while the dynamics read the same number as a speed.
+    joints_.front_wheel = (WHEEL_RATE_FROM_SPEED && WHEEL_RADIUS > 0.0) ?
+                          (Vx_ / WHEEL_RADIUS) : Vx_;
+
+    // Steer-to-balance. Shipped off (gains 0): implemented and sign-checked, but
+    // measured not to rescue the scooter while driving. See docs on ros2-humble.
+    balance_delta_ = 0.0;
+    const double speed = std::abs(Vx_);
+    double authority = 0.0;
+    if (STEER_BALANCE_FULL_SPEED > STEER_BALANCE_MIN_SPEED) {
+        authority = (speed - STEER_BALANCE_MIN_SPEED) /
+                    (STEER_BALANCE_FULL_SPEED - STEER_BALANCE_MIN_SPEED);
+        authority = std::max(0.0, std::min(1.0, authority));
+    } else if (speed >= STEER_BALANCE_MIN_SPEED) {
+        authority = 1.0;
+    }
+    if (authority > 0.0 && (STEER_BALANCE_KP != 0.0 || STEER_BALANCE_KD != 0.0)) {
+        const double theta = body_frame_.orientation.roll;
+        const double tau_wanted = -(STEER_BALANCE_KP * theta + STEER_BALANCE_KD * body_roll_rate_);
+        const double lateral = WHOLE_BODY_WEIGHT * COM_POS_Z * speed * speed;
+        if (lateral > 0.0) {
+            balance_delta_ = authority * std::atan(WHEEL_SEPARATION_DIS * tau_wanted / lateral);
+            balance_delta_ = std::max(-STEER_BALANCE_MAX, std::min(STEER_BALANCE_MAX, balance_delta_));
+            if (Vx_ < 0.0) balance_delta_ = -balance_delta_;
+        }
+    }
+
+    double target = rider_delta_ + balance_delta_;
+    target = std::max(-MAX_STEERING_ANGLE, std::min(MAX_STEERING_ANGLE, target));
+
+    if (MAX_STEERING_RATE > 0.0 && dt > 0.0) {
+        const double max_step = MAX_STEERING_RATE * dt;
+        des_delta += std::max(-max_step, std::min(max_step, target - des_delta));
+    } else {
+        des_delta = target;
+    }
+
+    joints_.handle_bar = des_delta;
+}
+
 void Control::publishJointCommand(const escooter_msgs::Joints &joints)
 {
     std_msgs::Float64 jpc_command;
@@ -216,6 +317,7 @@ void Control::jointStateCallback(const sensor_msgs::JointStateConstPtr& msg)
     std::string handle_bar_chasis_joint_name = "handle_bar_chasis_joint";
     std::string rotational_plate_joint_name = "rotational_plate_joint";
     double front_wheel_angle = prev_front_wheel_angle;
+    double steering_velocity = std::numeric_limits<double>::quiet_NaN();
 
     // FIX: the loop used to `break` inside the first `if`, so whichever joint came
     // first in the message hid the others.
@@ -224,6 +326,7 @@ void Control::jointStateCallback(const sensor_msgs::JointStateConstPtr& msg)
             front_wheel_angle = msg->position[i];
         } else if (msg->name[i] == handle_bar_chasis_joint_name) {
             steering_angle = msg->position[i];
+            if (i < msg->velocity.size()) steering_velocity = msg->velocity[i];
         } else if (msg->name[i] == rotational_plate_joint_name && i < msg->velocity.size()) {
             plate_velocity_ = msg->velocity[i];
         }
@@ -236,7 +339,11 @@ void Control::jointStateCallback(const sensor_msgs::JointStateConstPtr& msg)
 
     double delta_steering = steering_angle - prev_steering_angle;
     delta_ += delta_steering;
-    delta_dot_ = (delta_ - prev_delta_) / dt;
+    // FIX: prefer the joint's reported velocity over differencing its position,
+    // for the same reason the roll rate comes from the gyro - the quotient is
+    // noisy and feeds the psi_2dot_ term of the balancing feed-forward.
+    if ( std::isfinite(steering_velocity) ) delta_dot_ = steering_velocity;
+    else delta_dot_ = (delta_ - prev_delta_) / dt;
 
     prev_front_wheel_angle = front_wheel_angle;
     prev_steering_angle = steering_angle;
@@ -254,20 +361,38 @@ void Control::cmd_velCallback( const geometry_msgs::TwistConstPtr &cmd_vel_msg )
     current_time_cmd_vel_ = ros::Time::now();
     double dt = ( current_time_cmd_vel_ - last_time_cmd_vel_ ).toSec();
 
-    double des_delta_dot;
-    Vx_ = cmd_vel_msg->linear.x;     //TODO: need to convert to joint command later
-    des_delta_dot = cmd_vel_msg->angular.z;   //TODO: it should be delta
-    Vx_dot_ = Vx_ / dt;
+    rider_speed_ = cmd_vel_msg->linear.x;
+    const double omega = cmd_vel_msg->angular.z;
 
-    des_delta += des_delta_dot * dt;
-    if (des_delta > MAX_STEERING_ANGLE) des_delta = MAX_STEERING_ANGLE;
-    else if (des_delta < -MAX_STEERING_ANGLE) des_delta = -MAX_STEERING_ANGLE;
+    // FIX: how angular.z becomes a steering angle.
+    //
+    // This used to be `des_delta += angular.z * dt`, with the author's own
+    // `TODO: it should be delta` beside it. Teleop publishes a held value, so one
+    // key press ramped the bars to the 45 degree stop over about 8 s and left
+    // them there; releasing to angular.z = 0 froze them hard over instead of
+    // centring, and reversing meant waiting out the same ramp backwards.
+    //
+    // The default now follows the ROS convention for cmd_vel on a bicycle:
+    // angular.z is a yaw rate, inverted as delta = atan(L*omega/v). Centring is
+    // immediate because omega = 0 gives delta = 0.
+    double target_delta = 0.0;
+    if (STEERING_MODE == "rate") {
+        target_delta = rider_delta_ + omega * dt;       // legacy behaviour
+    } else if (STEERING_MODE == "angle") {
+        target_delta = omega;                           // angular.z is the angle
+    } else {
+        // The inversion is singular at standstill - a bicycle cannot change
+        // heading while stopped - so the speed is floored, which keeps the bars
+        // responsive while parked.
+        double v_eff = rider_speed_;
+        if (std::abs(v_eff) < STEERING_MIN_SPEED)
+            v_eff = (v_eff < 0.0) ? -STEERING_MIN_SPEED : STEERING_MIN_SPEED;
+        target_delta = std::atan(WHEEL_SEPARATION_DIS * omega / v_eff);
+    }
+
+    rider_delta_ = std::max(-MAX_STEERING_ANGLE, std::min(MAX_STEERING_ANGLE, target_delta));
 
     last_time_cmd_vel_ = current_time_cmd_vel_;
-
-    // Update joints with desired velocities
-    joints_.front_wheel = Vx_;
-    joints_.handle_bar = des_delta;
 }
 
 //==============================================================================

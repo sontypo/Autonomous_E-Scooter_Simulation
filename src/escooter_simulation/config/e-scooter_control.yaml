@@ -16,7 +16,9 @@ e_scooter:
     handle_bar_chasis_joint_position_controller:
         type: effort_controllers/JointPositionController
         joint: handle_bar_chasis_joint
-        pid: {p: 100.0, i: 10.0, d: 20.0}
+        # Raised with the joint's effort limit: at p = 100 the loop saturated
+        # at 23 degrees of error and the bars were back-driven off their stop.
+        pid: {p: 400.0, i: 20.0, d: 40.0}
 
 # Joint Velocity Controllers ---------------------------------------
     front_wheel_joint_velocity_controller:

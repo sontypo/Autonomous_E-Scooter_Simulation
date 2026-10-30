@@ -31,6 +31,11 @@ class Control
         bool getScooterState(void);
         void setPrevScooterState(bool state);
         bool getPrevScooterState(void);
+        // Combine the operator's steering request with the steer-to-balance term
+        // and write the result to joints_.handle_bar, and ramp the speed command.
+        // Called every control cycle, because those track the roll and the clock,
+        // not the cmd_vel rate.
+        void updateSteering();
         void publishJointCommand(const escooter_msgs::Joints &joints);
         void publishOdometry(double distance_traveled, double delta);
         void publishTwist(const geometry_msgs::Twist &com_vel);
@@ -44,6 +49,9 @@ class Control
         double body_roll_rate_ = 0.0;
         // Reaction plate speed [rad/s], from /e_scooter/joint_states.
         double plate_velocity_ = 0.0;
+        double rider_delta_ = 0.0;      // the operator's steering request [rad]
+        double rider_speed_ = 0.0;      // the operator's speed request [m/s]
+        double balance_delta_ = 0.0;    // what steer-to-balance added, for logging
         escooter_msgs::Joints joints_;
         geometry_msgs::Twist com_vel_;
         geometry_msgs::Twist cmd_vel_;
@@ -60,6 +68,17 @@ class Control
         double MAX_BODY_ROLL_COMP, MAX_BODY_PITCH_COMP, COMPENSATE_INCREMENT, COMPENSATE_TO_WITHIN, MAX_STEERING_ANGLE; // Auto-levelling yaml config
         double BODY_MAX_ROLL, BODY_MAX_PITCH, BODY_MAX_YAW; // Mechanical limits
         double VELOCITY_DIVISION, WHEEL_RADIUS, WHEEL_SEPARATION_DIS;
+        // How cmd_vel.angular.z is read; see STEERING_MODE in params/escooter.yaml.
+        std::string STEERING_MODE;
+        double STEERING_MIN_SPEED;
+        double MAX_STEERING_RATE;
+        double MAX_LINEAR_ACCEL;        // m/s^2 the speed command may change at
+        bool   WHEEL_RATE_FROM_SPEED;   // convert linear.x [m/s] to wheel [rad/s]
+        // Steer-to-balance: wanted roll torque, N.m/rad and N.m/(rad/s).
+        double STEER_BALANCE_KP, STEER_BALANCE_KD, STEER_BALANCE_MAX;
+        double STEER_BALANCE_MIN_SPEED, STEER_BALANCE_FULL_SPEED;
+        double WHOLE_BODY_WEIGHT, COM_POS_Z;   // to size that torque
+        double prev_Vx_ = 0.0;
         int NUMBER_OF_JOINTS;
         double pose_x_= 0.0;  // pose odometry
         double pose_y_= 0.0;  // pose odometry
@@ -78,6 +97,7 @@ class Control
 
         bool scooter_state_;      // Current loop state
         bool prev_scooter_state_; // Previous loop state
+        ros::Time current_time_steer_, last_time_steer_;
         ros::Time current_time_odometry_, last_time_odometry_, current_time_cmd_vel_, last_time_cmd_vel_, current_time_js_, last_time_js_;
         // tf::TransformBroadcaster odom_broadcaster;
 

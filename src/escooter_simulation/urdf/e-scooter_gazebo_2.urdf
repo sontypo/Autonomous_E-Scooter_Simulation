@@ -211,12 +211,12 @@
            escooter_dynamics/params/escooter.yaml stay as they are. The visual
            mesh is still the exported disc; that is display geometry only. -->
       <inertia
-        ixx="0.03"
+        ixx="0.06"
         ixy="0"
         ixz="0"
-        iyy="0.03"
+        iyy="0.06"
         iyz="0"
-        izz="0.06" />
+        izz="0.12" />
     </inertial>
     <visual>
       <origin
@@ -255,9 +255,12 @@
       link="rotational_plate" />
     <axis
       xyz="0 0 1" />
+    <!-- 400 rad/s (3820 rpm) with izz = 0.12 gives the plate 48 N.m.s, against
+         the 13.4 needed to pick the scooter up off its side from 55 degrees, so
+         it rights itself after a fall instead of lying there. -->
     <limit
       effort="500"
-      velocity="200" />
+      velocity="400" />
   </joint>
 
   <transmission name="transmission_1">
@@ -326,10 +329,14 @@
       link="handle_bar_chasis" />
     <axis
       xyz="0 1 0" />
+    <!-- 40 N.m saturated the position PID at 23 degrees of error, so once the
+         scooter leaned the bicycle's own trail back-drove the bars past the 60
+         degree stop - measured at +58.5 degrees against a command of 0 - which
+         turned the scooter and pulled it over. -->
     <limit
       lower="-1.047"
       upper="1.047"
-      effort="40"
+      effort="200"
       velocity="10" />
   </joint>
 

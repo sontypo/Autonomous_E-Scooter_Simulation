@@ -18,6 +18,7 @@ int main(int argc, char** argv)
     dynamics.balancingController(control.body_frame_, control.Vx_,
                                  control.body_roll_rate_, control.plate_velocity_);
     dynamics.updateDynamics(dynamics.theta_, &control.joints_, dynamics.tau_, control.Vx_);
+    control.updateSteering();
     control.publishJointCommand(control.joints_);
 
     ros::AsyncSpinner spinner( 2 ); // Using 2 threads
@@ -31,8 +32,9 @@ int main(int argc, char** argv)
         dynamics.constraints(control.Vx_, control.Vx_dot_, control.delta_, control.delta_dot_);
         control.publishOdometry(control.distance_traveled_, control.delta_);
         dynamics.balancingController(control.body_frame_, control.Vx_,
-                                 control.body_roll_rate_, control.plate_velocity_);
+                                     control.body_roll_rate_, control.plate_velocity_);
         dynamics.updateDynamics(dynamics.theta_, &control.joints_, dynamics.tau_, control.Vx_);
+        control.updateSteering();
         control.publishJointCommand(control.joints_);
 
         loop_rate.sleep();
