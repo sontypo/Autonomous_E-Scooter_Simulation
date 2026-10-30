@@ -11,12 +11,18 @@ So the world starts paused and this script closes the gap:
 
   1. the controllers are already loaded and configured (the launch file spawns
      them with `--inactive`, which works while the world is paused),
-  2. the activation request is sent first and blocks server side, because the
-     controller manager performs switches from its update loop,
-  3. the world is unpaused, and the very first simulation step carries out the
-     pending switch.
+  2. the world is unpaused,
+  3. the controllers are activated, which the controller manager carries out
+     from its update loop - now running.
 
-The controllers are therefore live within one control cycle of physics starting.
+The gap is one service round trip, tens of milliseconds, during which the
+scooter free-falls from its 1.4 degree spawn lean and picks up well under
+0.1 rad/s - far inside what the reaction plate can arrest.
+
+Sending the activation first and unpausing second would close the gap to a
+single control cycle, but it deadlocks: the controller manager blocks inside the
+switch callback waiting for an update that cannot happen until the world runs,
+and /unpause_physics is served from the same process, so neither call returns.
 """
 
 import argparse
@@ -69,19 +75,17 @@ def main():
             'controller manager %s never offered switch_controller' % args.controller_manager)
         return 1
 
-    request = SwitchController.Request()
-    request.activate_controllers = list(args.controllers)
-    request.strictness = SwitchController.Request.STRICT
-    # The switch is carried out by the controller manager's update loop, so this
-    # call stays pending until the world starts stepping. That is exactly what
-    # we want: send it first, then let physics go.
-    future = node.switch.call_async(request)
-
+    # Release the world first. The switch below is carried out by the controller
+    # manager's update loop, which does not run while the world is paused, so
+    # issuing it first would block the controller manager inside its own service
+    # callback - and /unpause_physics is served from the same process, so that
+    # call would never be answered either.
     if args.backend == 'classic':
         if not node.unpause.wait_for_service(timeout_sec=args.timeout):
             node.get_logger().error('/unpause_physics never appeared')
             return 1
-        node.unpause.call_async(Empty.Request())
+        unpaused = node.unpause.call_async(Empty.Request())
+        rclpy.spin_until_future_complete(node, unpaused, timeout_sec=args.timeout)
     else:
         try:
             unpause_ignition(args.world)
@@ -89,6 +93,10 @@ def main():
             node.get_logger().error(str(exc))
             return 1
 
+    request = SwitchController.Request()
+    request.activate_controllers = list(args.controllers)
+    request.strictness = SwitchController.Request.STRICT
+    future = node.switch.call_async(request)
     rclpy.spin_until_future_complete(node, future, timeout_sec=args.timeout)
     if not future.done():
         node.get_logger().error('controller activation timed out')

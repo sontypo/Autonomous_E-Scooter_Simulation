@@ -319,6 +319,18 @@ author's `TODO: need to convert to joint command later`. The scooter moved at
 the same number as a speed and overestimated the yaw rate by that factor.
 `WHEEL_RATE_FROM_SPEED` (default true) divides by the wheel radius.
 
+### Bring-up could deadlock
+
+`start_simulation.py` originally sent the activation request first and unpaused
+second, to close the gap to a single control cycle. That deadlocks: the
+controller manager blocks inside its own `switch_controller` callback waiting
+for an update that cannot happen until the world runs, and `/unpause_physics` is
+served from the same gzserver process, so neither call is ever answered and the
+launch dies with `controller activation timed out`. It unpauses first now. The
+gap is one service round trip, tens of milliseconds, in which the scooter
+picks up well under 0.1 rad/s from its 1.4 degree spawn lean - far inside what
+the plate can arrest.
+
 ### The steering joint was too weak to hold its command
 
 The export gave `handle_bar_chasis_joint` an effort limit of 40 N.m. Against the
@@ -364,6 +376,32 @@ mapped through the steering is not enough: lean and steer are coupled states and
 want a full-state controller designed on the linearised bicycle, and the
 exported trail and head angle should be checked for realism first. The
 implementation and its parameters are left in place for that work.
+
+### How much torque the steering actually uses
+
+Worth knowing, because 200 N.m is not a handlebar figure - a rider applies more
+like 10 to 20.
+
+Measured on `handle_bar_chasis_joint` while the scooter is genuinely balanced,
+standing still and through the first second of driving: **0.0 to 0.6 N.m**. The
+large numbers only appear once it has already started going over - 34 N.m at 8
+degrees of lean, saturating at 200 N.m while it is on its way down. That is the
+position PID chasing a joint the fall is throwing around, not a driving load. So
+the limit is headroom rather than something the controller spends.
+
+The stiffness is nevertheless load-bearing, which is the part worth deciding on.
+Two softer settings were tried with everything else unchanged:
+
+| steering PID / effort limit | standing still |
+| --- | --- |
+| p = 400, 200 N.m (shipped) | holds -0.05 deg |
+| p = 100, 200 N.m (exported gains) | falls |
+| p = 60, 40 N.m (close to the export) | falls |
+
+So the balance that does work depends on a steering column far more rigid than a
+human-scale handlebar - in effect it assumes a geared steering servo holding the
+column. Whether that matches the real vehicle is a design question; if it does
+not, the balance needs to come from somewhere other than a rigid column.
 
 Gains are deliberately gentle for the same budget reason: wn = 5 rad/s spent the
 whole flywheel on the settling impulse at spawn and saturated it, after which
