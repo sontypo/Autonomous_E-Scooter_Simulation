@@ -73,10 +73,44 @@ INTERPOLATION_LOOP_RATE: 300
 # Uncertainties parameter
 UNCERTAINTIES: 0.01
 
-# Balancing parameters
+# Balancing parameters.
+#
+# The reaction plate cancels gravity with PD_PDplus * (C*cos(theta) +
+# G*sin(theta)) and then holds the body upright with a PD loop, so the closed
+# loop reduces to  I_b * theta_ddot = -KP*theta - KD*theta_dot.  Gains scale
+# with the roll inertia about the wheel contact line,
+# I_b ~ WHOLE_BODY_WEIGHT * COM_POS_Z^2 = 2.905 kg.m^2:
+#
+#     KP = I_b * wn^2            KD = 2 * zeta * wn * I_b
+#
+# with wn = 4 rad/s and zeta = 1.0 (critically damped, no overshoot).
+# The previous KP: 2.0 / KD: 0.05 are wn = 0.83 rad/s and zeta = 0.015, far too
+# soft to hold 18.9 kg up - and were applied with the wrong sign on top of that.
 PD_PDplus: 1.0
-KP: 2.0
-KD: 0.05
+KP: 46.5
+KD: 23.2
+
+# Saturation of the balancing torque. The joint allows 500 N.m, but the plate
+# only stores 12 N.m.s of momentum: saturating at the joint limit dumps all of
+# it into the body in a fraction of a second and throws the scooter over.
+# Holding 45 degrees of lean needs 51 N.m.
+MAX_BALANCING_TORQUE: 150.0
+
+# Bound on the open-loop roll-rate prediction of the forward model. The model no
+# longer drives the actuator but it still integrates, so it needs a limit.
+MAX_MODEL_ROLL_RATE: 50.0
+
+# Momentum management for the reaction plate, in rad of lean per rad/s of plate
+# speed. A reaction wheel can only trade momentum, so any constant bias torque -
+# here a few millimetres of lateral centre-of-mass offset - winds it up until it
+# saturates. Measured without this term: the plate drifts 7.6 rad/s per second
+# and the scooter falls after about 26 s. The plate settles at
+# omega = -(1 + G/KP) * theta_bias / MOMENTUM_UNLOAD_GAIN, so 1e-4 would settle
+# right on the 200 rad/s limit while 5e-4 settles near -35 rad/s.
+# Set to 0.0 to hold exactly upright again, with that caveat.
+MOMENTUM_UNLOAD_GAIN: 0.0005
+# Hard bound on how far the bias above may tilt the setpoint, in rad.
+MAX_LEAN_SETPOINT: 0.035
 
 # Number of joints
 NUMBER_OF_JOINTS: 3

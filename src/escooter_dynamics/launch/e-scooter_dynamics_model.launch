@@ -44,5 +44,7 @@
         <remap from="/joint_states" to="/e_scooter/joint_states"/>
     </node>
 
-    <!-- <node pkg='escooter_dynamics' type='escooter_dynamics' name='escooter_dynamics_model' output='screen' /> -->
+    <!-- The balancing node. This was commented out, which is why the faults in
+         the PD+ loop went unnoticed on this branch. -->
+    <node pkg='escooter_dynamics' type='escooter_dynamics' name='escooter_dynamics_model' output='screen' />
 </launch>

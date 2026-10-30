@@ -214,16 +214,18 @@ void Control::jointStateCallback(const sensor_msgs::JointStateConstPtr& msg)
 
     std::string front_wheel_joint_name = "front_wheel_joint";
     std::string handle_bar_chasis_joint_name = "handle_bar_chasis_joint";
-    double front_wheel_angle = 0.0;
+    std::string rotational_plate_joint_name = "rotational_plate_joint";
+    double front_wheel_angle = prev_front_wheel_angle;
 
-    for (size_t i = 0; i < msg->name.size(); i++) {
+    // FIX: the loop used to `break` inside the first `if`, so whichever joint came
+    // first in the message hid the others.
+    for (size_t i = 0; i < msg->name.size() && i < msg->position.size(); i++) {
         if (msg->name[i] == front_wheel_joint_name) {
             front_wheel_angle = msg->position[i];
-            break;
-        }
-        if (msg->name[i] == handle_bar_chasis_joint_name) {
+        } else if (msg->name[i] == handle_bar_chasis_joint_name) {
             steering_angle = msg->position[i];
-            break;
+        } else if (msg->name[i] == rotational_plate_joint_name && i < msg->velocity.size()) {
+            plate_velocity_ = msg->velocity[i];
         }
     }
 
@@ -295,6 +297,8 @@ void Control::imuCallback( const sensor_msgs::ImuConstPtr &imu_msg )
 
     double imu_roll, imu_pitch, imu_yaw;
     tf2::Matrix3x3(quat).getRPY(imu_roll, imu_pitch, imu_yaw);
+
+    body_roll_rate_ = imu_msg->angular_velocity.x;
 
     body_frame_.orientation.roll = imu_roll;
     body_frame_.orientation.pitch = imu_pitch;

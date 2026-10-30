@@ -196,13 +196,27 @@
         rpy="0 0 0" />
       <mass
         value="1.0895" />
+      <!-- Reaction plate spin inertia, about the joint axis.
+
+           The SolidWorks export gave izz = 0.002376 kg.m^2 for a 6.6 cm disc,
+           which stores only 0.48 N.m.s at the 200 rad/s speed limit. A reaction
+           wheel can do no more than trade that momentum with the body, so the
+           balancing controller could right at most 1.9 degrees of lean - less
+           than the scooter picks up while settling onto the ground.
+
+           Below keeps the plate's 1.09 kg but redistributes it as a 23 cm rim:
+           izz = m*r^2 = 0.06 and transverse = izz/2 = 0.03. That is 12 N.m.s,
+           enough to arrest 4.1 rad/s of roll and right about 49 degrees. The
+           vehicle mass is unchanged, so WHOLE_BODY_WEIGHT and the PD gains in
+           escooter_dynamics/params/escooter.yaml stay as they are. The visual
+           mesh is still the exported disc; that is display geometry only. -->
       <inertia
-        ixx="0.0014131"
-        ixy="-3.5371E-07"
-        ixz="-2.0166E-06"
-        iyy="0.0014054"
-        iyz="9.1964E-08"
-        izz="0.002376" />
+        ixx="0.03"
+        ixy="0"
+        ixz="0"
+        iyy="0.03"
+        iyz="0"
+        izz="0.06" />
     </inertial>
     <visual>
       <origin

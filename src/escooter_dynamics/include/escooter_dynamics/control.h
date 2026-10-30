@@ -38,6 +38,12 @@ class Control
         int MASTER_LOOP_RATE;   // Master loop rate
         sensor_msgs::JointState joint_state_;
         escooter_msgs::Pose body_frame_;    // Body link rotation
+        // Roll rate as the IMU measures it [rad/s]. Differentiating
+        // body_frame_.orientation.roll instead aliases badly: the sensor runs at
+        // 100 Hz while the control loop runs at MASTER_LOOP_RATE = 500 Hz.
+        double body_roll_rate_ = 0.0;
+        // Reaction plate speed [rad/s], from /e_scooter/joint_states.
+        double plate_velocity_ = 0.0;
         escooter_msgs::Joints joints_;
         geometry_msgs::Twist com_vel_;
         geometry_msgs::Twist cmd_vel_;
