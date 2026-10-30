@@ -37,7 +37,10 @@ ARGUMENTS = [
         'plate_effort_limit', default_value='500',
         description='Effort limit of rotational_plate_joint, in N.m.'),
     DeclareLaunchArgument(
-        'plate_velocity_limit', default_value='200',
+        'handlebar_effort_limit', default_value='200',
+        description='Effort limit of handle_bar_chasis_joint, in N.m.'),
+    DeclareLaunchArgument(
+        'plate_velocity_limit', default_value='400',
         description='Speed limit of rotational_plate_joint, in rad/s. This is '
                     'what bounds the reaction plate angular momentum, and so '
                     'how much lean the balancing controller can recover.'),
@@ -67,6 +70,7 @@ def robot_description_command():
         ' imu_topic:=', LaunchConfiguration('imu_topic'),
         ' mesh_prefix:=', LaunchConfiguration('mesh_prefix'),
         ' plate_effort_limit:=', LaunchConfiguration('plate_effort_limit'),
+        ' handlebar_effort_limit:=', LaunchConfiguration('handlebar_effort_limit'),
         ' plate_velocity_limit:=', LaunchConfiguration('plate_velocity_limit'),
     ])
 

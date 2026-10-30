@@ -9,6 +9,8 @@
 #include "escooter_dynamics/control.hpp"
 
 #include <algorithm>
+#include <cmath>
+#include <limits>
 #include <string>
 #include <vector>
 
@@ -59,6 +61,10 @@ Control::Control(const rclcpp::Node::SharedPtr & node)
   getParam(node_, "WHEEL_RADIUS", WHEEL_RADIUS);
   getParam(node_, "WHEEL_SEPARATION_DIS", WHEEL_SEPARATION_DIS);
   getParam(node_, "MAX_STEERING_ANGLE", MAX_STEERING_ANGLE);
+  getParam(node_, "STEERING_MODE", STEERING_MODE);
+  getParam(node_, "STEERING_MIN_SPEED", STEERING_MIN_SPEED);
+  getParam(node_, "MAX_STEERING_RATE", MAX_STEERING_RATE);
+  getParam(node_, "WHEEL_RATE_FROM_SPEED", WHEEL_RATE_FROM_SPEED);
 
   // Frames and optional odometry TF (the ROS 1 broadcaster was commented out,
   // so the default keeps it off).
@@ -338,6 +344,7 @@ void Control::jointStateCallback(const sensor_msgs::msg::JointState::ConstShared
   const std::string & handle_bar_chasis_joint_name = joint_names_array_[0];
   const std::string & rotational_plate_joint_name = joint_names_array_[1];
   double front_wheel_angle = prev_front_wheel_angle;
+  double steering_velocity = std::numeric_limits<double>::quiet_NaN();
 
   // PORT: the ROS 1 loop `break`s after either match, so whichever joint came
   // first in the message hid the other one. Both are read now.
@@ -346,6 +353,9 @@ void Control::jointStateCallback(const sensor_msgs::msg::JointState::ConstShared
       front_wheel_angle = msg->position[i];
     } else if (msg->name[i] == handle_bar_chasis_joint_name) {
       steering_angle = msg->position[i];
+      if (i < msg->velocity.size()) {
+        steering_velocity = msg->velocity[i];
+      }
     } else if (msg->name[i] == rotational_plate_joint_name &&
       i < msg->velocity.size())
     {
@@ -360,7 +370,14 @@ void Control::jointStateCallback(const sensor_msgs::msg::JointState::ConstShared
 
   double delta_steering = steering_angle - prev_steering_angle;
   delta_ += delta_steering;
-  delta_dot_ = (dt > 0.0) ? ((delta_ - prev_delta_) / dt) : 0.0;
+  // Prefer the joint's reported velocity over differencing its position, for the
+  // same reason the roll rate comes from the gyro: the quotient is noisy and
+  // feeds the psi_2dot_ term of the balancing feed-forward.
+  if (std::isfinite(steering_velocity)) {
+    delta_dot_ = steering_velocity;
+  } else {
+    delta_dot_ = (dt > 0.0) ? ((delta_ - prev_delta_) / dt) : 0.0;
+  }
 
   prev_front_wheel_angle = front_wheel_angle;
   prev_steering_angle = steering_angle;
@@ -380,20 +397,73 @@ void Control::cmd_velCallback(const geometry_msgs::msg::Twist::ConstSharedPtr cm
 
   cmd_vel_ = *cmd_vel_msg;
 
-  double des_delta_dot;
   Vx_ = cmd_vel_msg->linear.x;              // TODO: need to convert to joint command later
-  des_delta_dot = cmd_vel_msg->angular.z;   // TODO: it should be delta
-  Vx_dot_ = Vx_ / dt;
+  const double omega = cmd_vel_msg->angular.z;
 
-  des_delta += des_delta_dot * dt;
-  if (des_delta > MAX_STEERING_ANGLE) {des_delta = MAX_STEERING_ANGLE;} else if (des_delta <
-    -MAX_STEERING_ANGLE)
-  {
-    des_delta = -MAX_STEERING_ANGLE;
+  // PORT: longitudinal acceleration.
+  //
+  // ROS 1 wrote `Vx_dot_ = Vx_ / dt`, which is a speed divided by a sample
+  // interval, not an acceleration. At a steady 2 m/s with cmd_vel at 20 Hz it
+  // reports 40 m/s^2, and Dynamics::constraints() multiplies that straight into
+  // psi_2dot_, so the balancing feed-forward picked up a fictitious 114 N.m the
+  // moment the scooter was driven and steered at the same time. That is what
+  // made it lurch through +-87 degrees under teleop.
+  Vx_dot_ = (Vx_ - prev_Vx_) / dt;
+  prev_Vx_ = Vx_;
+
+  // PORT: how angular.z becomes a steering angle.
+  //
+  // ROS 1 integrated it - `des_delta += angular.z * dt` - with the author's own
+  // `TODO: it should be delta` next to it. Teleop publishes a held value, so one
+  // key press ramped the steering to the 45 degree stop over about 8 s and left
+  // it there; releasing to angular.z = 0 froze the bars hard over instead of
+  // centring them, and reversing meant waiting out the same ramp the other way.
+  // That is the "steering does not respond" behaviour.
+  //
+  // The default now follows the ROS convention for cmd_vel on a bicycle:
+  // angular.z is the desired yaw rate, and the bicycle model inverts it into a
+  // steering angle, delta = atan(L * omega / v). Centring is immediate because
+  // omega = 0 gives delta = 0.
+  double target_delta = 0.0;
+  if (STEERING_MODE == "rate") {
+    // Legacy ROS 1 behaviour: angular.z is a steering rate.
+    target_delta = des_delta + omega * dt;
+  } else if (STEERING_MODE == "angle") {
+    // angular.z is the steering angle itself, in rad.
+    target_delta = omega;
+  } else {
+    // "yaw_rate": the bicycle model. Below STEERING_MIN_SPEED the inversion is
+    // singular - a bicycle cannot change heading while stationary - so the speed
+    // is floored, which keeps the bars responsive while parked.
+    double v_eff = Vx_;
+    if (std::abs(v_eff) < STEERING_MIN_SPEED) {
+      v_eff = (v_eff < 0.0) ? -STEERING_MIN_SPEED : STEERING_MIN_SPEED;
+    }
+    target_delta = std::atan(WHEEL_SEPARATION_DIS * omega / v_eff);
   }
 
-  // Update joints with desired velocities
-  joints_.front_wheel = Vx_;
+  target_delta = std::clamp(target_delta, -MAX_STEERING_ANGLE, MAX_STEERING_ANGLE);
+
+  // Slew limit: the balancing loop has to absorb the roll disturbance a steering
+  // change produces, so the bars move quickly but not instantly.
+  if (MAX_STEERING_RATE > 0.0) {
+    const double max_step = MAX_STEERING_RATE * dt;
+    des_delta += std::clamp(target_delta - des_delta, -max_step, max_step);
+  } else {
+    des_delta = target_delta;
+  }
+
+  // Update joints with desired velocities.
+  //
+  // PORT: cmd_vel.linear.x is a ground speed in m/s, but front_wheel_joint takes
+  // a wheel rate in rad/s. ROS 1 passed the number through unconverted - the
+  // author's `TODO: need to convert to joint command later` - so the scooter
+  // actually moved at v*WHEEL_RADIUS, 7.4 times slower than commanded, while
+  // Dynamics::constraints() used the unconverted value as a speed and so
+  // overestimated psi_dot by the same factor. Set WHEEL_RATE_FROM_SPEED to
+  // false to get the ROS 1 behaviour back.
+  joints_.front_wheel = (WHEEL_RATE_FROM_SPEED && WHEEL_RADIUS > 0.0) ?
+    (Vx_ / WHEEL_RADIUS) : Vx_;
   joints_.handle_bar = des_delta;
 }
 

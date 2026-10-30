@@ -77,6 +77,37 @@
     # Body maximum steering angle
     MAX_STEERING_ANGLE: 0.785398163     # 45 degrees
 
+    # How cmd_vel.angular.z becomes a steering angle.
+    #
+    #   yaw_rate  angular.z is the desired yaw rate, inverted through the
+    #             bicycle model: delta = atan(WHEEL_SEPARATION_DIS * w / v).
+    #             This is the ROS convention for cmd_vel, and centring is
+    #             immediate because w = 0 gives delta = 0.
+    #   angle     angular.z is the steering angle itself, in rad.
+    #   rate      ROS 1 behaviour: angular.z is a steering *rate* and is
+    #             integrated. Teleop holds its value, so one key press ramped
+    #             the bars to the 45 degree stop over ~8 s and releasing froze
+    #             them there instead of centring - the "steering does not
+    #             respond" symptom.
+    STEERING_MODE: "yaw_rate"
+
+    # The bicycle inversion is singular at standstill, so the speed used in it
+    # is floored at this value. Keeps the bars responsive while parked.
+    STEERING_MIN_SPEED: 0.5     # m/s
+
+    # Slew limit on the steering angle. The balancing loop has to absorb the
+    # roll disturbance a steering change makes, so the bars move quickly but not
+    # instantly: 2 rad/s covers the full 45 degrees in 0.4 s. Set to 0 to
+    # disable the limit.
+    MAX_STEERING_RATE: 2.0      # rad/s
+
+    # cmd_vel.linear.x is a ground speed in m/s, but front_wheel_joint takes a
+    # wheel rate in rad/s. ROS 1 passed the number straight through, so the
+    # scooter moved at v*WHEEL_RADIUS - 7.4 times slower than commanded - while
+    # the dynamics model used the same number as a speed and overestimated the
+    # yaw rate by that factor. Set to false for the ROS 1 behaviour.
+    WHEEL_RATE_FROM_SPEED: true
+
     # Initialized angle for each joints available in e-scooter
     INIT_HANLDE_BAR_ANGLE: 0.0
     INIT_R_PLATE_ANGLE: 0.0   # optional
@@ -102,6 +133,12 @@
     #     KP = I_b * wn^2            KD = 2 * zeta * wn * I_b
     #
     # with wn = 4 rad/s and zeta = 1.0 (critically damped, no overshoot).
+    #
+    # Deliberately gentle. The reaction plate has a fixed momentum budget, and a
+    # stiffer loop spends it on the settling impulse at spawn: wn = 5 drove the
+    # plate to its 400 rad/s limit during the first few seconds, after which the
+    # loop is open and the scooter falls. wn = 4 rides the same impulse out with
+    # the plate inside +-60 rad/s.
     #
     # ROS 1 shipped KP: 2.0 / KD: 0.05, i.e. wn = 0.83 rad/s and zeta = 0.015 -
     # far too soft to hold 18.9 kg up, and applied with the wrong sign on top of

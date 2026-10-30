@@ -34,7 +34,7 @@
 -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="escooter_ros2_control" params="sim plate_effort_limit:=500">
+  <xacro:macro name="escooter_ros2_control" params="sim plate_effort_limit:=500 handlebar_effort_limit:=200">
 
     <xacro:unless value="${sim == 'none'}">
       <ros2_control name="EScooterSystem" type="system">
@@ -56,9 +56,9 @@
               <param name="max">1.047</param>
             </command_interface>
             <!-- PID gains of the ROS 1 effort_controllers/JointPositionController -->
-            <param name="pos_kp">100.0</param>
-            <param name="pos_ki">10.0</param>
-            <param name="pos_kd">20.0</param>
+            <param name="pos_kp">400.0</param>
+            <param name="pos_ki">20.0</param>
+            <param name="pos_kd">40.0</param>
             <param name="pos_max_integral_error">10.0</param>
             <param name="pos_min_integral_error">-10.0</param>
             <param name="pos_antiwindup">true</param>
@@ -68,7 +68,7 @@
               <param name="min">-1.047</param>
               <param name="max">1.047</param>
             </command_interface>
-            <param name="position_proportional_gain">100.0</param>
+            <param name="position_proportional_gain">400.0</param>
           </xacro:if>
           <state_interface name="position">
             <param name="initial_value">0.0</param>

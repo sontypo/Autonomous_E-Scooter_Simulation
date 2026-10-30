@@ -75,7 +75,9 @@ def generate_launch_description():
                               description='URI prefix used to resolve the mesh files.'),
         DeclareLaunchArgument('plate_effort_limit', default_value='500',
                               description='Effort limit of rotational_plate_joint [N.m].'),
-        DeclareLaunchArgument('plate_velocity_limit', default_value='200',
+        DeclareLaunchArgument('handlebar_effort_limit', default_value='200',
+                              description='Effort limit of handle_bar_chasis_joint [N.m].'),
+        DeclareLaunchArgument('plate_velocity_limit', default_value='400',
                               description='Speed limit of rotational_plate_joint [rad/s]; '
                                           'bounds the momentum the balancing loop can use.'),
         # Spawn pose, same defaults as the ROS 1 launch file.
@@ -145,6 +147,7 @@ def generate_launch_description():
             'imu_topic': LaunchConfiguration('imu_topic'),
             'mesh_prefix': LaunchConfiguration('mesh_prefix'),
             'plate_effort_limit': LaunchConfiguration('plate_effort_limit'),
+            'handlebar_effort_limit': LaunchConfiguration('handlebar_effort_limit'),
             'plate_velocity_limit': LaunchConfiguration('plate_velocity_limit'),
             'use_sim_time': LaunchConfiguration('use_sim_time'),
         }.items(),

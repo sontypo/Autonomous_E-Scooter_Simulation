@@ -274,6 +274,82 @@ For comparison, every configuration before these fixes was flat on the ground
 at -55 degrees within about 1.5 s.
 
 
+## 5c. Teleoperation: steering and driving
+
+Three more faults showed up once the scooter was driven rather than just left to
+stand.
+
+### Steering did not respond
+
+Not the URDF - the joint frames are right. `handle_bar_chasis_joint`'s rpy
+(1.5481, 0, 0) takes its axis (0, 1, 0) to (0, 0.023, 0.9997), a near-vertical
+steering axis with a little rake, and `front_wheel_joint` resolves to
+(0, -0.9997, 0.023), a lateral spin axis. Both correct.
+
+The fault was in `cmd_velCallback`, next to the author's own
+`TODO: it should be delta`: `des_delta += angular.z * dt` integrates
+`angular.z`. Teleop publishes a held value, so one key press ramped the bars to
+the 45 degree stop over about 8 s and left them there; releasing to
+`angular.z = 0` froze them hard over instead of centring, and reversing meant
+waiting out the same ramp backwards.
+
+`STEERING_MODE` now defaults to `yaw_rate`, the ROS convention for `cmd_vel` on
+a bicycle: `delta = atan(L * omega / v)`, so `omega = 0` centres the bars at
+once. `angle` takes `angular.z` as the steering angle directly, and `rate`
+restores the ROS 1 integrator. `MAX_STEERING_RATE` slews the result so the
+balancing loop can absorb the roll disturbance.
+
+### A fictitious acceleration
+
+`Vx_dot_ = Vx_ / dt` is a speed divided by a sample interval. At a steady 2 m/s
+with cmd_vel at 20 Hz it reports **40 m/s^2**, and `constraints()` multiplies it
+into `psi_2dot_`, so the balancing feed-forward picked up a phantom 114 N.m at
+28 degrees of steering. That is what made the scooter lurch through +-87 degrees
+the moment it was driven and steered together. It is now
+`(Vx_ - prev_Vx_) / dt`.
+
+This was deliberately left alone during the port, as a modelling choice rather
+than a defect. That call was wrong: it is the dominant disturbance under teleop.
+
+### Commanded speed was never converted
+
+`joints_.front_wheel = Vx_` sent a m/s figure to a joint that takes rad/s - the
+author's `TODO: need to convert to joint command later`. The scooter moved at
+`v * WHEEL_RADIUS`, 7.4 times slower than asked, while the dynamics model read
+the same number as a speed and overestimated the yaw rate by that factor.
+`WHEEL_RATE_FROM_SPEED` (default true) divides by the wheel radius.
+
+### The steering joint was too weak to hold its command
+
+The export gave `handle_bar_chasis_joint` an effort limit of 40 N.m. Against the
+position PID's p = 100 that saturates at 23 degrees of error, so once the
+scooter leaned, the bicycle's own trail back-drove the bars past the 60 degree
+joint stop - measured at +58.5 degrees while the command was 0 - which turned
+the scooter and pulled it over. `handlebar_effort_limit` defaults to 200 N.m and
+the PID to p = 400; the bars now hold the commanded angle to 0.002 degrees.
+
+### Where it stands
+
+| | result |
+| --- | --- |
+| standing still | +-0.3 deg indefinitely, steering 0.002 deg |
+| righting itself after a fall | -87.7 deg to +0.74 deg in 2 s |
+| steering response | immediate, holds the commanded angle |
+| driving | **stable for about 1.6 s, then diverges** |
+
+Driving is still open. It fails the same way at every speed tried between 0.25
+and 2 m/s: the scooter holds to a few tenths of a degree, then goes from 0.5 to
+19 degrees in 400 ms. A reaction wheel fights the lean-steer coupling of a
+rolling bicycle with a fixed momentum budget, and it loses. The standard answer
+is steer-to-balance - steering into the fall, which is how bicycles actually
+stay up - using the handle bar the balancing loop currently leaves to the
+operator. That is a new controller, not a tuning change.
+
+Gains are deliberately gentle for the same budget reason: wn = 5 rad/s spent the
+whole flywheel on the settling impulse at spawn and saturated it, after which
+the loop is open. wn = 4 rides the same impulse out inside +-60 rad/s.
+
+
 ## 6. Controllers
 
 ros_control → ros2_control, keeping the controller names:

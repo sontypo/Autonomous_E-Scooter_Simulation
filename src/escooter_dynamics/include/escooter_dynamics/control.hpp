@@ -93,11 +93,18 @@ private:
   // Mechanical limits
   double BODY_MAX_ROLL{0.0}, BODY_MAX_PITCH{0.0}, BODY_MAX_YAW{0.0};
   double VELOCITY_DIVISION{0.0}, WHEEL_RADIUS{0.0}, WHEEL_SEPARATION_DIS{1.0};
+  // How cmd_vel.angular.z is read; see STEERING_MODE in params/escooter.yaml.
+  std::string STEERING_MODE{"yaw_rate"};
+  double STEERING_MIN_SPEED{0.5};
+  double MAX_STEERING_RATE{2.0};
+  // Convert cmd_vel.linear.x [m/s] into a front wheel rate [rad/s].
+  bool WHEEL_RATE_FROM_SPEED{true};
   int NUMBER_OF_JOINTS{3};
   double pose_x_ = 0.0;   // pose odometry
   double pose_y_ = 0.0;   // pose odometry
   double psi_ = 0.0;      // pose odometry
   double prev_distance_traveled_ = 0.0;
+  double prev_Vx_ = 0.0;
   double prev_front_wheel_angle = 0.0;
   double prev_steering_angle = 0.0;
   double steering_angle = 0.0;
