@@ -1,34 +1,35 @@
 <?xml version="1.0"?>
-<package format="2">
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>escooter_dynamics</name>
-  <version>0.0.0</version>
-  <description>The escooter_dynamics package</description>
+  <version>0.2.0</version>
+  <description>
+    Balancing dynamics model and controller interface for the autonomous e-scooter.
+  </description>
 
+  <author email="hongsonnguyen.haui@gmail.com">Saun Nguyen</author>
   <maintainer email="hongsonnguyen.haui@gmail.com">Saun Nguyen</maintainer>
+  <license>BSD-3-Clause</license>
 
-  <license>TODO</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>nodelet</build_depend>
-  <build_depend>geometry_msgs</build_depend>
-  <build_depend>escooter_msgs</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_export_depend>roscpp</build_export_depend>
-  <build_export_depend>nodelet</build_export_depend>
-  <build_export_depend>geometry_msgs</build_export_depend>
-  <build_export_depend>escooter_msgs</build_export_depend>
-  <build_export_depend>std_msgs</build_export_depend>
-  <exec_depend>roscpp</exec_depend>
-  <exec_depend>nodelet</exec_depend>
-  <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>escooter_msgs</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
+  <depend>escooter_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>tf2_ros</depend>
 
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>python3-pynput</exec_depend>
+  <exec_depend>rclpy</exec_depend>
 
-  <!-- The export tag contains other, unspecified, tags -->
   <export>
-    <!-- Other tools can request additional information be placed here -->
-
+    <build_type>ament_cmake</build_type>
   </export>
 </package>

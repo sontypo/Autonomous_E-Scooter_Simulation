@@ -1,0 +1,5 @@
+Third-party ROS 1 (catkin) Gazebo plugin, vendored on the `main` branch.
+The e-scooter description does not reference a RealSense sensor, so this
+package is not part of the ROS 2 port and colcon skips it. ROS 2 Humble users
+who need a depth camera should prefer the stock gazebo_ros camera plugins or
+realsense2_description. Delete this file once the package is ported.

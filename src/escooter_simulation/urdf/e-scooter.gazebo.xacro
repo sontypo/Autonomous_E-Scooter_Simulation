@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<!--
+  Simulator-specific tags: visual materials, the IMU sensor and the
+  ros2_control system plugin, emitted for whichever backend is selected.
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- IMU noise, shared by both backends (sdformat >= 6 schema). -->
+  <xacro:macro name="escooter_imu_noise">
+    <angular_velocity>
+      <x>
+        <noise type="gaussian">
+          <mean>0.0</mean>
+          <stddev>2e-4</stddev>
+          <bias_mean>0.0000075</bias_mean>
+          <bias_stddev>0.0000008</bias_stddev>
+        </noise>
+      </x>
+      <y>
+        <noise type="gaussian">
+          <mean>0.0</mean>
+          <stddev>2e-4</stddev>
+          <bias_mean>0.0000075</bias_mean>
+          <bias_stddev>0.0000008</bias_stddev>
+        </noise>
+      </y>
+      <z>
+        <noise type="gaussian">
+          <mean>0.0</mean>
+          <stddev>2e-4</stddev>
+          <bias_mean>0.0000075</bias_mean>
+          <bias_stddev>0.0000008</bias_stddev>
+        </noise>
+      </z>
+    </angular_velocity>
+    <linear_acceleration>
+      <x>
+        <noise type="gaussian">
+          <mean>0.0</mean>
+          <stddev>1.7e-2</stddev>
+          <bias_mean>0.1</bias_mean>
+          <bias_stddev>0.001</bias_stddev>
+        </noise>
+      </x>
+      <y>
+        <noise type="gaussian">
+          <mean>0.0</mean>
+          <stddev>1.7e-2</stddev>
+          <bias_mean>0.1</bias_mean>
+          <bias_stddev>0.001</bias_stddev>
+        </noise>
+      </y>
+      <z>
+        <noise type="gaussian">
+          <mean>0.0</mean>
+          <stddev>1.7e-2</stddev>
+          <bias_mean>0.1</bias_mean>
+          <bias_stddev>0.001</bias_stddev>
+        </noise>
+      </z>
+    </linear_acceleration>
+  </xacro:macro>
+
+  <xacro:macro name="escooter_gazebo" params="sim namespace controllers_file imu_topic">
+
+    <!-- =================================================================== -->
+    <!-- Visual materials.                                                   -->
+    <!-- Gazebo Classic needs its own material scripts; Ignition renders the -->
+    <!-- <material> colours declared in the URDF, so nothing is needed there.-->
+    <!-- =================================================================== -->
+    <xacro:if value="${sim == 'classic'}">
+      <gazebo reference="base_link">
+        <material>Gazebo/FlatBlack</material>
+      </gazebo>
+      <gazebo reference="reaction_motor">
+        <material>Gazebo/DarkGrey</material>
+      </gazebo>
+      <gazebo reference="rotational_plate">
+        <material>Gazebo/BlackTransparent</material>
+      </gazebo>
+      <gazebo reference="handle_bar_chasis">
+        <material>Gazebo/DarkGrey</material>
+      </gazebo>
+      <gazebo reference="front_wheel">
+        <material>Gazebo/FlatBlack</material>
+      </gazebo>
+      <gazebo reference="back_wheel">
+        <material>Gazebo/FlatBlack</material>
+      </gazebo>
+    </xacro:if>
+
+    <!-- =================================================================== -->
+    <!-- Wheel contact. Both engines default to mu = 1.0; stating it keeps   -->
+    <!-- Classic and Ignition comparable and makes the value tunable in one  -->
+    <!-- place when the traction model is revisited.                         -->
+    <!-- =================================================================== -->
+    <xacro:unless value="${sim == 'none'}">
+      <gazebo reference="front_wheel">
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
+      </gazebo>
+      <gazebo reference="back_wheel">
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
+      </gazebo>
+    </xacro:unless>
+
+    <!-- =================================================================== -->
+    <!-- IMU                                                                 -->
+    <!-- The noise block uses the sdformat >= 6 schema, which both Gazebo 11 -->
+    <!-- and Fortress parse; the numbers are the ones from the ROS 1 URDF.   -->
+    <!-- =================================================================== -->
+    <xacro:if value="${sim == 'classic'}">
+      <gazebo reference="imu_link">
+        <gravity>true</gravity>
+        <material>Gazebo/Grass</material>
+        <sensor name="imu_sensor" type="imu">
+          <always_on>true</always_on>
+          <update_rate>100</update_rate>
+          <visualize>false</visualize>
+          <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+            <ros>
+              <remapping>~/out:=${imu_topic}</remapping>
+            </ros>
+            <frame_name>imu_link</frame_name>
+            <!-- REP-145: report the orientation in the world frame, which is
+                 what Control::imuCallback expects for the roll feedback. -->
+            <initial_orientation_as_reference>false</initial_orientation_as_reference>
+          </plugin>
+          <imu>
+            <xacro:escooter_imu_noise/>
+          </imu>
+        </sensor>
+      </gazebo>
+    </xacro:if>
+
+    <xacro:if value="${sim == 'ignition'}">
+      <gazebo reference="imu_link">
+        <gravity>true</gravity>
+        <sensor name="imu_sensor" type="imu">
+          <always_on>1</always_on>
+          <update_rate>100</update_rate>
+          <visualize>false</visualize>
+          <!-- Published on the Ignition topic /imu and bridged 1:1 to ROS by
+               ros_gz_bridge; the world must load ignition-gazebo-imu-system. -->
+          <topic>${imu_topic}</topic>
+          <imu>
+            <xacro:escooter_imu_noise/>
+          </imu>
+        </sensor>
+      </gazebo>
+    </xacro:if>
+
+    <!-- =================================================================== -->
+    <!-- ros2_control system plugin                                          -->
+    <!-- =================================================================== -->
+    <xacro:if value="${sim == 'classic'}">
+      <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+          <ros>
+            <namespace>${namespace}</namespace>
+          </ros>
+          <parameters>${controllers_file}</parameters>
+          <robot_param>robot_description</robot_param>
+          <!-- Relative on purpose: resolved inside ${namespace}, which is where
+               robot_description.launch.py puts robot_state_publisher. -->
+          <robot_param_node>robot_state_publisher</robot_param_node>
+          <!-- Joints that carry a command interface are held at zero velocity
+               while no controller claims them; purely passive joints such as
+               back_wheel_joint are left free. -->
+          <hold_joints>true</hold_joints>
+        </plugin>
+      </gazebo>
+    </xacro:if>
+
+    <xacro:if value="${sim == 'ignition'}">
+      <gazebo>
+        <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+          <ros>
+            <namespace>${namespace}</namespace>
+          </ros>
+          <parameters>${controllers_file}</parameters>
+          <robot_param>robot_description</robot_param>
+          <!-- Must stay relative: this plugin concatenates its namespace with
+               the value, so a leading '/' yields '//' and an
+               InvalidServiceNameError at start-up. -->
+          <robot_param_node>robot_state_publisher</robot_param_node>
+          <controller_manager_name>controller_manager</controller_manager_name>
+        </plugin>
+      </gazebo>
+    </xacro:if>
+
+  </xacro:macro>
+
+</robot>

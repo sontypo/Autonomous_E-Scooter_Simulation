@@ -1,8 +1,0 @@
-prefix=/home/saun/E-scooter_ws/install
-
-Name: autonomous-scooter
-Description: Description of autonomous-scooter
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

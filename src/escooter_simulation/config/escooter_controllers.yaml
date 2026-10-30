@@ -1,0 +1,63 @@
+# ros2_control configuration for the e-scooter.
+#
+# This file is handed to the simulator's ros2_control system plugin through the
+# <parameters> tag of the URDF, so the controller manager and every controller
+# it spawns read their parameters from here.
+#
+# The node keys carry the `/e_scooter` namespace declared by
+# urdf/e-scooter.gazebo.xacro (`namespace` xacro argument). Change both together
+# if the robot namespace ever moves.
+#
+# ROS 1 equivalent: config/e-scooter_control.yaml on the `main` branch.
+
+/e_scooter/controller_manager:
+  ros__parameters:
+    # Matches MASTER_LOOP_RATE in escooter_dynamics/params/escooter.yaml.
+    update_rate: 500   # Hz
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    rotational_plate_joint_effort_controller:
+      type: effort_controllers/JointGroupEffortController
+
+    handle_bar_chasis_joint_position_controller:
+      type: position_controllers/JointGroupPositionController
+
+    front_wheel_joint_velocity_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+# Publish all joint states -----------------------------------
+/e_scooter/joint_state_broadcaster:
+  ros__parameters:
+    use_sim_time: true
+
+# Joint Effort Controllers ---------------------------------------
+# ROS 1: effort_controllers/JointEffortController (a pass-through forward
+# controller; the `pid` key it carried was never used by that controller type).
+/e_scooter/rotational_plate_joint_effort_controller:
+  ros__parameters:
+    use_sim_time: true
+    joints:
+      - rotational_plate_joint
+
+# Joint Position Controllers ---------------------------------------
+# ROS 1: effort_controllers/JointPositionController with pid {p: 100, i: 10, d: 20}.
+# The PID now lives next to the joint in urdf/e-scooter.ros2_control.xacro
+# (pos_kp / pos_ki / pos_kd) because it is the simulator that closes the loop.
+/e_scooter/handle_bar_chasis_joint_position_controller:
+  ros__parameters:
+    use_sim_time: true
+    joints:
+      - handle_bar_chasis_joint
+
+# Joint Velocity Controllers ---------------------------------------
+# ROS 1: velocity_controllers/JointVelocityController, with the velocity PID
+# supplied by gazebo_ros_control/pid_gains {p: 10, i: 2, d: 0.1}; that PID is
+# now the vel_kp / vel_ki / vel_kd parameters of the joint.
+/e_scooter/front_wheel_joint_velocity_controller:
+  ros__parameters:
+    use_sim_time: true
+    joints:
+      - front_wheel_joint

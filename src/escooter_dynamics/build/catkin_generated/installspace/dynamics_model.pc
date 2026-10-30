@@ -1,8 +1,0 @@
-prefix=/usr/local
-
-Name: dynamics_model
-Description: Description of dynamics_model
-Version: 0.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib -ldynamics_model
-Requires: roscpp std_msgs

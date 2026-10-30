@@ -1,90 +1,169 @@
-# Configuration Settings
+# Configuration Settings for the escooter_dynamics node (ROS 2).
+#
+# `/**` applies to the node whatever name it is launched under, which keeps this
+# file usable both from the bringup launch files and from a bare
+#   ros2 run escooter_dynamics escooter_dynamics --ros-args --params-file <this>
+/**:
+  ros__parameters:
 
-# Robot name space
-NAME_SPACE: "/e_scooter/"
+    # Robot name space (prefix for the controller command topics)
+    NAME_SPACE: "/e_scooter/"
 
-# Non teleop mode for naviagtion stack, Gazebo, etc type modes.
-# Controller will still have standup and sitdown functions for safty reasons 
-NON_TELEOP: false
+    # Non teleop mode for navigation stack, Gazebo, etc type modes.
+    # Controller will still have standup and sitdown functions for safety reasons
+    NON_TELEOP: false
 
-# Speed limit in Hz for the master loop rate
-MASTER_LOOP_RATE: 500
+    # Speed limit in Hz for the master loop rate
+    MASTER_LOOP_RATE: 500
 
-# Static time division to convert cmd_vel into segments for controller loop
-VELOCITY_DIVISION: 0.033
+    # Static time division to convert cmd_vel into segments for controller loop
+    VELOCITY_DIVISION: 0.033
 
-# Twist Max Values
-# Sim
-MAX_METERS_PER_SEC: 0.6944444444444444
-MAX_RADIANS_PER_SEC: 1.71440329
+    # Twist Max Values
+    # Sim
+    MAX_METERS_PER_SEC: 0.6944444444444444
+    MAX_RADIANS_PER_SEC: 1.71440329
 
-# Distance between handle bar and center of mass (assume that there is no gap in z axis between these two)
-HANDLE_BAR_TO_COM: 0.297
+    # Distance between handle bar and center of mass
+    # (assume that there is no gap in z axis between these two)
+    HANDLE_BAR_TO_COM: 0.297
 
-# Define the center of mass position
-# Sim
-COM_POS_X: 0.203
-COM_POS_Y: 0.0
-COM_POS_Z: 0.392    # (h) Ground to center of mass position
+    # Define the center of mass position
+    # Sim
+    COM_POS_X: 0.203
+    COM_POS_Y: 0.0
+    COM_POS_Z: 0.392      # (h) Ground to center of mass position
 
-# Origin position
-# Sim
-OG_POS_X: 0.0
-OG_POS_Y: 0.0
-OG_POS_Z: 0.197     # Ground to origin
+    # Origin position
+    # Sim
+    OG_POS_X: 0.0
+    OG_POS_Y: 0.0
+    OG_POS_Z: 0.197       # Ground to origin
 
-# Weights
-# BODY_WEIGHT Sim: 9.4259 + 1.8503 + 0.79986 
-BODY_WEIGHT: 12.07606  # base_link + back_wheel + Rotational_motor
-R_PLATE_WEIGHT: 2.18948
-F_WHEEL_WEIGHT: 2.0732
-HANDLE_BAR_WEIGHT: 3.5678
-WHOLE_BODY_WEIGHT: 18.90654
-WHOLE_BODY_WEIGHT_EXC: 17.71706
+    # Weights
+    # BODY_WEIGHT Sim: 9.4259 + 1.8503 + 0.79986
+    BODY_WEIGHT: 12.07606   # base_link + back_wheel + Rotational_motor
+    R_PLATE_WEIGHT: 2.18948
+    F_WHEEL_WEIGHT: 2.0732
+    HANDLE_BAR_WEIGHT: 3.5678
+    WHOLE_BODY_WEIGHT: 18.90654
+    WHOLE_BODY_WEIGHT_EXC: 17.71706
 
-# Wheel radius: front wheel and left wheel are equal to each other
-# Sim
-WHEEL_RADIUS: 0.135 # meter
+    # Wheel radius: front wheel and left wheel are equal to each other
+    # Sim
+    WHEEL_RADIUS: 0.135   # meter
 
-# Height, width
-BODY_HEIGHT: 1.3
-BODY_WIDTH: 1.3
-WHEEL_SEPARATION_DIS: 1.0
-B_WHEEL_TO_COM: 0.703   # (r) WHEEL_SEPARATION_DIS / 2 + COM_POS_X
-BASE_TO_COM: 0.195 # COM_POS_Z - OG_POS_Z
+    # Height, width
+    BODY_HEIGHT: 1.3
+    BODY_WIDTH: 1.3
+    WHEEL_SEPARATION_DIS: 1.0
+    B_WHEEL_TO_COM: 0.703   # (r) WHEEL_SEPARATION_DIS / 2 + COM_POS_X
+    BASE_TO_COM: 0.195      # COM_POS_Z - OG_POS_Z
 
-# Body FK maximum rotation
-# BODY_MAX_ROLL: !degrees 12
+    # Body FK maximum rotation / mechanical limits.
+    # ROS 1 read these without ever defining them, which left the members
+    # uninitialised; they are declared here so the values are explicit.
+    # They are currently informational: no code path clamps on them yet.
+    BODY_MAX_ROLL: 0.20943951    # 12 degrees
+    BODY_MAX_PITCH: 0.20943951   # 12 degrees
+    BODY_MAX_YAW: 3.14159265     # 180 degrees
 
-# Body maximum steering angle
-MAX_STEERING_ANGLE: 0.785398163     # 45 degrees
+    # Auto-levelling (IMU) compensation limits, likewise declared explicitly.
+    MAX_BODY_ROLL_COMP: 0.20943951
+    MAX_BODY_PITCH_COMP: 0.20943951
+    COMPENSATE_INCREMENT: 0.001
+    COMPENSATE_TO_WITHIN: 0.0075
 
-# Initialized angle for each joints available in e-scooter
-INIT_HANLDE_BAR_ANGLE: 0.0
-INIT_R_PLATE_ANGLE: 0.0 # optional
-INIT_F_WHEEL_ANGLE: 0.0 # optional
+    # Body maximum steering angle
+    MAX_STEERING_ANGLE: 0.785398163     # 45 degrees
 
-# Cycle length is the number of periods the travel is divided into ( Gait Settings )
-CYCLE_LENGTH: 50
+    # Initialized angle for each joints available in e-scooter
+    INIT_HANLDE_BAR_ANGLE: 0.0
+    INIT_R_PLATE_ANGLE: 0.0   # optional
+    INIT_F_WHEEL_ANGLE: 0.0   # optional
 
-# Speed in Hz that the joints interpolate between gait poses
-INTERPOLATION_LOOP_RATE: 300
+    # Cycle length is the number of periods the travel is divided into (Gait Settings)
+    CYCLE_LENGTH: 50
 
-# Uncertainties parameter
-UNCERTAINTIES: 0.01
+    # Speed in Hz that the joints interpolate between gait poses
+    INTERPOLATION_LOOP_RATE: 300
 
-# Balancing parameters
-PD_PDplus: 1.0
-KP: 2.0
-KD: 0.05
+    # Uncertainties parameter
+    UNCERTAINTIES: 0.01
 
-# Number of joints
-NUMBER_OF_JOINTS: 3
+    # Balancing parameters.
+    #
+    # The reaction plate cancels gravity with PD_PDplus * (C*cos(theta) +
+    # G*sin(theta)) and then holds the body upright with a PD loop, so the
+    # closed loop reduces to  I_b * theta_ddot = -KP*theta - KD*theta_dot.
+    # Gains therefore scale with the roll inertia about the wheel contact line,
+    # I_b ~ WHOLE_BODY_WEIGHT * COM_POS_Z^2 = 2.905 kg.m^2:
+    #
+    #     KP = I_b * wn^2            KD = 2 * zeta * wn * I_b
+    #
+    # with wn = 4 rad/s and zeta = 1.0 (critically damped, no overshoot).
+    #
+    # ROS 1 shipped KP: 2.0 / KD: 0.05, i.e. wn = 0.83 rad/s and zeta = 0.015 -
+    # far too soft to hold 18.9 kg up, and applied with the wrong sign on top of
+    # that. See docs/PORTING.md.
+    PD_PDplus: 1.0
+    KP: 46.5
+    KD: 23.2
 
-# Joint descriptions
-JOINTS: {
-    '0': {name: handle_bar_chasis_joint, sign: 1},
-    '1': {name: rotational_plate_joint, sign: 1},
-    '2': {name: front_wheel_joint, sign: -1},
-    '3': {name: back_wheel_joint, sign: -1},
-}
+    # Saturation of the balancing torque. The joint itself allows 500 N.m, but
+    # the reaction plate only stores 12 N.m.s of momentum: letting the loop
+    # saturate at the joint limit dumps all of it into the body in a fraction
+    # of a second and throws the scooter over. Holding 45 degrees of lean needs
+    # 51 N.m, so 150 leaves plenty of authority without the slam.
+    MAX_BALANCING_TORQUE: 150.0
+
+    # Bound on the open-loop roll-rate prediction of the forward model. The
+    # model no longer drives the actuator, but it still integrates, so it needs
+    # a limit to stay finite.
+    MAX_MODEL_ROLL_RATE: 50.0
+
+    # Momentum management for the reaction plate, in rad of lean per rad/s of
+    # plate speed. A reaction wheel can only trade momentum, so any constant
+    # bias torque - here a few millimetres of lateral centre-of-mass offset -
+    # winds it up until it saturates. Measured without this term: the plate
+    # drifts 7.6 rad/s per second and the scooter falls after about 26 s.
+    # Setting this to 0.0 holds exactly upright again, with that caveat.
+    #
+    # The plate settles where the net torque is zero, which works out at
+    # omega = -(1 + G/KP) * theta_bias / MOMENTUM_UNLOAD_GAIN. With the measured
+    # bias (theta_bias ~ 0.0069 rad) 1e-4 settles at -176 rad/s, i.e. right on
+    # the 200 rad/s limit; 5e-4 settles near -35 rad/s and still leaves the
+    # unloading loop (time constant I_w/(G*K) ~ 1.7 s) well separated from the
+    # 0.25 s balancing loop.
+    MOMENTUM_UNLOAD_GAIN: 0.0005
+    # Hard bound on how far the bias above may tilt the setpoint, in rad.
+    MAX_LEAN_SETPOINT: 0.035
+
+    # Number of joints driven by this node (handle bar, rotational plate, front wheel)
+    NUMBER_OF_JOINTS: 3
+
+    # Joint descriptions.
+    # ROS 2 parameters cannot hold nested maps, so the ROS 1
+    #   JOINTS: {'0': {name: ..., sign: ...}, ...}
+    # map is expressed as two index-aligned arrays with the same ordering:
+    #   0 -> handle bar, 1 -> rotational plate, 2 -> front wheel, 3 -> back wheel
+    JOINT_NAMES:
+      - "handle_bar_chasis_joint"
+      - "rotational_plate_joint"
+      - "front_wheel_joint"
+      - "back_wheel_joint"
+    JOINT_SIGNS: [1, 1, -1, -1]
+
+    # Interface topics (defaults reproduce the ROS 1 names)
+    JOINT_STATES_TOPIC: "/e_scooter/joint_states"
+    CMD_VEL_TOPIC: "/e_scooter/cmd_vel"
+    IMU_TOPIC: "/imu"
+    ODOM_TOPIC: "/e_scooter/odometry/calculated"
+    TWIST_TOPIC: "/twist"
+
+    # Odometry frames. The ROS 1 TF broadcaster was commented out; set
+    # PUBLISH_ODOM_TF to true only when debugging the calculated odometry,
+    # otherwise it fights the TF tree published by robot_state_publisher.
+    ODOM_FRAME_ID: "odom"
+    BASE_FRAME_ID: "base_link"
+    PUBLISH_ODOM_TF: false

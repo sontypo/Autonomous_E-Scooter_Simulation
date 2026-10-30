@@ -1,18 +1,24 @@
 <?xml version="1.0"?>
-<package>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>escooter_msgs</name>
-  <version>0.1.0</version>
-  <description>The escooter_msgs package</description>
+  <version>0.2.0</version>
+  <description>Message definitions for the autonomous e-scooter simulation.</description>
+
   <author email="hongsonnguyen.haui@gmail.com">Saun Nguyen</author>
   <maintainer email="hongsonnguyen.haui@gmail.com">Saun Nguyen</maintainer>
-  <license>BSD</license>
-  
-  <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>message_generation</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>geometry_msgs</build_depend>
-  <run_depend>std_msgs</run_depend>
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>message_runtime</run_depend>
+  <license>BSD-3-Clause</license>
 
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
+
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

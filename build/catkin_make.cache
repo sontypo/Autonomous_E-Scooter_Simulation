@@ -1,2 +1,0 @@
-autonomous-scooter:escooter_dynamics:escooter_msgs:escooter_simulation:gazebo-ros-actor-plugin:pid_controller:realsense_gazebo_plugin:thormang3-rides-gogoro
--DCATKIN_DEVEL_PREFIX=/home/saun/E-scooter_ws/devel -DCMAKE_INSTALL_PREFIX=/home/saun/E-scooter_ws/install -G Unix Makefiles

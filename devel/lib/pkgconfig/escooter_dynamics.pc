@@ -1,8 +1,0 @@
-prefix=/home/saun/E-scooter_ws/devel
-
-Name: escooter_dynamics
-Description: Description of escooter_dynamics
-Version: 0.0.0
-Cflags: -I/home/saun/E-scooter_ws/src/escooter_dynamics/include
-Libs: -L${prefix}/lib -lescooter_dynamics
-Requires: roscpp nodelet geometry_msgs escooter_msgs std_msgs

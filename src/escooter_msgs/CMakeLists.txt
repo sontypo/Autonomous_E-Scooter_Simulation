@@ -1,43 +1,24 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.8)
 project(escooter_msgs)
 
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  message_generation
-  std_msgs
-  geometry_msgs
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(ament_cmake REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/RPY.msg"
+  "msg/Pose.msg"
+  "msg/Joints.msg"
+  DEPENDENCIES
+    geometry_msgs
+    std_msgs
 )
 
+ament_export_dependencies(rosidl_default_runtime)
 
-## Generate messages in the 'msg' folder
-add_message_files(
-   FILES
-   Joints.msg
-   Pose.msg
-   RPY.msg
-)
-
-## Generate added messages and services with any dependencies listed here
-generate_messages(
-   DEPENDENCIES std_msgs geometry_msgs
-)
-
-###################################
-## catkin specific configuration ##
-###################################
-catkin_package(
-  CATKIN_DEPENDS message_runtime
-)
-
-###########
-## Build ##
-###########
-
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
-# include_directories(include)
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
+ament_package()

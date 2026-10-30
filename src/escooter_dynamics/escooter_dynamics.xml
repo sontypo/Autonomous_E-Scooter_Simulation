@@ -1,9 +1,0 @@
-<!-- escooter_dynamics publisher -->
-<library path="lib/escooter_dynamics">
-  <class name="escooter_dynamics/escooter_dynamics" type="escooter_dynamics" 
-    base_class_type="node::Node">
-    <description>
-      E-scooter dynamics controller.
-    </description>
-  </class>
-</library>

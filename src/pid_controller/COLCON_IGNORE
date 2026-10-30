@@ -1,0 +1,3 @@
+Empty ROS 1 (catkin) package skeleton: no sources, no launch files.
+Nothing in the e-scooter stack depends on it, so colcon skips it on the
+ros2-humble branch. Delete this file once the package is ported or removed.

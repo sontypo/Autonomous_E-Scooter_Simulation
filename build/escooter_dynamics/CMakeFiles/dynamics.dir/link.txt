@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC   -shared -Wl,-soname,libdynamics.so -o /home/saun/E-scooter_ws/devel/lib/libdynamics.so CMakeFiles/dynamics.dir/src/dynamics.cpp.o 
