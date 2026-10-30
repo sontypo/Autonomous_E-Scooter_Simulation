@@ -40,7 +40,10 @@ FORWARDED = [
     ('Roll', '0.0243175499999999985417'),
     ('Yaw', '0.0'),
     ('entity_name', 'e_scooter'),
-    ('dynamics', 'true'),
+    ('controller_type', 'rl'),
+    ('task_type', 'auto'),
+    ('policy_path', ''),
+    ('dynamics', 'false'),
     ('rviz', 'false'),
 ]
 

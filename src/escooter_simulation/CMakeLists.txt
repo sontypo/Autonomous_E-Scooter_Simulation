@@ -19,6 +19,7 @@ install(
     scripts/xacro_to_urdf.py
     scripts/start_simulation.py
     scripts/export_isaac_urdf.py
+    scripts/escooter_rl_controller.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

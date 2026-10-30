@@ -24,7 +24,7 @@ from launch.actions import (
 from launch.conditions import IfCondition, UnlessCondition
 from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, PythonExpression
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -82,8 +82,19 @@ def generate_launch_description():
         DeclareLaunchArgument('Roll', default_value='0.0243175499999999985417'),
         DeclareLaunchArgument('Yaw', default_value='0.0'),
         DeclareLaunchArgument('entity_name', default_value='e_scooter'),
-        DeclareLaunchArgument('dynamics', default_value='true',
-                              description='Also run the escooter_dynamics balancing node.'),
+        DeclareLaunchArgument('controller_type', default_value='rl',
+                              choices=['rl', 'dynamics', 'none'],
+                              description='Controller to run: "rl" (Isaac Lab RL policy), '
+                                          '"dynamics" (classical PD dynamics), or "none".'),
+        DeclareLaunchArgument('task_type', default_value='auto',
+                              choices=['auto', 'goal_nav', 'velocity'],
+                              description='RL task type: "auto" (detected from model), '
+                                          '"goal_nav", or "velocity".'),
+        DeclareLaunchArgument('policy_path', default_value='',
+                              description='Path to exported ONNX or TorchScript policy (.onnx / .pt). '
+                                          'If empty, auto-detects latest policy from logs/rsl_rl.'),
+        DeclareLaunchArgument('dynamics', default_value='false',
+                              description='Also run the escooter_dynamics balancing node (legacy).'),
         DeclareLaunchArgument('dynamics_params_file', default_value=default_dynamics_params,
                               description='Parameter file for the escooter_dynamics node.'),
         DeclareLaunchArgument('spawn_timeout', default_value='120.0',
@@ -204,15 +215,37 @@ def generate_launch_description():
             OnProcessExit(target_action=load_controllers, on_exit=[start_simulation])),
     ]
 
+    run_dynamics = PythonExpression([
+        "'", LaunchConfiguration('controller_type'), "' == 'dynamics' or ('",
+        LaunchConfiguration('controller_type'), "' == 'none' and '",
+        LaunchConfiguration('dynamics'), "' == 'true')"
+    ])
     dynamics = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution([FindPackageShare('escooter_dynamics'),
                                   'launch', 'escooter_dynamics.launch.py'])),
-        condition=IfCondition(LaunchConfiguration('dynamics')),
+        condition=IfCondition(run_dynamics),
         launch_arguments={
             'use_sim_time': LaunchConfiguration('use_sim_time'),
             'params_file': LaunchConfiguration('dynamics_params_file'),
         }.items(),
+    )
+
+    rl_controller = Node(
+        package=PKG,
+        executable='escooter_rl_controller.py',
+        name='escooter_rl_controller',
+        output='screen',
+        condition=IfCondition(
+            PythonExpression(["'", LaunchConfiguration('controller_type'), "' == 'rl'"])
+        ),
+        parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time'),
+            'namespace': LaunchConfiguration('namespace'),
+            'task_type': LaunchConfiguration('task_type'),
+            'policy_path': LaunchConfiguration('policy_path'),
+            'imu_topic': LaunchConfiguration('imu_topic'),
+        }],
     )
 
     rviz = Node(
@@ -235,5 +268,7 @@ def generate_launch_description():
             spawn_entity,
         ] + controller_chain + [
             dynamics,
+            rl_controller,
             rviz,
         ])
+
