@@ -35,21 +35,28 @@ DROP_LINKS = {'dummy'}
 DROP_JOINTS = {'dummy_joint'}
 
 STATE = """\
-State of the assets in new_meshes/ as of this writing:
+new_meshes/ holds exactly one USD asset now, e-scooter/, and it matches this
+URDF. The earlier imports were removed: one had been built from the pre-port
+description and was additionally bolted to the world by a fixed root_joint, the
+other was the same stale import under a different name.
 
-  e-scooter/                      corrected in place, matches this URDF:
-                                  plate inertia 0.06/0.06/0.12, steering limit
-                                  200 N.m, plate speed limit 400 rad/s, no world
-                                  fixation, articulation root on base_link,
-                                  drives set per joint, imu_link frame present.
-                                  Only the IMU sensor itself still has to be
-                                  attached - see point 3.
-  e-scooter_1st/                  the original import, still on the old numbers.
-  _backup_usd/                    both assets exactly as they were before the
-                                  correction, in case anything needs comparing.
+The six files of e-scooter/ are one set, not duplicates - the Isaac URDF
+importer always splits an asset this way:
 
-Re-importing from scratch is still the cleaner option if the model changes
-much; this is the list of what the importer gets wrong for this vehicle.
+  e-scooter_isaac.usd             scene wrapper, /World/e_scooter; this is the
+                                  one test_isaacsim.py loads
+  e-scooter.usd                   robot entry point, payloads the four below
+  configuration/
+    e-scooter_base.usd            geometry, 33 MB of it
+    e-scooter_physics.usd         rigid bodies, joints, drives
+    e-scooter_robot.usd           IsaacRobotAPI link and joint lists
+    e-scooter_sensor.usd          sensors, and the imu_link frame
+
+Splitting it that way is what let the physics be corrected without touching the
+33 MB of geometry. Everything in the list below has already been applied to
+e-scooter/, except the IMU sensor itself - see point 3. The list is kept because
+it is what the importer gets wrong for this vehicle, so it applies again on any
+future re-import.
 """
 
 CHECKLIST = """\
