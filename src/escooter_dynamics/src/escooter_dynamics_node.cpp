@@ -35,6 +35,7 @@ int main(int argc, char ** argv)
         control->plate_velocity_);
       dynamics->updateDynamics(
         dynamics->theta_, &control->joints_, dynamics->tau_, control->Vx_);
+      control->updateSteering();
       control->publishJointCommand(control->joints_);
     };
 

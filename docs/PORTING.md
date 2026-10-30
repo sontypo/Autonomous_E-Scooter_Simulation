@@ -332,18 +332,38 @@ the PID to p = 400; the bars now hold the commanded angle to 0.002 degrees.
 
 | | result |
 | --- | --- |
-| standing still | +-0.3 deg indefinitely, steering 0.002 deg |
-| righting itself after a fall | -87.7 deg to +0.74 deg in 2 s |
+| standing still | +-0.3 deg indefinitely, steering 0.004 deg |
+| righting itself after a fall | -87.7 deg to +0.74 deg in 2 s; -33 deg to -1.5 deg in 2 s |
 | steering response | immediate, holds the commanded angle |
 | driving | **stable for about 1.6 s, then diverges** |
 
 Driving is still open. It fails the same way at every speed tried between 0.25
 and 2 m/s: the scooter holds to a few tenths of a degree, then goes from 0.5 to
-19 degrees in 400 ms. A reaction wheel fights the lean-steer coupling of a
-rolling bicycle with a fixed momentum budget, and it loses. The standard answer
-is steer-to-balance - steering into the fall, which is how bicycles actually
-stay up - using the handle bar the balancing loop currently leaves to the
-operator. That is a new controller, not a tuning change.
+19 degrees in 400 ms.
+
+Two things were tried against it and are in the tree.
+
+**Ramping the speed command** (`MAX_LINEAR_ACCEL`). `front_wheel_joint` is
+velocity controlled, so a step command makes its PID slam the drive torque and
+the reaction tips a vehicle balanced on two in-line wheels: stepping straight to
+2 m/s took the wheel from 0 to -11.5 rad/s in 200 ms and had the scooter at -67
+degrees 200 ms later. Worth having regardless, but it did not fix the
+divergence.
+
+**Steer-to-balance** (`STEER_BALANCE_KP` / `KD`, `updateSteering()`), the
+textbook answer: steer into the fall so the contact patch is thrown back under
+the centre of mass. Steering makes a roll torque of `M*h*v^2*tan(delta)/L`, so
+the law asks for `delta = atan(L*tau/(M*h*v^2))`, which scales with speed on its
+own, and it is gated below `STEER_BALANCE_MIN_SPEED` because the torque goes
+with `v^2` - ungated at 0.25 m/s it pinned the bars at the 20 degree stop for a
+one degree lean and made things actively worse.
+
+**It is shipped off (`KP`/`KD` = 0.0) because it did not work.** Gated and
+tuned it still does not rescue the scooter at 2 m/s. One PD on the lean angle
+mapped through the steering is not enough: lean and steer are coupled states and
+want a full-state controller designed on the linearised bicycle, and the
+exported trail and head angle should be checked for realism first. The
+implementation and its parameters are left in place for that work.
 
 Gains are deliberately gentle for the same budget reason: wn = 5 rad/s spent the
 whole flywheel on the settling impulse at spawn and saturated it, after which

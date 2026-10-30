@@ -43,7 +43,8 @@ Control::Control(const rclcpp::Node::SharedPtr & node)
   clock_(node->get_clock()),
   last_time_odometry_(0, 0, node->get_clock()->get_clock_type()),
   last_time_cmd_vel_(0, 0, node->get_clock()->get_clock_type()),
-  last_time_js_(0, 0, node->get_clock()->get_clock_type())
+  last_time_js_(0, 0, node->get_clock()->get_clock_type()),
+  last_time_steer_(0, 0, node->get_clock()->get_clock_type())
 {
   NAME_SPACE = "/e_scooter/";
 
@@ -65,6 +66,14 @@ Control::Control(const rclcpp::Node::SharedPtr & node)
   getParam(node_, "STEERING_MIN_SPEED", STEERING_MIN_SPEED);
   getParam(node_, "MAX_STEERING_RATE", MAX_STEERING_RATE);
   getParam(node_, "WHEEL_RATE_FROM_SPEED", WHEEL_RATE_FROM_SPEED);
+  getParam(node_, "STEER_BALANCE_KP", STEER_BALANCE_KP);
+  getParam(node_, "STEER_BALANCE_KD", STEER_BALANCE_KD);
+  getParam(node_, "STEER_BALANCE_MAX", STEER_BALANCE_MAX);
+  getParam(node_, "STEER_BALANCE_MIN_SPEED", STEER_BALANCE_MIN_SPEED);
+  getParam(node_, "STEER_BALANCE_FULL_SPEED", STEER_BALANCE_FULL_SPEED);
+  getParam(node_, "MAX_LINEAR_ACCEL", MAX_LINEAR_ACCEL);
+  getParam(node_, "WHOLE_BODY_WEIGHT", WHOLE_BODY_WEIGHT);
+  getParam(node_, "COM_POS_Z", COM_POS_Z);
 
   // Frames and optional odometry TF (the ROS 1 broadcaster was commented out,
   // so the default keeps it off).
@@ -312,6 +321,104 @@ void Control::publishTwist(const geometry_msgs::msg::Twist & com_vel)
   twist_pub_->publish(twistStamped);
 }
 
+//==============================================================================
+// Steering: operator request plus steer-to-balance
+//==============================================================================
+
+void Control::updateSteering()
+{
+  const double dt = tick(last_time_steer_);
+
+  // Ramp the speed command.
+  //
+  // front_wheel_joint is velocity controlled, so a step in the command makes its
+  // PID slam the drive torque, and the reaction of that torque tips a vehicle
+  // balanced on two in-line wheels. Measured: stepping straight to 2 m/s drove
+  // the wheel from 0 to -11.5 rad/s in 200 ms and had the scooter at -67 degrees
+  // 200 ms after that. Teleop already ramps its own output; this bounds whatever
+  // else publishes cmd_vel.
+  if (MAX_LINEAR_ACCEL > 0.0 && dt > 0.0) {
+    const double max_step = MAX_LINEAR_ACCEL * dt;
+    Vx_ += std::clamp(rider_speed_ - Vx_, -max_step, max_step);
+  } else {
+    Vx_ = rider_speed_;
+  }
+  Vx_dot_ = (dt > 0.0) ? ((Vx_ - prev_Vx_) / dt) : 0.0;
+  prev_Vx_ = Vx_;
+
+  // cmd_vel.linear.x is a ground speed in m/s but front_wheel_joint takes a
+  // wheel rate in rad/s. ROS 1 passed the number through unconverted - the
+  // author's `TODO: need to convert to joint command later` - so the scooter
+  // moved at v*WHEEL_RADIUS, 7.4 times slower than asked, while
+  // Dynamics::constraints() read the same number as a speed and overestimated
+  // psi_dot by that factor.
+  joints_.front_wheel = (WHEEL_RATE_FROM_SPEED && WHEEL_RADIUS > 0.0) ?
+    (Vx_ / WHEEL_RADIUS) : Vx_;
+
+  // Steer-to-balance.
+  //
+  // A reaction wheel can only trade a fixed amount of momentum, so it cannot
+  // hold a rolling bicycle up for long - measured, the scooter stayed within a
+  // few tenths of a degree for about 1.6 s and then went from 0.5 to 19 degrees
+  // in 400 ms. Bicycles stay up by steering into the fall instead: the turn
+  // throws the contact patch under the centre of mass.
+  //
+  // Steering generates a roll torque of M*h*v^2*tan(delta)/L, so the angle that
+  // delivers a wanted torque is delta = atan(L*tau/(M*h*v^2)). Writing it that
+  // way makes the term scale with speed on its own: it asks for little at
+  // 3 m/s and saturates at walking pace, which is honest - a bicycle cannot be
+  // balanced by steering when it is barely moving, and the reaction plate has
+  // to carry it there.
+  //
+  // Sign: positive delta turns the front wheel to +Y, the scooter yaws left, and
+  // the centre of mass is thrown right, which is positive roll. Correcting a
+  // positive roll therefore needs a negative steering angle.
+  balance_delta_ = 0.0;
+  const double speed = std::abs(Vx_);
+  // Authority fades in with speed. The roll torque steering can produce goes
+  // with v^2, so below walking pace the law asks for angles it cannot usefully
+  // reach: measured at 0.25 m/s it pinned the bars at the 20 degree stop for a
+  // one degree lean and drove the scooter over. Under
+  // STEER_BALANCE_MIN_SPEED the reaction plate carries the scooter alone.
+  double authority = 0.0;
+  if (STEER_BALANCE_FULL_SPEED > STEER_BALANCE_MIN_SPEED) {
+    authority = (speed - STEER_BALANCE_MIN_SPEED) /
+      (STEER_BALANCE_FULL_SPEED - STEER_BALANCE_MIN_SPEED);
+    authority = std::clamp(authority, 0.0, 1.0);
+  } else if (speed >= STEER_BALANCE_MIN_SPEED) {
+    authority = 1.0;
+  }
+
+  if (authority > 0.0 && (STEER_BALANCE_KP != 0.0 || STEER_BALANCE_KD != 0.0)) {
+    const double theta = body_frame_.orientation.roll;
+    const double tau_wanted = -(STEER_BALANCE_KP * theta + STEER_BALANCE_KD * body_roll_rate_);
+
+    const double lateral = WHOLE_BODY_WEIGHT * COM_POS_Z * speed * speed;
+    if (lateral > 0.0) {
+      balance_delta_ = authority *
+        std::atan(WHEEL_SEPARATION_DIS * tau_wanted / lateral);
+      balance_delta_ = std::clamp(balance_delta_, -STEER_BALANCE_MAX, STEER_BALANCE_MAX);
+      // Reversing throws the mass the other way, so the correction flips too.
+      if (Vx_ < 0.0) {
+        balance_delta_ = -balance_delta_;
+      }
+    }
+  }
+
+  const double target =
+    std::clamp(rider_delta_ + balance_delta_, -MAX_STEERING_ANGLE, MAX_STEERING_ANGLE);
+
+  // Slew limit so the bars move quickly but not instantly.
+  if (MAX_STEERING_RATE > 0.0 && dt > 0.0) {
+    const double max_step = MAX_STEERING_RATE * dt;
+    des_delta += std::clamp(target - des_delta, -max_step, max_step);
+  } else {
+    des_delta = target;
+  }
+
+  joints_.handle_bar = des_delta;
+}
+
 void Control::publishJointCommand(const escooter_msgs::msg::Joints & joints)
 {
   std_msgs::msg::Float64MultiArray jpc_command;
@@ -397,7 +504,7 @@ void Control::cmd_velCallback(const geometry_msgs::msg::Twist::ConstSharedPtr cm
 
   cmd_vel_ = *cmd_vel_msg;
 
-  Vx_ = cmd_vel_msg->linear.x;              // TODO: need to convert to joint command later
+  rider_speed_ = cmd_vel_msg->linear.x;
   const double omega = cmd_vel_msg->angular.z;
 
   // PORT: longitudinal acceleration.
@@ -408,8 +515,7 @@ void Control::cmd_velCallback(const geometry_msgs::msg::Twist::ConstSharedPtr cm
   // psi_2dot_, so the balancing feed-forward picked up a fictitious 114 N.m the
   // moment the scooter was driven and steered at the same time. That is what
   // made it lurch through +-87 degrees under teleop.
-  Vx_dot_ = (Vx_ - prev_Vx_) / dt;
-  prev_Vx_ = Vx_;
+
 
   // PORT: how angular.z becomes a steering angle.
   //
@@ -442,29 +548,11 @@ void Control::cmd_velCallback(const geometry_msgs::msg::Twist::ConstSharedPtr cm
     target_delta = std::atan(WHEEL_SEPARATION_DIS * omega / v_eff);
   }
 
-  target_delta = std::clamp(target_delta, -MAX_STEERING_ANGLE, MAX_STEERING_ANGLE);
+  // The operator's request. updateSteering() adds the steer-to-balance term and
+  // does the clamping and slew limiting, because it runs every control cycle
+  // while this callback only fires when a cmd_vel arrives.
+  rider_delta_ = std::clamp(target_delta, -MAX_STEERING_ANGLE, MAX_STEERING_ANGLE);
 
-  // Slew limit: the balancing loop has to absorb the roll disturbance a steering
-  // change produces, so the bars move quickly but not instantly.
-  if (MAX_STEERING_RATE > 0.0) {
-    const double max_step = MAX_STEERING_RATE * dt;
-    des_delta += std::clamp(target_delta - des_delta, -max_step, max_step);
-  } else {
-    des_delta = target_delta;
-  }
-
-  // Update joints with desired velocities.
-  //
-  // PORT: cmd_vel.linear.x is a ground speed in m/s, but front_wheel_joint takes
-  // a wheel rate in rad/s. ROS 1 passed the number through unconverted - the
-  // author's `TODO: need to convert to joint command later` - so the scooter
-  // actually moved at v*WHEEL_RADIUS, 7.4 times slower than commanded, while
-  // Dynamics::constraints() used the unconverted value as a speed and so
-  // overestimated psi_dot by the same factor. Set WHEEL_RATE_FROM_SPEED to
-  // false to get the ROS 1 behaviour back.
-  joints_.front_wheel = (WHEEL_RATE_FROM_SPEED && WHEEL_RADIUS > 0.0) ?
-    (Vx_ / WHEEL_RADIUS) : Vx_;
-  joints_.handle_bar = des_delta;
 }
 
 //==============================================================================
