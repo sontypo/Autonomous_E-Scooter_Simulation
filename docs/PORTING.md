@@ -532,3 +532,95 @@ Both backends were brought up headless and exercised end to end:
 * `angular.z` integrates into the steering angle and clamps at
   `MAX_STEERING_ANGLE = 0.785398163`, which both simulators then track;
 * the generated URDF was diffed term by term against the ROS 1 original.
+
+## 12. Actuator profiles: matching Gazebo to Isaac Lab
+
+The RL path deploys a policy trained in Isaac Lab against a Gazebo plant that
+was tuned for something else entirely. A policy is a frozen function of the
+plant it was trained on, so the two have to agree. `actuator_profile` selects
+which plant the description is generated against; `launch/robot_description.
+launch.py` holds the table.
+
+`auto` follows `controller_type`: `rl` gets `isaac`, everything else gets
+`classic`. Override it directly with `actuator_profile:=classic|isaac`.
+
+### What differed
+
+An Isaac `ImplicitActuatorCfg` computes
+
+    tau = clamp(stiffness*(q_d - q) + damping*(w_d - w), +-effort_limit)
+
+with `w_d = 0` for a position or effort action, so its `damping` is a plain
+`-damping*w` drag on the joint.
+
+| | Isaac | Gazebo (`classic`) | who was right |
+|---|---|---|---|
+| steering PD | k 300, d 25 | kp 400, kd 40 | a draw: zeta 0.83 vs 1.14, both near 3.3 Hz on the 0.765 kg.m2 steering inertia |
+| steering effort | 40 N.m | 200 N.m | Isaac. 200 N.m is not a handlebar that exists, and it turns the large-signal slew from 92 deg/s into 286 deg/s |
+| steering integral | none | ki 20, clamp +-10 | Isaac. A real servo wants one, but the policy re-commands at 50 Hz into an accumulator it never saw |
+| plate damping | 0.2 | none | Isaac. `b = kt^2/R` with kt 0.1 N.m/A and R 0.05 ohm is exactly 0.2; a frictionless flywheel is the unphysical one |
+| plate speed | 200 rad/s | 400 rad/s | Isaac |
+| front wheel | P servo, d 5, effort 80 | kp 10, ki 2, effort unbounded | Isaac |
+| back wheel | effort limit 0 | free | same thing either way |
+
+### Where the damping had to go
+
+`gazebo_ros2_control` calls `control_toolbox::Pid::computeCommand(error, dt)`,
+which differentiates the **error**. A `pos_kd` there fires a full-scale torque
+spike on every new setpoint, 50 times a second. Isaac's `damping` differentiates
+the **measurement** and has no setpoint kick. So the `isaac` profile carries the
+damping as URDF joint damping, which Gazebo applies at the 1 kHz physics rate,
+and leaves the PID with its P term alone.
+
+This also corrects an earlier wrong call. The same damping was once emulated
+inside `escooter_rl_controller.py`, subtracting `0.2*w` from the command, and it
+made things worse (peak lean 117 deg against 91 deg). That failed because of
+where it was applied, not what it was: a velocity-proportional term delayed by
+the 20 ms control period is positive feedback. The `plate_damping` parameter is
+still there, still 0.0, and must stay that way now the plant provides the term.
+
+### Measured result: it got worse, and that was the useful part
+
+25 s at 1.5 m/s, counting time inside the 0.61 rad envelope that
+`fall_orientation` terminates training at:
+
+| | `classic` | `isaac` |
+|---|---|---|
+| time within 35 deg | 81.7 % | 10.4 % |
+| peak \|roll\| | 96.6 deg | 84.3 deg |
+| lost the envelope at | - | 2.6 s |
+
+The classical controller is unaffected: `controller_type:=dynamics` still holds
++-0.67 deg, and the `classic` profile's URDF differs from the pre-change one
+only by `damping="0.0"` on two joints and an explicit `effort="-1"` on the
+front wheel, which is what SDF already defaulted to.
+
+### What the regression exposed
+
+The matched plant is correct; `classic` was masking a policy-side fault with an
+over-powered reaction plate. Feeding the exported ONNX a clean synthetic
+observation, with no simulator in the loop at all:
+
+All other observations held at the nominal upright, stationary, zero-command
+state, `last_action` zero:
+
+| `reaction_plate_vel` | raw steering action |
+|---|---|
+| 0 rad/s | +0.02 |
+| -16 rad/s | +0.98 |
+| -22.4 rad/s | +1.40 |
+| -75 rad/s | +4.03 |
+| -150 rad/s | +7.32 |
+
+The steering head moves about 0.06 action units per rad/s of plate speed, so it
+leaves the valid `[-1, 1]` range at roughly 16 rad/s and is clipped to the
+0.7 rad action scale from then on. The live `[OBS]` log shows exactly that: the
+scooter upright, stationary, zero command, every other observation clean, and
+`raw=[+2.08, -0.08, +0.00]` with the steering pinned at its 40 deg limit.
+
+The plate settles at -22 rad/s on its own, because the policy's residual torque
+of about -4.7 N.m against the 0.2 damping has its equilibrium at -23.5 rad/s.
+That alone is enough to rail the steering.
+
+`debug_obs:=true` turns the observation log on. The remaining gap is on the
+training side and is not something the deployment plumbing can close.

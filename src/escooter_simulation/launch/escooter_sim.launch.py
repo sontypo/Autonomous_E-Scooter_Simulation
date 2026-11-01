@@ -31,9 +31,11 @@ FORWARDED = [
     ('use_sim_time', 'true'),
     ('imu_topic', '/imu'),
     ('mesh_prefix', 'package://escooter_simulation'),
-    ('plate_effort_limit', '500'),
-    ('handlebar_effort_limit', '200'),
-    ('plate_velocity_limit', '400'),
+    # Empty: let actuator_profile decide. See robot_description.launch.py.
+    ('actuator_profile', 'auto'),
+    ('plate_effort_limit', ''),
+    ('handlebar_effort_limit', ''),
+    ('plate_velocity_limit', ''),
     ('x_pos', '0.0'),
     ('y_pos', '0.0'),
     ('z_pos', '0.197'),
@@ -43,6 +45,7 @@ FORWARDED = [
     ('controller_type', 'rl'),
     ('task_type', 'auto'),
     ('policy_path', ''),
+    ('debug_obs', 'false'),
     ('dynamics', 'false'),
     ('rviz', 'false'),
 ]

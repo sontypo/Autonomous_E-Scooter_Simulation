@@ -61,6 +61,36 @@
   <xacro:arg name="plate_spin_inertia" default="0.12"/>
   <xacro:arg name="plate_transverse_inertia" default="0.06"/>
   <xacro:arg name="plate_velocity_limit" default="400"/>
+  <!-- Actuator terms that have no counterpart in the ROS 1 model, added so the
+       Gazebo plant can be matched term for term against the Isaac Lab
+       ImplicitActuatorCfg the RL policy was trained on
+       (src/escooter_rl/escooter_rl/assets/escooter.py).
+
+       An Isaac implicit actuator computes
+           tau = clamp(k*(q_d = q) + d*(w_d = w), +-effort_limit)
+       so its `damping` is derivative on the MEASUREMENT, with no setpoint
+       kick. gazebo_ros2_control calls control_toolbox::Pid::computeCommand
+       (error, dt), which differentiates the ERROR, so a kd there fires a
+       full-scale torque spike on every new 50 Hz setpoint. Carrying the
+       damping as joint damping instead reproduces Isaac exactly and lets
+       Gazebo apply it at the 1 kHz physics rate.
+
+       Defaults keep the ROS 1 plant: no joint damping, no wheel effort cap.
+       launch/robot_description.launch.py selects them by actuator_profile. -->
+  <xacro:arg name="plate_damping" default="0.0"/>
+  <xacro:arg name="handlebar_damping" default="0.0"/>
+  <!-- SDF reads a negative effort or velocity limit as "unbounded", which is
+       what the front wheel had when it carried no <limit> at all. -->
+  <xacro:arg name="front_wheel_effort_limit" default="-1"/>
+  <xacro:arg name="front_wheel_velocity_limit" default="-1"/>
+  <!-- gazebo_ros2_control PID gains, consumed by e-scooter.ros2_control.xacro.
+       Defaults are the ROS 1 gains carried over by the port. -->
+  <xacro:arg name="steer_kp" default="400.0"/>
+  <xacro:arg name="steer_ki" default="20.0"/>
+  <xacro:arg name="steer_kd" default="40.0"/>
+  <xacro:arg name="wheel_kp" default="10.0"/>
+  <xacro:arg name="wheel_ki" default="2.0"/>
+  <xacro:arg name="wheel_kd" default="0.1"/>
 
   <xacro:property name="sim" value="$(arg sim)"/>
   <xacro:property name="namespace" value="$(arg namespace)"/>
@@ -72,6 +102,10 @@
   <xacro:property name="plate_spin_inertia" value="$(arg plate_spin_inertia)"/>
   <xacro:property name="plate_transverse_inertia" value="$(arg plate_transverse_inertia)"/>
   <xacro:property name="plate_velocity_limit" value="$(arg plate_velocity_limit)"/>
+  <xacro:property name="plate_damping" value="$(arg plate_damping)"/>
+  <xacro:property name="handlebar_damping" value="$(arg handlebar_damping)"/>
+  <xacro:property name="front_wheel_effort_limit" value="$(arg front_wheel_effort_limit)"/>
+  <xacro:property name="front_wheel_velocity_limit" value="$(arg front_wheel_velocity_limit)"/>
 
   <!-- ############################################################################################################### -->
   <!-- MATERIALS
@@ -266,6 +300,8 @@
     <limit
       effort="${plate_effort_limit}"
       velocity="${plate_velocity_limit}" />
+    <dynamics
+      damping="${plate_damping}" />
   </joint>
 
   <!-- ############################################################################################################### -->
@@ -325,6 +361,8 @@
       upper="1.047"
       effort="${handlebar_effort_limit}"
       velocity="10" />
+    <dynamics
+      damping="${handlebar_damping}" />
   </joint>
 
   <!-- ############################################################################################################### -->
@@ -379,6 +417,9 @@
       link="front_wheel" />
     <axis
       xyz="0 0 1" />
+    <limit
+      effort="${front_wheel_effort_limit}"
+      velocity="${front_wheel_velocity_limit}" />
   </joint>
 
   <!-- ############################################################################################################### -->
@@ -443,7 +484,11 @@
   <xacro:include filename="$(find escooter_simulation)/urdf/e-scooter.gazebo.xacro"/>
 
   <xacro:escooter_ros2_control sim="${sim}" plate_effort_limit="${plate_effort_limit}"
-                               handlebar_effort_limit="${handlebar_effort_limit}"/>
+                               handlebar_effort_limit="${handlebar_effort_limit}"
+                               steer_kp="$(arg steer_kp)" steer_ki="$(arg steer_ki)"
+                               steer_kd="$(arg steer_kd)"
+                               wheel_kp="$(arg wheel_kp)" wheel_ki="$(arg wheel_ki)"
+                               wheel_kd="$(arg wheel_kd)"/>
   <xacro:escooter_gazebo
     sim="${sim}"
     namespace="${namespace}"

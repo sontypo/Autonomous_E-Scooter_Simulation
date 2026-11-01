@@ -117,13 +117,22 @@ class EScooterRLController(Node):
         #     tau = stiffness*(q_des - q) + damping*(qd_des - qd) + effort_target
         # with stiffness 0 and damping 0.2, so the plate always felt an extra
         # -0.2*omega on top of the policy's torque - 30 N.m at the 150 rad/s the
-        # flywheel actually runs at, half the 60 N.m action scale. The Gazebo
-        # effort controller is a pass-through and applies no such term, so it is
-        # reproduced here, in the command, rather than by changing the joint.
-        # DEFAULT OFF (0.0). Reproducing it was measured to make things worse,
-        # not better - peak lean went from 91 to 117 degrees - so the policy
-        # torque is sent unmodified. Set to 0.2 to try it again.
+        # flywheel actually runs at, half the 60 N.m action scale.
+        #
+        # LEAVE THIS AT 0.0. Subtracting the term here was measured to make
+        # things worse, not better: peak lean went from 91 to 117 degrees. A
+        # velocity-proportional term delayed by the 20 ms control period is
+        # positive feedback, which is not what the plant does. The damping now
+        # lives where it belongs, as <dynamics damping> on rotational_plate_joint
+        # under the "isaac" actuator profile, so Gazebo applies it at the 1 kHz
+        # physics rate. Setting this non-zero on top of that double counts it.
         self.declare_parameter("plate_damping", 0.0)   # N.m.s/rad
+        # Log the full observation vector and the UNCLIPPED policy output at
+        # debug_obs_rate Hz. The policy's steering head is close to unbounded in
+        # the reaction_plate_vel input, so a raw action far outside [-1, 1] is
+        # the signature of an observation the policy never saw in training.
+        self.declare_parameter("debug_obs", False)
+        self.declare_parameter("debug_obs_rate", 2.0)        # Hz
         self.declare_parameter("publish_odom", True)         # Publish dead-reckoning odometry
         self.declare_parameter("odom_frame_id", "odom")
         self.declare_parameter("base_frame_id", "base_link")
@@ -147,6 +156,11 @@ class EScooterRLController(Node):
             "joint_vel_order").get_parameter_value().string_value
         self.odom_topic = self.get_parameter("odom_topic").get_parameter_value().string_value
         self.plate_damping = self.get_parameter("plate_damping").get_parameter_value().double_value
+        self.debug_obs = self.get_parameter("debug_obs").get_parameter_value().bool_value
+        self.debug_obs_rate = self.get_parameter("debug_obs_rate").get_parameter_value().double_value
+        self._debug_every = max(1, int(round(
+            self.control_rate / max(self.debug_obs_rate, 1e-3))))
+        self._debug_tick = 0
         self.publish_odom = self.get_parameter("publish_odom").get_parameter_value().bool_value
         self.odom_frame_id = self.get_parameter("odom_frame_id").get_parameter_value().string_value
         self.base_frame_id = self.get_parameter("base_frame_id").get_parameter_value().string_value
@@ -549,6 +563,20 @@ class EScooterRLController(Node):
         # the unclipped action back and clip only what reaches the actuators.
         self.last_action = np.asarray(raw_actions, dtype=np.float32).copy()
         actions = np.clip(raw_actions, -1.0, 1.0)
+
+        if self.debug_obs:
+            self._debug_tick += 1
+            if self._debug_tick % self._debug_every == 0:
+                o = obs[0]
+                self.get_logger().info(
+                    "[OBS] v=[%+.2f %+.2f %+.2f] w=[%+.2f %+.2f %+.2f] "
+                    "g=[%+.2f %+.2f %+.2f] steer=%+.3f plate=%+7.1f "
+                    "jv=[%+.1f %+.1f] cmd=[%+.2f %+.2f %+.2f] | raw=[%+.3f %+.3f %+.3f]%s"
+                    % (o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8],
+                       o[9], o[10], o[11], o[12], o[13], o[14], o[15],
+                       raw_actions[0], raw_actions[1], raw_actions[2],
+                       "  <== RAW OUT OF RANGE"
+                       if np.max(np.abs(raw_actions)) > 1.0 else ""))
 
         # 3. Scale actions to physical actuator units
         # Steering angle target (radians); matches JointPositionActionCfg with

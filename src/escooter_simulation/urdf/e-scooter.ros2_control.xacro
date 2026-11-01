@@ -34,7 +34,10 @@
 -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="escooter_ros2_control" params="sim plate_effort_limit:=500 handlebar_effort_limit:=200">
+  <xacro:macro name="escooter_ros2_control"
+               params="sim plate_effort_limit:=500 handlebar_effort_limit:=200
+                       steer_kp:=400.0 steer_ki:=20.0 steer_kd:=40.0
+                       wheel_kp:=10.0 wheel_ki:=2.0 wheel_kd:=0.1">
 
     <xacro:unless value="${sim == 'none'}">
       <ros2_control name="EScooterSystem" type="system">
@@ -55,10 +58,14 @@
               <param name="min">-1.047</param>
               <param name="max">1.047</param>
             </command_interface>
-            <!-- PID gains of the ROS 1 effort_controllers/JointPositionController -->
-            <param name="pos_kp">400.0</param>
-            <param name="pos_ki">20.0</param>
-            <param name="pos_kd">40.0</param>
+            <!-- PID gains. Defaults are the ROS 1
+                 effort_controllers/JointPositionController gains; the "isaac"
+                 actuator profile replaces them with Isaac's stiffness and
+                 moves the derivative term into the joint's own damping,
+                 because computeCommand(error, dt) differentiates the error. -->
+            <param name="pos_kp">${steer_kp}</param>
+            <param name="pos_ki">${steer_ki}</param>
+            <param name="pos_kd">${steer_kd}</param>
             <param name="pos_max_integral_error">10.0</param>
             <param name="pos_min_integral_error">-10.0</param>
             <param name="pos_antiwindup">true</param>
@@ -68,7 +75,7 @@
               <param name="min">-1.047</param>
               <param name="max">1.047</param>
             </command_interface>
-            <param name="position_proportional_gain">400.0</param>
+            <param name="position_proportional_gain">${steer_kp}</param>
           </xacro:if>
           <state_interface name="position">
             <param name="initial_value">0.0</param>
@@ -95,9 +102,9 @@
           <xacro:if value="${sim == 'classic'}">
             <command_interface name="velocity_pid"/>
             <!-- PID gains of the ROS 1 gazebo_ros_control/pid_gains entry -->
-            <param name="vel_kp">10.0</param>
-            <param name="vel_ki">2.0</param>
-            <param name="vel_kd">0.1</param>
+            <param name="vel_kp">${wheel_kp}</param>
+            <param name="vel_ki">${wheel_ki}</param>
+            <param name="vel_kd">${wheel_kd}</param>
             <param name="vel_max_integral_error">10.0</param>
             <param name="vel_min_integral_error">-10.0</param>
             <param name="vel_antiwindup">true</param>

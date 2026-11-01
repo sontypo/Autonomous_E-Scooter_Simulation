@@ -67,13 +67,16 @@ def generate_launch_description():
         DeclareLaunchArgument('imu_topic', default_value='/imu'),
         DeclareLaunchArgument('mesh_prefix', default_value='package://escooter_simulation',
                               description='URI prefix used to resolve the mesh files.'),
-        DeclareLaunchArgument('plate_effort_limit', default_value='500',
-                              description='Effort limit of rotational_plate_joint [N.m].'),
-        DeclareLaunchArgument('handlebar_effort_limit', default_value='200',
-                              description='Effort limit of handle_bar_chasis_joint [N.m].'),
-        DeclareLaunchArgument('plate_velocity_limit', default_value='400',
+        DeclareLaunchArgument('plate_effort_limit', default_value='',
+                              description='Effort limit of rotational_plate_joint [N.m]. '
+                                          'Empty takes it from actuator_profile.'),
+        DeclareLaunchArgument('handlebar_effort_limit', default_value='',
+                              description='Effort limit of handle_bar_chasis_joint [N.m]. '
+                                          'Empty takes it from actuator_profile.'),
+        DeclareLaunchArgument('plate_velocity_limit', default_value='',
                               description='Speed limit of rotational_plate_joint [rad/s]; '
-                                          'bounds the momentum the balancing loop can use.'),
+                                          'bounds the momentum the balancing loop can use. '
+                                          'Empty takes it from actuator_profile.'),
         # Spawn pose, same defaults as the ROS 1 launch file.
         DeclareLaunchArgument('x_pos', default_value='0.0'),
         DeclareLaunchArgument('y_pos', default_value='0.0'),
@@ -82,6 +85,21 @@ def generate_launch_description():
         DeclareLaunchArgument('Roll', default_value='0.0243175499999999985417'),
         DeclareLaunchArgument('Yaw', default_value='0.0'),
         DeclareLaunchArgument('entity_name', default_value='e_scooter'),
+        DeclareLaunchArgument('debug_obs', default_value='false',
+                              description='Log the RL observation vector and the '
+                                          'unclipped policy output, for diagnosing '
+                                          'out-of-distribution observations.'),
+        DeclareLaunchArgument('actuator_profile', default_value='auto',
+                              choices=['auto', 'classic', 'isaac'],
+                              description='Actuator plant the description is '
+                                          'generated against. "auto" follows '
+                                          'controller_type: the RL policy gets '
+                                          '"isaac", which matches the Isaac Lab '
+                                          'actuators it was trained on, and '
+                                          'everything else gets "classic", the '
+                                          'plant escooter_dynamics was tuned '
+                                          'for. See ACTUATOR_PROFILES in '
+                                          'robot_description.launch.py.'),
         DeclareLaunchArgument('controller_type', default_value='rl',
                               choices=['rl', 'dynamics', 'none'],
                               description='Controller to run: "rl" (Isaac Lab RL policy), '
@@ -143,6 +161,14 @@ def generate_launch_description():
         ),
     ])
 
+    # "auto" is resolved here rather than in robot_description.launch.py
+    # because controller_type, which decides it, is declared at this level.
+    actuator_profile = PythonExpression([
+        "'", LaunchConfiguration('actuator_profile'), "' if '",
+        LaunchConfiguration('actuator_profile'), "' != 'auto' else ('isaac' if '",
+        LaunchConfiguration('controller_type'), "' == 'rl' else 'classic')",
+    ])
+
     robot_state_publisher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_share, 'launch', 'robot_description.launch.py')),
@@ -152,6 +178,7 @@ def generate_launch_description():
             'controllers_file': LaunchConfiguration('controllers_file'),
             'imu_topic': LaunchConfiguration('imu_topic'),
             'mesh_prefix': LaunchConfiguration('mesh_prefix'),
+            'actuator_profile': actuator_profile,
             'plate_effort_limit': LaunchConfiguration('plate_effort_limit'),
             'handlebar_effort_limit': LaunchConfiguration('handlebar_effort_limit'),
             'plate_velocity_limit': LaunchConfiguration('plate_velocity_limit'),
@@ -245,6 +272,7 @@ def generate_launch_description():
             'task_type': LaunchConfiguration('task_type'),
             'policy_path': LaunchConfiguration('policy_path'),
             'imu_topic': LaunchConfiguration('imu_topic'),
+            'debug_obs': LaunchConfiguration('debug_obs'),
         }],
     )
 
