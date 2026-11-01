@@ -162,6 +162,7 @@ class EScooterRLController(Node):
         self._debug_every = max(1, int(round(
             self.control_rate / max(self.debug_obs_rate, 1e-3))))
         self._debug_tick = 0
+        self._debug_prev = None
         self.publish_odom = self.get_parameter("publish_odom").get_parameter_value().bool_value
         self.odom_frame_id = self.get_parameter("odom_frame_id").get_parameter_value().string_value
         self.base_frame_id = self.get_parameter("base_frame_id").get_parameter_value().string_value
@@ -649,13 +650,18 @@ class EScooterRLController(Node):
 
         if self.debug_obs:
             self._debug_tick += 1
+            _now = self.get_clock().now()
+            _dt = ((_now - self._debug_prev).nanoseconds * 1e-9
+                   if self._debug_prev is not None else float("nan"))
+            self._debug_prev = _now
             if self._debug_tick % self._debug_every == 0:
                 o = obs[0]
                 self.get_logger().info(
-                    "[OBS] v=[%+.2f %+.2f %+.2f] w=[%+.2f %+.2f %+.2f] "
+                    "[OBS] dt=%.4f "
+                    "v=[%+.2f %+.2f %+.2f] w=[%+.2f %+.2f %+.2f] "
                     "g=[%+.2f %+.2f %+.2f] steer=%+.3f plate=%+7.1f "
                     "jv=[%+.1f %+.1f] cmd=[%+.2f %+.2f %+.2f] | raw=[%+.3f %+.3f %+.3f]%s"
-                    % (o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8],
+                    % (_dt, o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8],
                        o[9], o[10], o[11], o[12], o[13], o[14], o[15],
                        raw_actions[0], raw_actions[1], raw_actions[2],
                        "  <== RAW OUT OF RANGE"

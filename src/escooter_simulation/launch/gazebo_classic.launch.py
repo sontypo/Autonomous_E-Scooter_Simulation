@@ -46,6 +46,7 @@ def generate_launch_description():
     pkg_share = get_package_share_directory(PKG)
     default_world = os.path.join(pkg_share, 'worlds', 'escooter_empty.world')
     default_controllers = os.path.join(pkg_share, 'config', 'escooter_controllers.yaml')
+    default_gazebo_params = os.path.join(pkg_share, 'config', 'gazebo_params.yaml')
     default_dynamics_params = os.path.join(
         get_package_share_directory('escooter_dynamics'), 'params', 'escooter.yaml')
 
@@ -54,6 +55,11 @@ def generate_launch_description():
                               description='Gazebo Classic world file.'),
         DeclareLaunchArgument('controllers_file', default_value=default_controllers,
                               description='ros2_control YAML for the controller manager.'),
+        DeclareLaunchArgument('gazebo_params_file', default_value=default_gazebo_params,
+                              description='Parameters for the gazebo_ros nodes. Carries the '
+                                          '/clock publish rate, which gazebo_ros_init defaults '
+                                          'to 10 Hz; at that rate every use_sim_time timer is '
+                                          'quantised to 100 ms. See the file for details.'),
         DeclareLaunchArgument('namespace', default_value='/e_scooter',
                               description='ROS namespace of the controller manager.'),
         DeclareLaunchArgument('gui', default_value='true',
@@ -89,6 +95,8 @@ def generate_launch_description():
                               description='Log the RL observation vector and the '
                                           'unclipped policy output, for diagnosing '
                                           'out-of-distribution observations.'),
+        DeclareLaunchArgument('debug_obs_rate', default_value='2.0',
+                              description='Rate of the debug_obs log, in Hz.'),
         DeclareLaunchArgument('actuator_profile', default_value='auto',
                               choices=['auto', 'classic', 'isaac'],
                               description='Actuator plant the description is '
@@ -143,6 +151,9 @@ def generate_launch_description():
                              'launch', 'gzserver.launch.py')),
             launch_arguments={
                 'world': LaunchConfiguration('world'),
+                # Raises the /clock rate off its 10 Hz default; without it a
+                # 50 Hz control loop runs in 100 ms bursts.
+                'params_file': LaunchConfiguration('gazebo_params_file'),
                 # Always paused: start_simulation.py releases the world once
                 # the controllers are loaded, so the balancing loop is live
                 # from the very first physics step.
@@ -273,6 +284,7 @@ def generate_launch_description():
             'policy_path': LaunchConfiguration('policy_path'),
             'imu_topic': LaunchConfiguration('imu_topic'),
             'debug_obs': LaunchConfiguration('debug_obs'),
+            'debug_obs_rate': LaunchConfiguration('debug_obs_rate'),
         }],
     )
 

@@ -24,6 +24,7 @@ PKG = 'escooter_simulation'
 # Arguments both backends understand; forwarded as-is.
 FORWARDED = [
     ('controllers_file', None),
+    ('gazebo_params_file', 'GAZEBO_PARAMS'),
     ('dynamics_params_file', 'DYNAMICS_PARAMS'),
     ('namespace', '/e_scooter'),
     ('gui', 'true'),
@@ -46,6 +47,7 @@ FORWARDED = [
     ('task_type', 'auto'),
     ('policy_path', ''),
     ('debug_obs', 'false'),
+    ('debug_obs_rate', '2.0'),
     ('dynamics', 'false'),
     ('rviz', 'false'),
 ]
@@ -69,6 +71,8 @@ def generate_launch_description():
             default = default_controllers
         elif default == 'DYNAMICS_PARAMS':
             default = default_dynamics_params
+        elif default == 'GAZEBO_PARAMS':
+            default = os.path.join(pkg_share, 'config', 'gazebo_params.yaml')
         args.append(DeclareLaunchArgument(name, default_value=default))
         forwarded[name] = LaunchConfiguration(name)
 

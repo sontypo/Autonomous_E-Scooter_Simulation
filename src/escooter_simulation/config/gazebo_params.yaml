@@ -1,0 +1,18 @@
+# Parameters for the gazebo_ros nodes that gzserver loads.
+#
+# The only thing here is the /clock rate, and it is not a detail.
+# gazebo_ros_init defaults publish_rate to 10 Hz, so every node running with
+# use_sim_time sees simulated time advance in 100 ms jumps. A timer asking for
+# 50 Hz does not get 50 Hz: it fires twice back to back and then waits 100 ms,
+# which holds each command five times longer than intended. For the RL policy,
+# trained at a 20 ms control period, that is five times the intended impulse
+# per decision - the reaction plate reached its speed limit within half a
+# second and the scooter went over. escooter_dynamics was quantised the same
+# way, it just survived it because its control law is pure state feedback and
+# carries no dt.
+#
+# 1000 Hz matches max_step_size = 0.001 in the world file, so /clock ticks once
+# per physics step and nothing is quantised at all.
+/gazebo:
+  ros__parameters:
+    publish_rate: 1000.0

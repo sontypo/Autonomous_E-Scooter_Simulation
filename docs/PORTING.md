@@ -687,3 +687,61 @@ actor_weights = {k.replace("actor.", ""): v for k, v in state_dict.items()
 The normaliser would be dropped without a word, and the exported policy would
 be fed raw observations while expecting normalised ones. Either leave it off
 and scale explicitly, as above, or fix the exporter first.
+
+## 14. /clock at 10 Hz, and why the RL policy could not balance
+
+`gazebo_ros_init` publishes `/clock` at **10 Hz** by default. Every node running
+with `use_sim_time` therefore sees simulated time advance in 100 ms jumps, and a
+timer asking for 50 Hz does not get 50 Hz - it fires twice back to back and then
+waits 100 ms:
+
+    dt = 0.0000, 0.1000, 0.0000, 0.1000, ...   (expected 0.0200)
+
+The RL policy is trained with `decimation = 4` on `sim.dt = 0.005`, so it
+assumes a 20 ms control period. Holding each action for 100 ms delivers five
+times the intended impulse per decision. The reaction plate reached its speed
+limit inside half a second, the scooter lost its only balancing authority and
+went over, every time.
+
+`config/gazebo_params.yaml` sets `publish_rate: 1000.0`, matching the world's
+`max_step_size` of 0.001, and `gazebo_classic.launch.py` passes it through
+gzserver's `params_file`. Ignition is unaffected: it gets `/clock` from the
+ros_gz bridge at the sim rate.
+
+### How it was found
+
+The plate went from 0 to 20 rad/s between two consecutive 50 Hz debug samples.
+With `I = 0.12` and a commanded 25 N.m that takes 96 ms, not 20 ms - so the
+samples were not 20 ms apart. Logging the control period directly showed the
+100 ms quantisation. `debug_obs_rate:=50.0` turns that trace on.
+
+`escooter_dynamics` was quantised exactly the same way. It survived because its
+control law is pure state feedback and carries no `dt`; raising the clock rate
+leaves it at +-0.65 deg, unchanged.
+
+### Measured, 25 s at 1.5 m/s
+
+| | before | after |
+|---|---|---|
+| `isaac` profile, time within 35 deg | 3.6 % | **100 %** |
+| `isaac` peak \|roll\| | 84.3 deg | 16.2 deg, 21.4 deg over two runs |
+| `classic` profile, time within 35 deg | 57.4 % | **100 %** |
+| `classic` peak \|roll\| | 94.3 deg | **7.1 deg** |
+
+Forward speed now tracks the command, 1.38 to 1.63 m/s against 1.5.
+
+### What is still wrong
+
+Under the `isaac` profile the reaction plate drifts up over about 20 s and
+parks on its 200 rad/s limit, after which it produces no torque at all and the
+scooter holds a steady 10 deg lean on steering alone. The plate observation is
+then +2.0 after scaling, against the roughly +-0.03 the policy saw in training
+(`Episode_Reward/reaction_plate_centering` = -0.0152 means the plate sat near
+3 rad/s), so the policy is extrapolating again. `classic` does not hit this: its
+400 rad/s ceiling leaves headroom, peak plate speed was 180.7 rad/s and the
+torque never saturated.
+
+Raising only `plate_velocity_limit` to 400 inside the `isaac` profile did not
+reproduce the `classic` result - that run fell - so the ceiling is not the whole
+story and the difference is not yet isolated. That is one run, and not enough to
+conclude from.

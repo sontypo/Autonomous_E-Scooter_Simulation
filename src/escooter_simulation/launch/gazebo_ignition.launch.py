@@ -92,6 +92,13 @@ def generate_launch_description():
                               description='Log the RL observation vector and the '
                                           'unclipped policy output, for diagnosing '
                                           'out-of-distribution observations.'),
+        DeclareLaunchArgument('gazebo_params_file', default_value='',
+                              description='Accepted so escooter_sim.launch.py can forward it '
+                                          'to either backend, and unused here: Ignition gets '
+                                          'its /clock from the ros_gz bridge, which runs at '
+                                          'the sim rate rather than gazebo_ros_init\'s 10 Hz.'),
+        DeclareLaunchArgument('debug_obs_rate', default_value='2.0',
+                              description='Rate of the debug_obs log, in Hz.'),
         DeclareLaunchArgument('actuator_profile', default_value='auto',
                               choices=['auto', 'classic', 'isaac'],
                               description='Actuator plant the description is '
@@ -272,6 +279,7 @@ def generate_launch_description():
             'policy_path': LaunchConfiguration('policy_path'),
             'imu_topic': LaunchConfiguration('imu_topic'),
             'debug_obs': LaunchConfiguration('debug_obs'),
+            'debug_obs_rate': LaunchConfiguration('debug_obs_rate'),
         }],
     )
 
