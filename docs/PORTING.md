@@ -624,3 +624,66 @@ That alone is enough to rail the steering.
 
 `debug_obs:=true` turns the observation log on. The remaining gap is on the
 training side and is not something the deployment plumbing can close.
+
+## 13. The observation contract between training and deployment
+
+The policy is a frozen function of the observation vector, and nothing in an
+ONNX graph records what units that vector is in. This interface has drifted
+silently twice: the `joint_vel` pair was swapped, and `drive_wheel_sign` was
+inverted. Both times the node kept running and produced plausible nonsense.
+
+So the scaling now travels with the weights:
+
+    escooter_rl/obs_spec.py        the numbers, imported by escooter_env_cfg
+        |
+        v
+    scripts/export_onnx.py         writes obs_spec.json into exported/
+        |
+        v
+    escooter_rl_controller.py      reads it beside the policy file
+
+`obs_spec.py` deliberately has no imports, so `export_onnx.py` can load it by
+path without pulling in Isaac Lab; exporting a checkpoint never needs a GPU.
+
+The node falls back to unscaled observations when no `obs_spec.json` is
+present, which is how every policy exported before this existed was trained,
+and says so in a warning. A re-export of an **old** checkpoint will therefore
+pick up a spec describing the **current** `obs_spec.py` - only re-export
+checkpoints trained against the config they shipped with.
+
+### What is scaled, and why
+
+| observation | raw range | clip | scale |
+|---|---|---|---|
+| `reaction_vel` | +-300 rad/s | +-250 | 0.01 |
+| `joint_vel` | +-20 rad/s | +-40 | 0.05 |
+| everything else | order 1 | - | - |
+
+Clip is in rad/s and applied before scale, matching `ObservationTermCfg`'s
+noise -> clip -> scale order. The clip matters more than the scale: it makes
+the extrapolation blow-up of section 12 structurally impossible, whatever the
+deployed plant does.
+
+### Gate before deploying
+
+`scripts/check_policy_range.py` sweeps an exported policy over the physically
+reachable envelope and fails if any raw action leaves `[-1, 1]`, which is the
+range the action scales assume. It needs only onnxruntime on the CPU. On the
+2026-10-30 checkpoint it fails 8 of 12 probes, worst steering 15.11:
+
+    plate -300..300 rad/s         13.83     3.14     5.30   OUT OF RANGE
+    random, 20000 samples         15.11     4.73     7.92   OUT OF RANGE
+
+### Do not enable empirical normalization
+
+`empirical_normalization = True` would handle the scaling automatically, but
+`export_onnx.py` rebuilds the network from the `actor.*` keys alone:
+
+```python
+actor_weights = {k.replace("actor.", ""): v for k, v in state_dict.items()
+                 if k.startswith("actor.")}
+```
+
+The normaliser would be dropped without a word, and the exported policy would
+be fed raw observations while expecting normalised ones. Either leave it off
+and scale explicitly, as above, or fix the exporter first.

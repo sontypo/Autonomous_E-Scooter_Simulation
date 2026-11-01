@@ -9,6 +9,7 @@ the e-scooter in Gazebo Classic, Ignition Fortress, or on real hardware.
 Replaces the classical PID dynamics controller (escooter_dynamics).
 """
 
+import json
 import math
 import os
 import re
@@ -188,6 +189,17 @@ class EScooterRLController(Node):
                 self._retry_pref = pref
                 self.create_timer(5.0, self._retry_load_policy)
 
+        # Observation scaling, read from obs_spec.json next to the policy.
+        # Defaults are "raw", which is how every policy exported before the
+        # spec existed was trained, so an old checkpoint keeps working.
+        self.plate_vel_clip = None
+        self.plate_vel_scale = 1.0
+        self.wheel_vel_clip = None
+        self.wheel_vel_scale = 1.0
+        self.obs_spec = None
+        if self.policy_path:
+            self._load_obs_spec(self.policy_path)
+
         # Load Policy Inference Engine
         self.inference_engine = None
         self.is_onnx = False
@@ -297,6 +309,7 @@ class EScooterRLController(Node):
         if found:
             self.get_logger().info(f"[RL] Policy appeared: {found}")
             self.policy_path = found
+            self._load_obs_spec(found)
             self._load_policy(found)
 
     def _load_policy(self, path: str):
@@ -472,6 +485,68 @@ class EScooterRLController(Node):
         self.goal_y = msg.pose.position.y
         self.get_logger().info(f"[RL] New target goal received: ({self.goal_x:.2f}, {self.goal_y:.2f})")
 
+    def _load_obs_spec(self, policy_path: str):
+        """Read the observation spec the exporter wrote beside the weights.
+
+        The reaction plate and the wheels are scaled and clipped in training
+        (escooter_rl/obs_spec.py), and the policy is only valid on observations
+        prepared the same way. Nothing in the ONNX graph records that, and the
+        two sides of this interface have silently drifted apart twice already,
+        so the scaling travels with the weights rather than being retyped here.
+        """
+        spec_path = os.path.join(os.path.dirname(policy_path), "obs_spec.json")
+        if not os.path.exists(spec_path):
+            self.get_logger().warn(
+                "[RL] No obs_spec.json beside %s. Falling back to unscaled "
+                "observations, which is correct only for a policy trained "
+                "before the spec existed. Re-export with scripts/export_onnx.py "
+                "to remove the guesswork." % os.path.basename(policy_path))
+            return
+
+        try:
+            with open(spec_path) as handle:
+                spec = json.load(handle)
+        except Exception as exc:
+            self.get_logger().error(
+                "[RL] Could not read %s: %s. Using unscaled observations."
+                % (spec_path, exc))
+            return
+
+        terms = {t["name"]: t for t in spec.get("terms", [])}
+
+        reaction = terms.get("reaction_vel", {})
+        if "clip" in reaction:
+            self.plate_vel_clip = tuple(reaction["clip"])
+        self.plate_vel_scale = float(reaction.get("scale", 1.0))
+
+        wheels = terms.get("joint_vel", {})
+        if "clip" in wheels:
+            self.wheel_vel_clip = tuple(wheels["clip"])
+        self.wheel_vel_scale = float(wheels.get("scale", 1.0))
+        order = wheels.get("joint_order")
+        if order:
+            # The spec is authoritative over the joint_vel_order parameter.
+            self.joint_vel_order = (
+                "declared" if order[0] == "front_wheel_joint" else "articulation")
+
+        task = spec.get("task")
+        if task and self.task_type == "auto":
+            self.task_type = task
+
+        self.obs_spec = spec
+        self.get_logger().info(
+            "[RL] obs_spec.json: task=%s obs_dim=%s plate(clip=%s scale=%g) "
+            "wheels(clip=%s scale=%g) order=%s"
+            % (task, spec.get("obs_dim"), self.plate_vel_clip,
+               self.plate_vel_scale, self.wheel_vel_clip, self.wheel_vel_scale,
+               order))
+
+    def _scaled(self, value, clip, scale):
+        """Clip then scale, matching ObservationTermCfg's noise -> clip -> scale."""
+        if clip is not None:
+            value = min(max(value, clip[0]), clip[1])
+        return value * scale
+
     def _joint_vel_obs(self) -> np.ndarray:
         """The two wheel velocities, in the order Isaac Lab actually produced.
 
@@ -487,7 +562,9 @@ class EScooterRLController(Node):
             pair = (self.front_wheel_vel, self.back_wheel_vel)
         else:
             pair = (self.back_wheel_vel, self.front_wheel_vel)
-        return np.array(pair, dtype=np.float32)
+        return np.array(
+            [self._scaled(v, self.wheel_vel_clip, self.wheel_vel_scale) for v in pair],
+            dtype=np.float32)
 
     def _assemble_observations(self) -> np.ndarray:
         """Assembles the observation vector matching Isaac Lab MDP order."""
@@ -513,7 +590,10 @@ class EScooterRLController(Node):
                 self.base_ang_vel,                              # (3,)
                 self.projected_gravity,                         # (3,)
                 np.array([self.steering_pos], dtype=np.float32),# (1,)
-                np.array([self.reaction_plate_vel], dtype=np.float32), # (1,)
+                np.array([self._scaled(self.reaction_plate_vel,
+                                       self.plate_vel_clip,
+                                       self.plate_vel_scale)],
+                         dtype=np.float32),                     # (1,)
                 self._joint_vel_obs(),                          # (2,)
                 goal_cmd,                                       # (4,)
                 self.last_action,                               # (3,)
@@ -528,7 +608,10 @@ class EScooterRLController(Node):
                 self.base_ang_vel,                              # (3,)
                 self.projected_gravity,                         # (3,)
                 np.array([self.steering_pos], dtype=np.float32),# (1,)
-                np.array([self.reaction_plate_vel], dtype=np.float32), # (1,)
+                np.array([self._scaled(self.reaction_plate_vel,
+                                       self.plate_vel_clip,
+                                       self.plate_vel_scale)],
+                         dtype=np.float32),                     # (1,)
                 self._joint_vel_obs(),                          # (2,)
                 vel_cmd,                                        # (3,)
                 self.last_action,                               # (3,)
