@@ -1,0 +1,16 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from escooter_msgs/msg/Joints.msg
+// generated code does not contain a copyright notice
+
+
+module escooter_msgs {
+  module msg {
+    struct Joints {
+      double handle_bar;
+
+      double rotational_plate;
+
+      double front_wheel;
+    };
+  };
+};

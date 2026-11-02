@@ -1,0 +1,6 @@
+source;share/escooter_rl/hook/pythonpath.ps1
+source;share/escooter_rl/hook/pythonpath.dsv
+source;share/escooter_rl/hook/pythonpath.sh
+source;../../build/escooter_rl/share/escooter_rl/hook/pythonpath_develop.ps1
+source;../../build/escooter_rl/share/escooter_rl/hook/pythonpath_develop.dsv
+source;../../build/escooter_rl/share/escooter_rl/hook/pythonpath_develop.sh

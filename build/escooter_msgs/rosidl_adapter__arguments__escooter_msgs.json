@@ -1,0 +1,8 @@
+{
+  "package_name": "escooter_msgs",
+  "non_idl_tuples": [
+    "/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs:msg/RPY.msg",
+    "/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs:msg/Pose.msg",
+    "/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs:msg/Joints.msg"
+  ]
+}

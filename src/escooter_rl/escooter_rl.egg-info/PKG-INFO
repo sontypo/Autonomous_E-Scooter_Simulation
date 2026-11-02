@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: escooter_rl
+Version: 0.1.0
+Summary: Isaac Lab RL environment for self-balancing and goal navigation of autonomous E-Scooter
+Author: Hong-Son Nguyen
+Requires-Dist: torch
+Requires-Dist: numpy
+Dynamic: author
+Dynamic: requires-dist
+Dynamic: summary

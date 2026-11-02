@@ -1,0 +1,89 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /home/hong-son/.pyenv/shims/python3 (found version "3.10.12") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found escooter_msgs: 0.2.0 (/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake)
+-- Found rosidl_generator_c: 3.1.9 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.9 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.9 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found nav_msgs: 4.9.2 (/opt/ros/humble/share/nav_msgs/cmake)
+-- Found rclcpp: 16.0.21 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rmw_implementation_cmake: 6.1.4 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+-- Found FastRTPS: /opt/ros/humble/include  
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found sensor_msgs: 4.9.2 (/opt/ros/humble/share/sensor_msgs/cmake)
+-- Found std_srvs: 4.9.2 (/opt/ros/humble/share/std_srvs/cmake)
+-- Found tf2: 0.25.24 (/opt/ros/humble/share/tf2/cmake)
+-- Found tf2_geometry_msgs: 0.25.24 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+-- Found Eigen3: TRUE (found version "3.4.0") 
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics
+[ 16%] Building CXX object CMakeFiles/dynamics.dir/src/dynamics.cpp.o
+[ 33%] Building CXX object CMakeFiles/control.dir/src/control.cpp.o
+[ 50%] Linking CXX shared library libdynamics.so
+[ 50%] Built target dynamics
+[ 66%] Linking CXX shared library libcontrol.so
+[ 66%] Built target control
+[ 83%] Building CXX object CMakeFiles/escooter_dynamics_node.dir/src/escooter_dynamics_node.cpp.o
+[100%] Linking CXX executable escooter_dynamics_node
+[100%] Built target escooter_dynamics_node
+-- Install configuration: "Release"
+-- Execute custom install script
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/escooter_dynamics/escooter_dynamics_node
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/include/escooter_dynamics/control.hpp
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/include/escooter_dynamics/dynamics.hpp
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/launch/escooter_dynamics.launch.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/params/escooter.yaml
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/escooter_dynamics/teleop_escooter.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/escooter_dynamics/keyboard_cmd_vel.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/escooter_dynamics/imu_to_euler.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/environment/library_path.sh
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/environment/library_path.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/ament_index/resource_index/package_run_dependencies/escooter_dynamics
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/ament_index/resource_index/parent_prefix_path/escooter_dynamics
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/environment/ament_prefix_path.sh
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/environment/ament_prefix_path.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/environment/path.sh
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/environment/path.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/local_setup.bash
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/local_setup.sh
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/local_setup.zsh
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/local_setup.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/ament_index/resource_index/packages/escooter_dynamics
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/cmake/ament_cmake_export_libraries-extras.cmake
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/cmake/ament_cmake_export_targets-extras.cmake
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/cmake/escooter_dynamicsConfig.cmake
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/cmake/escooter_dynamicsConfig-version.cmake
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.xml
+-- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/libcontrol.so
+-- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/libcontrol.so" to ""
+-- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/libdynamics.so
+-- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/libdynamics.so" to ""
+-- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/cmake/export_escooter_dynamicsExport.cmake
+-- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/cmake/export_escooter_dynamicsExport-release.cmake

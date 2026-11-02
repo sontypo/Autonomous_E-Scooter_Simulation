@@ -1,0 +1,12 @@
+running develop
+running egg_info
+writing escooter_rl.egg-info/PKG-INFO
+writing dependency_links to escooter_rl.egg-info/dependency_links.txt
+writing requirements to escooter_rl.egg-info/requires.txt
+writing top-level names to escooter_rl.egg-info/top_level.txt
+reading manifest file 'escooter_rl.egg-info/SOURCES.txt'
+writing manifest file 'escooter_rl.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/lib/python3.10/site-packages/escooter-rl.egg-link (link to .)
+
+Installed /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl

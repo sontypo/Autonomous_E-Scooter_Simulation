@@ -1,0 +1,10 @@
+setup.py
+escooter_msgs/__init__.py
+escooter_msgs.egg-info/PKG-INFO
+escooter_msgs.egg-info/SOURCES.txt
+escooter_msgs.egg-info/dependency_links.txt
+escooter_msgs.egg-info/top_level.txt
+escooter_msgs/msg/__init__.py
+escooter_msgs/msg/_joints.py
+escooter_msgs/msg/_pose.py
+escooter_msgs/msg/_rpy.py

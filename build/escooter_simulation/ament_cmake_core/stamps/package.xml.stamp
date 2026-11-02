@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>escooter_simulation</name>
+  <version>0.2.0</version>
+  <description>
+    Description, ros2_control configuration and simulator bringup for the
+    autonomous e-scooter. Supports Gazebo Classic 11 and Ignition Gazebo
+    Fortress from the same xacro.
+  </description>
+
+  <author email="hongsonnguyen.haui@gmail.com">Saun Nguyen</author>
+  <maintainer email="hongsonnguyen.haui@gmail.com">Saun Nguyen</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Robot description and visualisation -->
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <!-- ros2_control -->
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>controller_manager_msgs</exec_depend>
+  <exec_depend>effort_controllers</exec_depend>
+  <exec_depend>joint_state_broadcaster</exec_depend>
+  <exec_depend>position_controllers</exec_depend>
+  <exec_depend>ros2_control</exec_depend>
+  <exec_depend>ros2_controllers</exec_depend>
+  <exec_depend>velocity_controllers</exec_depend>
+
+  <!-- Gazebo Classic 11 backend -->
+  <exec_depend>gazebo_plugins</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_ros2_control</exec_depend>
+
+  <!-- Ignition Gazebo Fortress backend -->
+  <exec_depend>ign_ros2_control</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+
+  <!-- Balancing controller -->
+  <exec_depend>escooter_dynamics</exec_depend>
+
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+    <!-- Puts <install>/share on GAZEBO_MODEL_PATH and IGN_GAZEBO_RESOURCE_PATH
+         so `package://escooter_simulation/meshes/...` resolves in both engines. -->
+    <gazebo_ros gazebo_model_path="${prefix}/.."/>
+    <gazebo_ros gazebo_media_path="${prefix}/.."/>
+  </export>
+</package>

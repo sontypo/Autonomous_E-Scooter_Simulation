@@ -1,0 +1,4 @@
+source;share/escooter_dynamics/local_setup.bash
+source;share/escooter_dynamics/local_setup.dsv
+source;share/escooter_dynamics/local_setup.sh
+source;share/escooter_dynamics/local_setup.zsh

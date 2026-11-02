@@ -1,0 +1,16 @@
+[0.634s] Invoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl': PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/build --no-deps
+[0.792s] running develop
+[0.915s] running egg_info
+[0.915s] creating escooter_rl.egg-info
+[0.915s] writing escooter_rl.egg-info/PKG-INFO
+[0.915s] writing dependency_links to escooter_rl.egg-info/dependency_links.txt
+[0.915s] writing requirements to escooter_rl.egg-info/requires.txt
+[0.915s] writing top-level names to escooter_rl.egg-info/top_level.txt
+[0.915s] writing manifest file 'escooter_rl.egg-info/SOURCES.txt'
+[0.916s] reading manifest file 'escooter_rl.egg-info/SOURCES.txt'
+[0.917s] writing manifest file 'escooter_rl.egg-info/SOURCES.txt'
+[0.932s] running build_ext
+[0.932s] Creating /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/lib/python3.10/site-packages/escooter-rl.egg-link (link to .)
+[0.932s] 
+[0.932s] Installed /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl
+[0.949s] Invoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl' returned '0': PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/build --no-deps

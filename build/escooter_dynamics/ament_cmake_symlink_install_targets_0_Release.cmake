@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics/escooter_dynamics_node" "TARGETS" "escooter_dynamics_node" "DESTINATION" "lib/escooter_dynamics")

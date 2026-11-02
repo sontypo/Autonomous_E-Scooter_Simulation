@@ -1,0 +1,6 @@
+msg/Joints.idl
+msg/Joints.msg
+msg/Pose.idl
+msg/Pose.msg
+msg/RPY.idl
+msg/RPY.msg

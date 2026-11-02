@@ -1,0 +1,63 @@
+[0.009s] Invoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation -- -j32 -l32
+[0.022s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.157s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.233s] -- Configuring done
+[0.234s] -- Generating done
+[0.235s] -- Build files have been written to: /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation
+[0.248s] Invoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation' returned '0': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation -- -j32 -l32
+[0.256s] Invoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation
+[0.261s] -- Install configuration: ""
+[0.261s] -- Execute custom install script
+[0.261s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/config/escooter_controllers.yaml
+[0.261s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/config/joint_names_e-scooter.yaml
+[0.262s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/display.launch.py
+[0.262s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/escooter_sim.launch.py
+[0.262s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/gazebo_classic.launch.py
+[0.262s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/gazebo_ignition.launch.py
+[0.262s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/robot_description.launch.py
+[0.262s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/back_wheel.STL
+[0.262s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/base_link.STL
+[0.262s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/e-scooter.urdf
+[0.262s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/front_wheel.STL
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/handle_bar_chasis.STL
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/reaction_motor.STL
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/rotational_plate.STL
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_base_1.dae
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_base_1.stl
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_base_2.dae
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_base_2.stl
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_scan.dae
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_scan.stl
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/d435.dae
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/gps.stl
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/imu.stl
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/max_sonar_ez4.dae
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/realsense.dae
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/realsense.stl
+[0.263s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/rviz/escooter.rviz
+[0.264s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/urdf/e-scooter.gazebo.xacro
+[0.264s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/urdf/e-scooter.ros2_control.xacro
+[0.264s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/urdf/e-scooter.urdf.xacro
+[0.264s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/urdf/e-scooter_gazebo.csv
+[0.264s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/worlds/escooter_empty.sdf
+[0.264s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/worlds/escooter_empty.world
+[0.264s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/escooter_simulation/xacro_to_urdf.py
+[0.264s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/escooter_simulation/start_simulation.py
+[0.264s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/escooter_simulation/export_isaac_urdf.py
+[0.270s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/escooter_simulation.dsv
+[0.270s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/ament_index/resource_index/package_run_dependencies/escooter_simulation
+[0.270s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/ament_index/resource_index/parent_prefix_path/escooter_simulation
+[0.270s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/ament_prefix_path.sh
+[0.270s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/ament_prefix_path.dsv
+[0.270s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/path.sh
+[0.270s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/path.dsv
+[0.270s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/local_setup.bash
+[0.270s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/local_setup.sh
+[0.271s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/local_setup.zsh
+[0.271s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/local_setup.dsv
+[0.271s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.dsv
+[0.277s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/ament_index/resource_index/packages/escooter_simulation
+[0.277s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/cmake/escooter_simulationConfig.cmake
+[0.277s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/cmake/escooter_simulationConfig-version.cmake
+[0.277s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.xml
+[0.278s] Invoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation' returned '0': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation

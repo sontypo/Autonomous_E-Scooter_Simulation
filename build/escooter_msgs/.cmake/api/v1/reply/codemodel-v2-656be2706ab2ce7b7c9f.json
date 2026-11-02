@@ -1,0 +1,258 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-624560868a44609b9f8d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						17,
+						18
+					]
+				},
+				{
+					"build" : "escooter_msgs__py",
+					"jsonFile" : "directory-escooter_msgs__py-1b8ffaf1947d5d087420.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs/escooter_msgs__py",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "escooter_msgs__rs",
+					"jsonFile" : "directory-escooter_msgs__rs-647b6a4397f994564b1e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs/escooter_msgs__rs",
+					"targetIndexes" : 
+					[
+						16
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "escooter_msgs",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_escooter_msgs_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_escooter_msgs_egg-8e570761a0642fae422f.json",
+					"name" : "ament_cmake_python_build_escooter_msgs_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_symlink_escooter_msgs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_symlink_escooter_msgs-8b966d02bb5444bb86f3.json",
+					"name" : "ament_cmake_python_symlink_escooter_msgs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs-3ee46ceabbffbaaffb8a.json",
+					"name" : "escooter_msgs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__cpp-f13df24e06a1f8ffbf42.json",
+					"name" : "escooter_msgs__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "escooter_msgs__py::@0eb369f57f05a600bc2d",
+					"jsonFile" : "target-escooter_msgs__py-2f169ffa309c8e785231.json",
+					"name" : "escooter_msgs__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_generator_c-31a4f8da6963e0ef796b.json",
+					"name" : "escooter_msgs__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_generator_py-1de64ed75c2ac2c940c1.json",
+					"name" : "escooter_msgs__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_typesupport_c-7f3360369988d187dd1f.json",
+					"name" : "escooter_msgs__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_typesupport_c__pyext-eaf61a3f030b9cef785d.json",
+					"name" : "escooter_msgs__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_typesupport_cpp-c0d58ca544d50b9daafa.json",
+					"name" : "escooter_msgs__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_typesupport_fastrtps_c-e018b6849461d7ef0385.json",
+					"name" : "escooter_msgs__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_typesupport_fastrtps_c__pyext-de679d3276fd8fddb0cd.json",
+					"name" : "escooter_msgs__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_typesupport_fastrtps_cpp-1b1795b59579b3633d2b.json",
+					"name" : "escooter_msgs__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_typesupport_introspection_c-ce75b2ecb10be959e109.json",
+					"name" : "escooter_msgs__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_typesupport_introspection_c__pyext-4b427a117ea655ff778d.json",
+					"name" : "escooter_msgs__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs__rosidl_typesupport_introspection_cpp-327e010e57807e1f08a6.json",
+					"name" : "escooter_msgs__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "escooter_msgs__rs::@321936c8ff02454987e5",
+					"jsonFile" : "target-escooter_msgs__rs-73732174e69037932e19.json",
+					"name" : "escooter_msgs__rs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_msgs_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_msgs_uninstall-6d70d7fe1fbc10473e5e.json",
+					"name" : "escooter_msgs_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-beaa9515ee10935fc121.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs",
+		"source" : "/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

@@ -1,0 +1,261 @@
+[0.006s] Invoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs
+[0.043s] -- The C compiler identification is GNU 11.4.0
+[0.101s] -- The CXX compiler identification is GNU 11.4.0
+[0.104s] -- Detecting C compiler ABI info
+[0.191s] -- Detecting C compiler ABI info - done
+[0.198s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.199s] -- Detecting C compile features
+[0.199s] -- Detecting C compile features - done
+[0.204s] -- Detecting CXX compiler ABI info
+[0.286s] -- Detecting CXX compiler ABI info - done
+[0.290s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.290s] -- Detecting CXX compile features
+[0.290s] -- Detecting CXX compile features - done
+[0.292s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.846s] -- Found Python3: /home/hong-son/.pyenv/shims/python3 (found version "3.10.12") found components: Interpreter 
+[0.989s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.004s] -- Found geometry_msgs: 4.9.2 (/opt/ros/humble/share/geometry_msgs/cmake)
+[1.024s] -- Found rosidl_generator_c: 3.1.9 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.027s] -- Found rosidl_adapter: 3.1.9 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.031s] -- Found rosidl_generator_cpp: 3.1.9 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.037s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.044s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.062s] -- Found rosidl_default_generators: 1.2.1 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[1.617s] -- Found ament_cmake_ros: 0.10.1 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[2.343s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.619s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.668s] -- Found PythonInterp: /home/hong-son/.pyenv/shims/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[2.669s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[2.746s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[2.746s] -- Using PYTHON_EXECUTABLE: /home/hong-son/.pyenv/shims/python3
+[2.746s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[2.746s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[2.871s] -- Found PythonExtra: .so  
+[3.027s] -- Configuring done
+[3.043s] -- Generating done
+[3.048s] -- Build files have been written to: /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs
+[3.054s] Invoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs
+[3.055s] Invoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs -- -j32 -l32
+[3.081s] [  2%] Generating C code for ROS interfaces
+[3.087s] [  4%] Generating Rust code for ROS interfaces
+[3.088s] [  6%] Generating C++ code for ROS interfaces
+[3.094s] [  6%] Built target ament_cmake_python_symlink_escooter_msgs
+[3.242s] [  6%] Built target escooter_msgs__rs
+[3.272s] [  8%] Building C object CMakeFiles/escooter_msgs__rosidl_generator_c.dir/rosidl_generator_c/escooter_msgs/msg/detail/pose__functions.c.o
+[3.272s] [ 10%] Building C object CMakeFiles/escooter_msgs__rosidl_generator_c.dir/rosidl_generator_c/escooter_msgs/msg/detail/rpy__functions.c.o
+[3.273s] [ 12%] Building C object CMakeFiles/escooter_msgs__rosidl_generator_c.dir/rosidl_generator_c/escooter_msgs/msg/detail/joints__functions.c.o
+[3.278s] [ 12%] Built target escooter_msgs__cpp
+[3.284s] [ 14%] Generating C++ introspection for ROS interfaces
+[3.285s] [ 18%] Generating C++ type support dispatch for ROS interfaces
+[3.285s] [ 18%] Generating C++ type support for eProsima Fast-RTPS
+[3.286s] running egg_info
+[3.286s] creating escooter_msgs.egg-info
+[3.287s] writing escooter_msgs.egg-info/PKG-INFO
+[3.287s] writing dependency_links to escooter_msgs.egg-info/dependency_links.txt
+[3.287s] writing top-level names to escooter_msgs.egg-info/top_level.txt
+[3.287s] writing manifest file 'escooter_msgs.egg-info/SOURCES.txt'
+[3.288s] reading manifest file 'escooter_msgs.egg-info/SOURCES.txt'
+[3.288s] writing manifest file 'escooter_msgs.egg-info/SOURCES.txt'
+[3.304s] [ 18%] Built target ament_cmake_python_build_escooter_msgs_egg
+[3.305s] [ 20%] Linking C shared library libescooter_msgs__rosidl_generator_c.so
+[3.330s] [ 20%] Built target escooter_msgs__rosidl_generator_c
+[3.337s] [ 22%] Generating C type support dispatch for ROS interfaces
+[3.337s] [ 27%] Generating C type support for eProsima Fast-RTPS
+[3.337s] [ 27%] Generating C introspection for ROS interfaces
+[3.473s] [ 33%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/escooter_msgs/msg/pose__type_support.cpp.o
+[3.473s] [ 33%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/escooter_msgs/msg/joints__type_support.cpp.o
+[3.473s] [ 33%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/escooter_msgs/msg/rpy__type_support.cpp.o
+[3.490s] [ 37%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/escooter_msgs/msg/detail/dds_fastrtps/pose__type_support.cpp.o
+[3.490s] [ 37%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/escooter_msgs/msg/detail/dds_fastrtps/rpy__type_support.cpp.o
+[3.490s] [ 39%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/escooter_msgs/msg/detail/dds_fastrtps/joints__type_support.cpp.o
+[3.503s] [ 43%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/escooter_msgs/msg/detail/rpy__type_support.cpp.o
+[3.503s] [ 43%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/escooter_msgs/msg/detail/pose__type_support.cpp.o
+[3.503s] [ 45%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/escooter_msgs/msg/detail/joints__type_support.cpp.o
+[3.516s] [ 47%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/escooter_msgs/msg/joints__type_support.cpp.o
+[3.516s] [ 52%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/escooter_msgs/msg/pose__type_support.cpp.o
+[3.517s] [ 52%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/escooter_msgs/msg/rpy__type_support.cpp.o
+[3.537s] [ 56%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/escooter_msgs/msg/detail/joints__type_support_c.cpp.o
+[3.537s] [ 56%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/escooter_msgs/msg/detail/pose__type_support_c.cpp.o
+[3.538s] [ 58%] Building CXX object CMakeFiles/escooter_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/escooter_msgs/msg/detail/rpy__type_support_c.cpp.o
+[3.540s] [ 60%] Linking CXX shared library libescooter_msgs__rosidl_typesupport_c.so
+[3.553s] [ 64%] Building C object CMakeFiles/escooter_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/escooter_msgs/msg/detail/joints__type_support.c.o
+[3.553s] [ 64%] Building C object CMakeFiles/escooter_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/escooter_msgs/msg/detail/rpy__type_support.c.o
+[3.553s] [ 66%] Building C object CMakeFiles/escooter_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/escooter_msgs/msg/detail/pose__type_support.c.o
+[3.572s] [ 68%] Linking C shared library libescooter_msgs__rosidl_typesupport_introspection_c.so
+[3.572s] [ 68%] Built target escooter_msgs__rosidl_typesupport_c
+[3.595s] [ 68%] Built target escooter_msgs__rosidl_typesupport_introspection_c
+[3.630s] [ 70%] Linking CXX shared library libescooter_msgs__rosidl_typesupport_cpp.so
+[3.659s] [ 70%] Built target escooter_msgs__rosidl_typesupport_cpp
+[3.728s] [ 72%] Linking CXX shared library libescooter_msgs__rosidl_typesupport_fastrtps_cpp.so
+[3.746s] [ 75%] Linking CXX shared library libescooter_msgs__rosidl_typesupport_introspection_cpp.so
+[3.765s] [ 75%] Built target escooter_msgs__rosidl_typesupport_fastrtps_cpp
+[3.782s] [ 75%] Built target escooter_msgs__rosidl_typesupport_introspection_cpp
+[3.782s] [ 77%] Linking CXX shared library libescooter_msgs__rosidl_typesupport_fastrtps_c.so
+[3.822s] [ 77%] Built target escooter_msgs__rosidl_typesupport_fastrtps_c
+[3.834s] [ 77%] Built target escooter_msgs
+[3.848s] [ 79%] Generating Python code for ROS interfaces
+[4.071s] [ 79%] Built target escooter_msgs__py
+[4.084s] [ 81%] Building C object CMakeFiles/escooter_msgs__rosidl_generator_py.dir/rosidl_generator_py/escooter_msgs/msg/_pose_s.c.o
+[4.084s] [ 83%] Building C object CMakeFiles/escooter_msgs__rosidl_generator_py.dir/rosidl_generator_py/escooter_msgs/msg/_rpy_s.c.o
+[4.085s] [ 85%] Building C object CMakeFiles/escooter_msgs__rosidl_generator_py.dir/rosidl_generator_py/escooter_msgs/msg/_joints_s.c.o
+[4.142s] [ 87%] Linking C shared library rosidl_generator_py/escooter_msgs/libescooter_msgs__rosidl_generator_py.so
+[4.176s] [ 87%] Built target escooter_msgs__rosidl_generator_py
+[4.198s] [ 89%] Building C object CMakeFiles/escooter_msgs__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/escooter_msgs/_escooter_msgs_s.ep.rosidl_typesupport_c.c.o
+[4.199s] [ 91%] Building C object CMakeFiles/escooter_msgs__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/escooter_msgs/_escooter_msgs_s.ep.rosidl_typesupport_fastrtps_c.c.o
+[4.199s] [ 93%] Building C object CMakeFiles/escooter_msgs__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/escooter_msgs/_escooter_msgs_s.ep.rosidl_typesupport_introspection_c.c.o
+[4.249s] [100%] Linking C shared library rosidl_generator_py/escooter_msgs/escooter_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[4.249s] [100%] Linking C shared library rosidl_generator_py/escooter_msgs/escooter_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[4.249s] [100%] Linking C shared library rosidl_generator_py/escooter_msgs/escooter_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[4.279s] [100%] Built target escooter_msgs__rosidl_typesupport_c__pyext
+[4.280s] [100%] Built target escooter_msgs__rosidl_typesupport_introspection_c__pyext
+[4.280s] [100%] Built target escooter_msgs__rosidl_typesupport_fastrtps_c__pyext
+[4.290s] Invoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs -- -j32 -l32
+[4.304s] Invoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs
+[4.314s] -- Install configuration: ""
+[4.315s] -- Execute custom install script
+[4.315s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/ament_index/resource_index/rosidl_interfaces/escooter_msgs
+[4.328s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__functions.h
+[4.338s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__struct.h
+[4.350s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__type_support.h
+[4.364s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__functions.h
+[4.371s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__struct.h
+[4.376s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__type_support.h
+[4.382s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__functions.h
+[4.391s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__struct.h
+[4.398s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__type_support.h
+[4.404s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/joints.h
+[4.410s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/pose.h
+[4.417s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/rosidl_generator_c__visibility_control.h
+[4.423s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/rpy.h
+[4.429s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/environment/library_path.sh
+[4.433s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/environment/library_path.dsv
+[4.437s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__rosidl_typesupport_fastrtps_c.h
+[4.442s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__rosidl_typesupport_fastrtps_c.h
+[4.446s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__rosidl_typesupport_fastrtps_c.h
+[4.452s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[4.459s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__builder.hpp
+[4.465s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__struct.hpp
+[4.472s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__traits.hpp
+[4.481s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__type_support.hpp
+[4.494s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__builder.hpp
+[4.509s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__struct.hpp
+[4.524s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__traits.hpp
+[4.539s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__type_support.hpp
+[4.552s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__builder.hpp
+[4.566s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__struct.hpp
+[4.578s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__traits.hpp
+[4.595s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__type_support.hpp
+[4.607s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/joints.hpp
+[4.620s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/pose.hpp
+[4.630s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/rosidl_generator_cpp__visibility_control.hpp
+[4.641s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/rpy.hpp
+[4.647s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__rosidl_typesupport_fastrtps_cpp.hpp
+[4.653s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__rosidl_typesupport_fastrtps_cpp.hpp
+[4.662s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__rosidl_typesupport_fastrtps_cpp.hpp
+[4.668s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[4.674s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__rosidl_typesupport_introspection_c.h
+[4.680s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__rosidl_typesupport_introspection_c.h
+[4.687s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__rosidl_typesupport_introspection_c.h
+[4.694s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[4.699s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/joints__rosidl_typesupport_introspection_cpp.hpp
+[4.705s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/pose__rosidl_typesupport_introspection_cpp.hpp
+[4.710s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/include/escooter_msgs/escooter_msgs/msg/detail/rpy__rosidl_typesupport_introspection_cpp.hpp
+[4.716s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/environment/pythonpath.sh
+[4.722s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/environment/pythonpath.dsv
+[4.728s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs-0.2.0-py3.10.egg-info/PKG-INFO
+[4.733s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs-0.2.0-py3.10.egg-info/SOURCES.txt
+[4.739s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs-0.2.0-py3.10.egg-info/dependency_links.txt
+[4.746s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs-0.2.0-py3.10.egg-info/top_level.txt
+[4.753s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/__init__.py
+[4.761s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/_escooter_msgs_s.ep.rosidl_typesupport_c.c
+[4.766s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/_escooter_msgs_s.ep.rosidl_typesupport_fastrtps_c.c
+[4.771s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/_escooter_msgs_s.ep.rosidl_typesupport_introspection_c.c
+[4.776s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/escooter_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[4.783s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/escooter_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[4.789s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/escooter_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[4.796s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/libescooter_msgs__rosidl_generator_py.so
+[4.809s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/__init__.py
+[4.823s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/_joints.py
+[4.832s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/_joints_s.c
+[4.844s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/_pose.py
+[4.857s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/_pose_s.c
+[4.866s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/_rpy.py
+[4.877s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/_rpy_s.c
+[4.883s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/escooter_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[4.883s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/escooter_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[4.883s] -- Up-to-date symlink: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/escooter_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[4.883s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/rust/Cargo.toml
+[4.887s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/rust/build.rs
+[4.891s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/rust/src/lib.rs
+[4.899s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/rust/src/msg.rs
+[4.913s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/rust/src/msg/rmw.rs
+[4.922s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/msg/RPY.idl
+[4.931s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/msg/Pose.idl
+[4.937s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/msg/Joints.idl
+[4.942s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/msg/RPY.msg
+[4.947s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/msg/Pose.msg
+[4.951s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/msg/Joints.msg
+[4.955s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/ament_index/resource_index/package_run_dependencies/escooter_msgs
+[4.960s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/ament_index/resource_index/parent_prefix_path/escooter_msgs
+[4.965s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/environment/ament_prefix_path.sh
+[4.969s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/environment/ament_prefix_path.dsv
+[4.975s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/environment/path.sh
+[4.981s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/environment/path.dsv
+[4.985s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/local_setup.bash
+[4.990s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/local_setup.sh
+[4.995s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/local_setup.zsh
+[5.000s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/local_setup.dsv
+[5.005s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.dsv
+[5.011s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/ament_index/resource_index/packages/escooter_msgs
+[5.016s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/rosidl_cmake-extras.cmake
+[5.020s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/ament_cmake_export_dependencies-extras.cmake
+[5.024s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/ament_cmake_export_include_directories-extras.cmake
+[5.029s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/ament_cmake_export_libraries-extras.cmake
+[5.033s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/ament_cmake_export_targets-extras.cmake
+[5.041s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[5.052s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[5.066s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/rosidl_cmake_aggregate_target-extras.cmake
+[5.079s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgsConfig.cmake
+[5.093s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgsConfig-version.cmake
+[5.108s] -- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.xml
+[5.116s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_generator_c.so
+[5.117s] -- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_generator_c.so" to ""
+[5.117s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_fastrtps_c.so
+[5.117s] -- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_fastrtps_c.so" to ""
+[5.117s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_fastrtps_cpp.so
+[5.118s] -- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_fastrtps_cpp.so" to ""
+[5.118s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_introspection_c.so
+[5.118s] -- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_introspection_c.so" to ""
+[5.118s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_c.so
+[5.119s] -- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_c.so" to ""
+[5.119s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_introspection_cpp.so
+[5.119s] -- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_introspection_cpp.so" to ""
+[5.119s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_cpp.so
+[5.119s] -- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_typesupport_cpp.so" to ""
+[5.256s] Listing '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs'...
+[5.256s] Compiling '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/__init__.py'...
+[5.256s] Listing '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg'...
+[5.256s] Compiling '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/__init__.py'...
+[5.256s] Compiling '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/_joints.py'...
+[5.256s] Compiling '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/_pose.py'...
+[5.256s] Compiling '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages/escooter_msgs/msg/_rpy.py'...
+[5.258s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_generator_py.so
+[5.258s] -- Set runtime path of "/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/libescooter_msgs__rosidl_generator_py.so" to ""
+[5.258s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/export_escooter_msgs__rosidl_generator_cExport.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/export_escooter_msgs__rosidl_generator_cExport-noconfig.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/export_escooter_msgs__rosidl_typesupport_fastrtps_cExport.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/export_escooter_msgs__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/export_escooter_msgs__rosidl_generator_cppExport.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/export_escooter_msgs__rosidl_typesupport_fastrtps_cppExport.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/export_escooter_msgs__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgs__rosidl_typesupport_introspection_cExport.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgs__rosidl_typesupport_cExport.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgs__rosidl_typesupport_cExport-noconfig.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgs__rosidl_typesupport_introspection_cppExport.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgs__rosidl_typesupport_cppExport.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/escooter_msgs__rosidl_typesupport_cppExport-noconfig.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/export_escooter_msgs__rosidl_generator_pyExport.cmake
+[5.259s] -- Installing: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/cmake/export_escooter_msgs__rosidl_generator_pyExport-noconfig.cmake
+[5.261s] Invoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs

@@ -1,0 +1,4 @@
+source;share/escooter_simulation/local_setup.bash
+source;share/escooter_simulation/local_setup.dsv
+source;share/escooter_simulation/local_setup.sh
+source;share/escooter_simulation/local_setup.zsh

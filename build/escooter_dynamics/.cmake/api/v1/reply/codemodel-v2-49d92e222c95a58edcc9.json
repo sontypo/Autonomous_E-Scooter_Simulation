@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-04d3a6f89bb385504467.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "escooter_dynamics",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "control::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-control-Release-eced61821009529c19ef.json",
+					"name" : "control",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dynamics::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dynamics-Release-d874e032bc8f3d6f330c.json",
+					"name" : "dynamics",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_dynamics_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_dynamics_node-Release-327f9f6743ec07a3cc06.json",
+					"name" : "escooter_dynamics_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "escooter_dynamics_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-escooter_dynamics_uninstall-Release-9155c61a362f1a227846.json",
+					"name" : "escooter_dynamics_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-4c99216f16097115cbea.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics",
+		"source" : "/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_dynamics"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

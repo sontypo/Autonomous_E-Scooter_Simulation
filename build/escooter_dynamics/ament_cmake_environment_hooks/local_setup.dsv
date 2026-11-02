@@ -1,0 +1,3 @@
+source;share/escooter_dynamics/environment/ament_prefix_path.sh
+source;share/escooter_dynamics/environment/library_path.sh
+source;share/escooter_dynamics/environment/path.sh
