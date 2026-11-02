@@ -779,13 +779,41 @@ plate observation moves the plate action from +1.748 to +1.990 - the plate
 observation is nearly irrelevant. Setting roll to zero in that same state drops
 it to **+0.408**, inside range.
 
-So the lean drives it:
+That reading was incomplete, and the causality in it is backwards. Tracing
+roll against plate speed through a run settles it:
 
-    scooter holds ~10 deg of lean
-      -> policy asks for full +60 N.m to correct it
-      -> plate winds up to its 200 rad/s limit
-      -> a railed plate delivers no torque
-      -> the lean persists
+| | |
+|---|---|
+| mean roll **before** the plate rails | **+0.10 deg** |
+| roll at the moment it rails | +0.57 deg |
+| mean roll **after** | +11.13 deg |
+| mean plate torque before it rails | **+13.1 N.m, positive on 74 % of cycles** |
+
+The scooter is upright the entire time the plate is winding up. The lean is a
+consequence of the rail, not its cause.
+
+The cause is in the policy, and it is the opposite of momentum unloading.
+Sweeping plate speed with everything else at the nominal upright state:
+
+| plate speed | commanded torque |
+|---|---|
+| 0 rad/s | -2.3 N.m |
+| +50 | +14.9 |
+| +100 | +26.6 |
+| +200 | **+40.8** |
+
+The faster the plate turns one way, the harder the policy pushes it that way.
+A reaction wheel needs the opposite reflex - torque against its rotation - to
+bleed momentum back out. This policy has positive feedback on plate momentum
+instead, so **any** persistent bias, however small, runs it to the limit.
+
+Gazebo supplies one: the scooter's static equilibrium sits at g_y = -0.02,
+a 1.15 deg lean, which alone asks for +13.2 N.m. Spawning at `Roll:=0.0`
+does not remove it.
+
+    small static bias -> steady plate torque -> plate speeds up
+      -> policy pushes harder the faster it goes -> rails at 200 rad/s
+      -> a railed plate delivers no torque -> only then does the scooter lean
 
 It is a stable attractor, not a divergence: 40 s with an upright spawn stayed
 inside the envelope the whole time, roll 9 to 16 deg, speed tracking 1.33 to
@@ -817,3 +845,44 @@ for 8 s then +0.5 rad/s: 100 % of 30 s inside the envelope, measured yaw
 
 **So a deployment must ramp: forward speed first, yaw command second.** Teleop
 should not hand a stationary scooter a turn.
+
+## 16. Teleoperation and Ignition, after everything above
+
+### Teleop drives the whole route
+
+`teleop_escooter.py` reads the keyboard directly, so it cannot be driven from a
+script. Instead the exact command stream it produces was replayed: the same
+0.1 steps on `w`/`x`/`a`/`d`, the same `make_simple_profile` smoothing at half
+a step, the same topic, at a human key rate of 0.3 s.
+
+Accelerate to 1.5 m/s, hold, turn left to 0.4 rad/s, straighten, turn right to
+-0.4, straighten, decelerate - 48 s in all:
+
+    |roll| max : 24.59 deg
+    roll cuoi  : +0.53 deg
+    left the 35 deg envelope : never
+
+It finishes upright rather than in the 10 deg lean of section 15(b), because
+ramping the keys brings forward speed up before any yaw is asked for - which
+is exactly the ordering 15(c) says a deployment has to respect. Ordinary teleop
+gets that right by construction; a script that publishes a step command does
+not.
+
+### Ignition is fine, and never had the /clock bug
+
+Fortress with the `isaac` profile, 25 s at 1.5 m/s:
+
+    time within 35 deg : 100 %
+    |roll| max         : 15.57 deg
+    speed              : 1.39 to 1.69 m/s against 1.5
+    control period     : median 0.0200 s, max 0.0210  (n = 5627)
+
+The control period confirms what section 14 assumed: Ignition takes `/clock`
+from the ros_gz bridge at the sim rate, so it was never quantised and needed no
+equivalent of `gazebo_params.yaml`. `gazebo_classic.launch.py` is the only one
+that sets it; the Ignition file declares the argument and ignores it, so
+`escooter_sim.launch.py` can forward it to either backend.
+
+The reaction plate rails at 200 rad/s on Ignition exactly as it does on
+Classic, which is the expected result: 15(b) is a property of the policy, not
+of a simulator.
