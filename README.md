@@ -6,6 +6,11 @@ A dynamics model for an autonomous e-scooter simulation. This project is built u
 ![Gazebo](https://img.shields.io/badge/Gazebo-brightgreen)
 ![Topics](https://img.shields.io/badge/Topics-Dynamical%20Systems-orange)
 
+![The e-scooter balancing in Gazebo Classic](docs/images/gazebo_classic.png)
+
+<p align="center"><em>The e-scooter holding itself upright in Gazebo Classic 11.
+The disc behind the deck is the reaction plate the balancing controller drives.</em></p>
+
 ## 📖 Table of Contents
 - [About the Project](#about-the-project)
 - [Getting Started](#getting-started)
