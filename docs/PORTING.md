@@ -745,3 +745,75 @@ Raising only `plate_velocity_limit` to 400 inside the `isaac` profile did not
 reproduce the `classic` result - that run fell - so the ceiling is not the whole
 story and the difference is not yet isolated. That is one run, and not enough to
 conclude from.
+
+## 15. Three follow-ups, and what each turned out to be
+
+### (a) The drive wheel action scale: nothing to fix
+
+An earlier reading of `check_policy_range.py` said the policy wanted a raw
+drive action of 2.62, so the 20 rad/s scale looked too small. That was wrong,
+and the fault was in the gate: several probes set `v_x = 1.5` while leaving the
+wheel velocities at zero, which is a locked-wheel skid the robot cannot be in
+and the policy was never shown. The builder now derives wheel speed from body
+speed unless a probe deliberately decouples them.
+
+With consistent probes, the policy tracking its commanded speed asks for -0.09
+to -0.29 across 0 to 2.5 m/s. The scale is right. No retraining was needed.
+
+The live run says the same thing. Counting cycles whose raw action left
+`[-1, 1]` over a 20 s run:
+
+| action | whole run | plate below 150 rad/s |
+|---|---|---|
+| steering | 0.3 % | **0.0 %** |
+| drive wheel | 0.1 % | 1.0 % |
+| reaction plate | **89.0 %** | 1.3 % |
+
+The policy is in range until the plate winds up. The 89 % is a symptom of (b),
+not a defect of its own.
+
+### (b) Why the reaction plate parks on its limit
+
+Taking the steady state the scooter actually settles into and sweeping only the
+plate observation moves the plate action from +1.748 to +1.990 - the plate
+observation is nearly irrelevant. Setting roll to zero in that same state drops
+it to **+0.408**, inside range.
+
+So the lean drives it:
+
+    scooter holds ~10 deg of lean
+      -> policy asks for full +60 N.m to correct it
+      -> plate winds up to its 200 rad/s limit
+      -> a railed plate delivers no torque
+      -> the lean persists
+
+It is a stable attractor, not a divergence: 40 s with an upright spawn stayed
+inside the envelope the whole time, roll 9 to 16 deg, speed tracking 1.33 to
+1.72 m/s against 1.5. Spawning at `Roll:=0.0` instead of the inherited
++1.39 deg changed nothing, so the initial lean is not the trigger.
+
+What is not isolated: why the lean settles near 10 deg rather than zero. The
+turn it holds only accounts for 2.8 deg of it. Under `classic` the lean is
+smaller (7.1 deg peak) and the plate stops at 180.7 rad/s without railing,
+so the residual is plant-dependent, but raising only `plate_velocity_limit`
+to 400 inside the `isaac` profile did not reproduce the `classic` result.
+
+### (c) Turning works, but not from a standstill
+
+A yaw command live at spawn puts the scooter down before it has moved:
+`ang_vel_z` of 0.2 and 0.5 rad/s both failed identically, plate at 408 rad/s,
+measured yaw -0.10 against a commanded +0.2.
+
+The policy is not at fault. Probed offline at 1.5 m/s it answers yaw commands
+smoothly and well inside range - steering +0.506 for a commanded +0.5 rad/s.
+The problem is that at zero speed steering produces no roll authority, and
+Isaac never trains that case: `reset_escooter_root_state` always gives an
+initial x velocity in (0, 0.5) and the command resamples every 8 to 12 s, so
+the policy never has to turn from a dead stop.
+
+Holding the yaw command at zero until the scooter is rolling fixes it. Straight
+for 8 s then +0.5 rad/s: 100 % of 30 s inside the envelope, measured yaw
++0.367 against the commanded +0.5, steering working at +25 to +30 deg.
+
+**So a deployment must ramp: forward speed first, yaw command second.** Teleop
+should not hand a stationary scooter a turn.
