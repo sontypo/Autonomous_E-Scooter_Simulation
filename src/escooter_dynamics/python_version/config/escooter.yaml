@@ -1,0 +1,97 @@
+# Configuration Settings
+
+# Robot name space
+NAME_SPACE: "/e_scooter/"
+
+# Non teleop mode for naviagtion stack, Gazebo, etc type modes.
+# Controller will still have standup and sitdown functions for safty reasons 
+NON_TELEOP: false
+
+# Speed limit in Hz for the master loop rate
+MASTER_LOOP_RATE: 500
+
+# Static time division to convert cmd_vel into segments for controller loop
+VELOCITY_DIVISION: 0.033
+
+# Twist Max Values
+# Sim
+MAX_METERS_PER_SEC: 0.6944444444444444
+MAX_RADIANS_PER_SEC: 1.71440329
+
+# Distance between handle bar and center of mass (assume that there is no gap in z axis between these two)
+HANDLE_BAR_TO_COM: 0.297
+
+# Define the center of mass position
+# Sim
+COM_POS_X: 0.203
+COM_POS_Y: 0.0
+COM_POS_Z: 0.392    # (h) Ground to center of mass position
+
+# Origin position
+# Sim
+OG_POS_X: 0.0
+OG_POS_Y: 0.0
+OG_POS_Z: 0.197     # Ground to origin
+
+# Weights
+# BODY_WEIGHT Sim: 9.4259 + 1.8503 + 0.79986 
+BODY_WEIGHT: 12.07606  # base_link + back_wheel + Rotational_motor
+R_PLATE_WEIGHT: 2.18948
+F_WHEEL_WEIGHT: 2.0732
+HANDLE_BAR_WEIGHT: 3.5678
+WHOLE_BODY_WEIGHT: 18.90654
+WHOLE_BODY_WEIGHT_EXC: 17.71706
+
+# Wheel radius: front wheel and left wheel are equal to each other
+# Sim
+WHEEL_RADIUS: 0.135 # meter
+
+# Height, width
+BODY_HEIGHT: 1.3
+BODY_WIDTH: 1.3
+WHEEL_SEPARATION_DIS: 1.0
+B_WHEEL_TO_COM: 0.703   # (r) WHEEL_SEPARATION_DIS / 2 + COM_POS_X
+BASE_TO_COM: 0.195 # COM_POS_Z - OG_POS_Z
+
+# Body FK maximum rotation
+# BODY_MAX_ROLL: !degrees 12
+
+# Body maximum steering angle
+MAX_STEERING_ANGLE: 0.785398163     # 45 degrees
+
+# Initialized angle for each joints available in e-scooter
+INIT_HANLDE_BAR_ANGLE: 0.0
+INIT_R_PLATE_ANGLE: 0.0 # optional
+INIT_F_WHEEL_ANGLE: 0.0 # optional
+
+# Cycle length is the number of periods the travel is divided into ( Gait Settings )
+CYCLE_LENGTH: 50
+
+# Speed in Hz that the joints interpolate between gait poses
+INTERPOLATION_LOOP_RATE: 300
+
+# Uncertainties parameter
+UNCERTAINTIES: 0.01
+
+# Balancing parameters
+PD_PDplus: 1.0
+KP: 2.0
+KD: 0.05
+
+# Number of joints
+NUMBER_OF_JOINTS: 3
+
+# Joint descriptions
+JOINTS:
+  '0':
+    name: handle_bar_chasis_joint
+    sign: 1
+  '1':
+    name: rotational_plate_joint
+    sign: 1
+  '2':
+    name: front_wheel_joint
+    sign: -1
+  '3':
+    name: back_wheel_joint
+    sign: -1

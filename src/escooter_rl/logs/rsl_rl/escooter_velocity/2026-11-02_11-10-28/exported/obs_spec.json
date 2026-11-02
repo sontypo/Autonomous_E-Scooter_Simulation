@@ -1,0 +1,59 @@
+{
+  "spec_version": 1,
+  "task": "velocity",
+  "obs_dim": 19,
+  "terms": [
+    {
+      "name": "base_lin_vel",
+      "dim": 3
+    },
+    {
+      "name": "base_ang_vel",
+      "dim": 3
+    },
+    {
+      "name": "projected_gravity",
+      "dim": 3
+    },
+    {
+      "name": "steering_pos",
+      "dim": 1
+    },
+    {
+      "name": "reaction_vel",
+      "dim": 1,
+      "clip": [
+        -250.0,
+        250.0
+      ],
+      "scale": 0.01
+    },
+    {
+      "name": "joint_vel",
+      "dim": 2,
+      "clip": [
+        -40.0,
+        40.0
+      ],
+      "scale": 0.05,
+      "joint_order": [
+        "back_wheel_joint",
+        "front_wheel_joint"
+      ]
+    },
+    {
+      "name": "command",
+      "dim": 3
+    },
+    {
+      "name": "actions",
+      "dim": 3
+    }
+  ],
+  "action_scales": {
+    "steering": 0.7,
+    "reaction_plate": 60.0,
+    "drive_wheel": 20.0
+  },
+  "checkpoint": "model_1199.pt"
+}
