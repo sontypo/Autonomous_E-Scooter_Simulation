@@ -11,6 +11,13 @@ dynamical systems and the balancing controller.
 > version lives on `main`; see [docs/PORTING.md](docs/PORTING.md) for what
 > changed and why.
 
+![The e-scooter in Gazebo Classic, Ignition Fortress and Isaac Sim](docs/images/simulators.png)
+
+<p align="center"><em>The same URDF across all three backends. Left and centre:
+the reaction-plate balancing controller holding the scooter upright from a
+standstill. Right: 16 Isaac Lab environments replaying a trained velocity-tracking
+policy, with the commanded velocity drawn as an arrow over each scooter.</em></p>
+
 ## 📖 Table of Contents
 - [About the Project](#about-the-project)
 - [Getting Started](#getting-started)
