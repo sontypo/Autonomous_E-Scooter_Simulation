@@ -1,0 +1,406 @@
+[0.051s] [34mcolcon[0m [1;30mDEBUG[0m [32mCommand line arguments: ['/usr/bin/colcon', 'build', '--symlink-install'][0m
+[0.051s] [34mcolcon[0m [1;30mDEBUG[0m [32mParsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=32, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7526ea309330>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7526ea308070>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7526ea308070>>)[0m
+[0.148s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) check parameters
+[0.149s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) check parameters
+[0.149s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) check parameters
+[0.149s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) check parameters
+[0.149s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) discover
+[0.149s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) discover
+[0.149s] [34mcolcon.colcon_core.package_discovery[0m [1;30mINFO[0m Crawling recursively for packages in '/home/hong-son/Autonomous_E-Scooter_Simulation'
+[0.149s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.149s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore'
+[0.149s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore_ament_install'
+[0.149s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_pkg']
+[0.149s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_pkg'
+[0.149s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_meta']
+[0.149s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_meta'
+[0.149s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ros']
+[0.149s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ros'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['cmake', 'python']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'cmake'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['python_setup_py']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python_setup_py'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extension 'ignore'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) ignored
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extensions ['ignore', 'ignore_ament_install']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extension 'ignore'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extension 'ignore_ament_install'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extensions ['colcon_pkg']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extension 'colcon_pkg'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extensions ['colcon_meta']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extension 'colcon_meta'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extensions ['ros']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extension 'ros'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extensions ['cmake', 'python']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extension 'cmake'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extension 'python'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extensions ['python_setup_py']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(docs) by extension 'python_setup_py'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extension 'ignore'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) ignored
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extension 'ignore'
+[0.154s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) ignored
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ignore'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ignore_ament_install'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['colcon_pkg']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'colcon_pkg'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['colcon_meta']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'colcon_meta'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['ros']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ros'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['cmake', 'python']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'cmake'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'python'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['python_setup_py']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'python_setup_py'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extensions ['ignore', 'ignore_ament_install']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extension 'ignore'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extension 'ignore_ament_install'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extensions ['colcon_pkg']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extension 'colcon_pkg'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extensions ['colcon_meta']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extension 'colcon_meta'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extensions ['ros']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extension 'ros'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extensions ['cmake', 'python']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extension 'cmake'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extension 'python'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extensions ['python_setup_py']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/autonomous-scooter) by extension 'python_setup_py'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_dynamics) by extensions ['ignore', 'ignore_ament_install']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_dynamics) by extension 'ignore'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_dynamics) by extension 'ignore_ament_install'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_dynamics) by extensions ['colcon_pkg']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_dynamics) by extension 'colcon_pkg'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_dynamics) by extensions ['colcon_meta']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_dynamics) by extension 'colcon_meta'
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_dynamics) by extensions ['ros']
+[0.155s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_dynamics) by extension 'ros'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/escooter_dynamics' with type 'ros.ament_cmake' and name 'escooter_dynamics'[0m
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_msgs) by extension 'ignore'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_msgs) by extension 'ignore_ament_install'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_msgs) by extensions ['colcon_pkg']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_msgs) by extension 'colcon_pkg'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_msgs) by extensions ['colcon_meta']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_msgs) by extension 'colcon_meta'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_msgs) by extensions ['ros']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_msgs) by extension 'ros'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/escooter_msgs' with type 'ros.ament_cmake' and name 'escooter_msgs'[0m
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extensions ['ignore', 'ignore_ament_install']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extension 'ignore'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extension 'ignore_ament_install'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extensions ['colcon_pkg']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extension 'colcon_pkg'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extensions ['colcon_meta']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extension 'colcon_meta'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extensions ['ros']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extension 'ros'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extensions ['cmake', 'python']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extension 'cmake'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extension 'python'
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extensions ['python_setup_py']
+[0.157s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_rl) by extension 'python_setup_py'
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/escooter_rl' with type 'python' and name 'escooter_rl'[0m
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_simulation) by extensions ['ignore', 'ignore_ament_install']
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_simulation) by extension 'ignore'
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_simulation) by extension 'ignore_ament_install'
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_simulation) by extensions ['colcon_pkg']
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_simulation) by extension 'colcon_pkg'
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_simulation) by extensions ['colcon_meta']
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_simulation) by extension 'colcon_meta'
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_simulation) by extensions ['ros']
+[0.290s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/escooter_simulation) by extension 'ros'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/escooter_simulation' with type 'ros.ament_cmake' and name 'escooter_simulation'[0m
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extensions ['ignore', 'ignore_ament_install']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extension 'ignore'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extension 'ignore_ament_install'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extensions ['colcon_pkg']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extension 'colcon_pkg'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extensions ['colcon_meta']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extension 'colcon_meta'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extensions ['ros']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extension 'ros'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extensions ['cmake', 'python']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extension 'cmake'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extension 'python'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extensions ['python_setup_py']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/gazebo-ros-actor-plugin) by extension 'python_setup_py'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/pid_controller) by extensions ['ignore', 'ignore_ament_install']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/pid_controller) by extension 'ignore'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/pid_controller) ignored
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/realsense_gazebo_plugin) by extensions ['ignore', 'ignore_ament_install']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/realsense_gazebo_plugin) by extension 'ignore'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/realsense_gazebo_plugin) ignored
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extensions ['ignore', 'ignore_ament_install']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extension 'ignore'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extension 'ignore_ament_install'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extensions ['colcon_pkg']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extension 'colcon_pkg'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extensions ['colcon_meta']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extension 'colcon_meta'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extensions ['ros']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extension 'ros'
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extensions ['cmake', 'python']
+[0.291s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extension 'cmake'
+[0.292s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extension 'python'
+[0.292s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extensions ['python_setup_py']
+[0.292s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/thormang3-rides-gogoro) by extension 'python_setup_py'
+[0.292s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) using defaults
+[0.292s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) discover
+[0.292s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) using defaults
+[0.292s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) discover
+[0.292s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) using defaults
+[0.300s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(prefix_path) check parameters
+[0.300s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(prefix_path) discover
+[0.301s] [34mcolcon.colcon_installed_package_information.package_discovery[0m [1;30mDEBUG[0m [32mFound 523 installed packages in /opt/ros/humble[0m
+[0.302s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(prefix_path) using defaults
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_msgs' build argument 'cmake_args' from command line to 'None'
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_msgs' build argument 'cmake_target' from command line to 'None'
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.326s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'escooter_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs', 'merge_install': False, 'path': '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs', 'symlink_install': True, 'test_result_base': None}[0m
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_rl' build argument 'cmake_args' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_rl' build argument 'cmake_target' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_rl' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_rl' build argument 'cmake_clean_cache' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_rl' build argument 'cmake_clean_first' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_rl' build argument 'cmake_force_configure' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_rl' build argument 'ament_cmake_args' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_rl' build argument 'catkin_cmake_args' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_rl' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'escooter_rl' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl', 'merge_install': False, 'path': '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_rl', 'symlink_install': True, 'test_result_base': None}[0m
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_dynamics' build argument 'cmake_args' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_dynamics' build argument 'cmake_target' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_dynamics' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_dynamics' build argument 'cmake_clean_cache' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_dynamics' build argument 'cmake_clean_first' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_dynamics' build argument 'cmake_force_configure' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_dynamics' build argument 'ament_cmake_args' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_dynamics' build argument 'catkin_cmake_args' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_dynamics' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'escooter_dynamics' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics', 'merge_install': False, 'path': '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_dynamics', 'symlink_install': True, 'test_result_base': None}[0m
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_simulation' build argument 'cmake_args' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_simulation' build argument 'cmake_target' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_simulation' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_simulation' build argument 'cmake_clean_cache' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_simulation' build argument 'cmake_clean_first' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_simulation' build argument 'cmake_force_configure' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_simulation' build argument 'ament_cmake_args' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_simulation' build argument 'catkin_cmake_args' from command line to 'None'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'escooter_simulation' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.327s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'escooter_simulation' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation', 'merge_install': False, 'path': '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_simulation', 'symlink_install': True, 'test_result_base': None}[0m
+[0.327s] [34mcolcon.colcon_core.executor[0m [1;30mINFO[0m Executing jobs using 'parallel' executor
+[0.328s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete[0m
+[0.328s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs' with build type 'ament_cmake'
+[0.328s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs'
+[0.329s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.329s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.329s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.331s] [34mcolcon.colcon_core.task.python.build[0m [1;30mINFO[0m Building Python package in '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_rl'
+[0.331s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.331s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.335s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs[0m
+[0.684s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mAvailable setuptools commands: dist_info, install_headers, install, build_clib, symlink_data, bdist_egg, upload_docs, bdist_wheel, saveopts, build_py, init_catalog, develop, clean, upload, install_data, test, egg_info, build_ext, nosetests, extract_messages, install_egg_info, alias, rotate, update_catalog, compile_catalog, build, install_lib, setopt, easy_install, sdist, check, register, bdist_dumb, bdist, build_scripts, install_scripts, bdist_rpm[0m
+[0.828s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mAvailable setuptools 'develop' options: --build-directory, --local-snapshots-ok, --help, --index-url, --user, --record, --multi-version, --zip-ok, --upgrade, --exclude-scripts, --egg-path, --quiet, --no-user-cfg, --uninstall, --install-layout, --dry-run, --prefix, --force-installation-into-system-dir, --allow-hosts, --editable, --no-find-links, --site-dirs, --always-unzip, --verbose, --no-deps, --version, --install-dir, --optimize, --find-links, --script-dir, --always-copy[0m
+[0.829s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl': PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/build --no-deps[0m
+[1.108s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_rl', 'pythonpath_develop')
+[1.108s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl' returned '0': PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/build --no-deps[0m
+[1.109s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/share/escooter_rl/hook/pythonpath_develop.ps1'
+[1.109s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/share/escooter_rl/hook/pythonpath_develop.dsv'
+[1.110s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_rl/share/escooter_rl/hook/pythonpath_develop.sh'
+[1.112s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl' for CMake module files
+[1.112s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl' for CMake config files
+[1.112s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/lib'
+[1.112s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/bin'
+[1.112s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/lib/pkgconfig/escooter_rl.pc'
+[1.112s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/lib/python3.10/site-packages'
+[1.112s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_rl', 'pythonpath')
+[1.112s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/share/escooter_rl/hook/pythonpath.ps1'
+[1.112s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/share/escooter_rl/hook/pythonpath.dsv'
+[1.113s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/share/escooter_rl/hook/pythonpath.sh'
+[1.113s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/bin'
+[1.113s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(escooter_rl)
+[1.113s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/share/escooter_rl/package.ps1'
+[1.113s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/share/escooter_rl/package.dsv'
+[1.114s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/share/escooter_rl/package.sh'
+[1.114s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/share/escooter_rl/package.bash'
+[1.114s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/share/escooter_rl/package.zsh'
+[1.114s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_rl/share/colcon-core/packages/escooter_rl)
+[2.713s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_msgs -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs[0m
+[2.714s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs -- -j32 -l32[0m
+[4.023s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs -- -j32 -l32[0m
+[4.039s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs[0m
+[5.306s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(escooter_msgs)
+[5.306s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs' for CMake module files
+[5.307s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_msgs[0m
+[5.307s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs' for CMake config files
+[5.308s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_msgs', 'cmake_prefix_path')
+[5.308s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/cmake_prefix_path.ps1'
+[5.308s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/cmake_prefix_path.dsv'
+[5.309s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/cmake_prefix_path.sh'
+[5.309s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib'
+[5.309s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_msgs', 'ld_library_path_lib')
+[5.309s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/ld_library_path_lib.ps1'
+[5.309s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/ld_library_path_lib.dsv'
+[5.310s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/ld_library_path_lib.sh'
+[5.310s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/bin'
+[5.310s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/pkgconfig/escooter_msgs.pc'
+[5.310s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/python3.10/site-packages'
+[5.310s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/bin'
+[5.310s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.ps1'
+[5.311s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.dsv'
+[5.311s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.sh'
+[5.311s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.bash'
+[5.312s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.zsh'
+[5.312s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/colcon-core/packages/escooter_msgs)
+[5.312s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(escooter_msgs)
+[5.313s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs' for CMake module files
+[5.313s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs' for CMake config files
+[5.314s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_msgs', 'cmake_prefix_path')
+[5.314s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/cmake_prefix_path.ps1'
+[5.315s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/cmake_prefix_path.dsv'
+[5.315s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/cmake_prefix_path.sh'
+[5.315s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib'
+[5.316s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_msgs', 'ld_library_path_lib')
+[5.316s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/ld_library_path_lib.ps1'
+[5.316s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/ld_library_path_lib.dsv'
+[5.316s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/hook/ld_library_path_lib.sh'
+[5.317s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/bin'
+[5.317s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/pkgconfig/escooter_msgs.pc'
+[5.317s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib/python3.10/site-packages'
+[5.317s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/bin'
+[5.317s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.ps1'
+[5.317s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.dsv'
+[5.317s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.sh'
+[5.317s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.bash'
+[5.318s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/escooter_msgs/package.zsh'
+[5.318s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/share/colcon-core/packages/escooter_msgs)
+[5.318s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_dynamics' with build type 'ament_cmake'
+[5.318s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_dynamics'
+[5.318s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[5.318s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[5.327s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_dynamics -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics[0m
+[6.880s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics' returned '0': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_dynamics -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics[0m
+[6.881s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics -- -j32 -l32[0m
+[17.611s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics' returned '0': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics -- -j32 -l32[0m
+[17.613s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics[0m
+[17.786s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(escooter_dynamics)
+[17.786s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics' returned '0': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_dynamics[0m
+[17.786s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics' for CMake module files
+[17.787s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics' for CMake config files
+[17.787s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_dynamics', 'cmake_prefix_path')
+[17.788s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/cmake_prefix_path.ps1'
+[17.788s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/cmake_prefix_path.dsv'
+[17.788s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/cmake_prefix_path.sh'
+[17.789s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib'
+[17.789s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_dynamics', 'ld_library_path_lib')
+[17.789s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/ld_library_path_lib.ps1'
+[17.789s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/ld_library_path_lib.dsv'
+[17.789s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/ld_library_path_lib.sh'
+[17.790s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/bin'
+[17.790s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/pkgconfig/escooter_dynamics.pc'
+[17.790s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/python3.10/site-packages'
+[17.790s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/bin'
+[17.790s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.ps1'
+[17.790s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.dsv'
+[17.790s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.sh'
+[17.791s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.bash'
+[17.791s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.zsh'
+[17.791s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/colcon-core/packages/escooter_dynamics)
+[17.791s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(escooter_dynamics)
+[17.791s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics' for CMake module files
+[17.791s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics' for CMake config files
+[17.791s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_dynamics', 'cmake_prefix_path')
+[17.792s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/cmake_prefix_path.ps1'
+[17.792s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/cmake_prefix_path.dsv'
+[17.792s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/cmake_prefix_path.sh'
+[17.792s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib'
+[17.792s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_dynamics', 'ld_library_path_lib')
+[17.792s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/ld_library_path_lib.ps1'
+[17.792s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/ld_library_path_lib.dsv'
+[17.792s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/hook/ld_library_path_lib.sh'
+[17.793s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/bin'
+[17.793s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/pkgconfig/escooter_dynamics.pc'
+[17.793s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib/python3.10/site-packages'
+[17.793s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/bin'
+[17.793s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.ps1'
+[17.793s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.dsv'
+[17.793s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.sh'
+[17.794s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.bash'
+[17.794s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/escooter_dynamics/package.zsh'
+[17.794s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/share/colcon-core/packages/escooter_dynamics)
+[17.794s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_simulation' with build type 'ament_cmake'
+[17.794s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_simulation'
+[17.794s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[17.794s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[17.802s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_simulation -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation[0m
+[18.539s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation' returned '0': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/hong-son/Autonomous_E-Scooter_Simulation/src/escooter_simulation -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation[0m
+[18.540s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation -- -j32 -l32[0m
+[18.573s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation' returned '0': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation -- -j32 -l32[0m
+[18.573s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation[0m
+[18.942s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(escooter_simulation)
+[18.942s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation' for CMake module files
+[18.943s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation' returned '0': AMENT_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_dynamics/lib:/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/lib:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation[0m
+[18.943s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation' for CMake config files
+[18.943s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_simulation', 'cmake_prefix_path')
+[18.943s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/hook/cmake_prefix_path.ps1'
+[18.944s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/hook/cmake_prefix_path.dsv'
+[18.944s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/hook/cmake_prefix_path.sh'
+[18.944s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib'
+[18.944s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/bin'
+[18.944s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/pkgconfig/escooter_simulation.pc'
+[18.944s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/python3.10/site-packages'
+[18.944s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/bin'
+[18.945s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.ps1'
+[18.945s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.dsv'
+[18.945s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.sh'
+[18.945s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.bash'
+[18.945s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.zsh'
+[18.946s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/colcon-core/packages/escooter_simulation)
+[18.946s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(escooter_simulation)
+[18.946s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation' for CMake module files
+[18.946s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation' for CMake config files
+[18.946s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('escooter_simulation', 'cmake_prefix_path')
+[18.946s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/hook/cmake_prefix_path.ps1'
+[18.947s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/hook/cmake_prefix_path.dsv'
+[18.947s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/hook/cmake_prefix_path.sh'
+[18.947s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib'
+[18.947s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/bin'
+[18.947s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/pkgconfig/escooter_simulation.pc'
+[18.947s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/python3.10/site-packages'
+[18.947s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/bin'
+[18.948s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.ps1'
+[18.948s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.dsv'
+[18.948s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.sh'
+[18.948s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.bash'
+[18.948s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.zsh'
+[18.948s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/colcon-core/packages/escooter_simulation)
+[18.949s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mclosing loop[0m
+[18.949s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mloop closed[0m
+[18.949s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete finished with '0'[0m
+[18.949s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoining thread[0m
+[18.952s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[18.952s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[18.952s] [34mcolcon.colcon_notification.desktop_notification[0m [1;30mINFO[0m Sending desktop notification using 'notify2'
+[18.963s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoined thread[0m
+[18.964s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/local_setup.ps1'
+[18.965s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module '/home/hong-son/Autonomous_E-Scooter_Simulation/install/_local_setup_util_ps1.py'
+[18.966s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/setup.ps1'
+[18.966s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/local_setup.sh'
+[18.967s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module '/home/hong-son/Autonomous_E-Scooter_Simulation/install/_local_setup_util_sh.py'
+[18.967s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/setup.sh'
+[18.968s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/local_setup.bash'
+[18.968s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/setup.bash'
+[18.968s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/local_setup.zsh'
+[18.969s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/hong-son/Autonomous_E-Scooter_Simulation/install/setup.zsh'

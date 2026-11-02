@@ -1,0 +1,74 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /home/hong-son/.pyenv/shims/python3 (found version "3.10.12") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/hong-son/Autonomous_E-Scooter_Simulation/build/escooter_simulation
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/config/escooter_controllers.yaml
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/config/gazebo_params.yaml
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/config/joint_names_e-scooter.yaml
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/display.launch.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/escooter_sim.launch.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/gazebo_classic.launch.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/gazebo_ignition.launch.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/launch/robot_description.launch.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/back_wheel.STL
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/base_link.STL
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/e-scooter.urdf
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/front_wheel.STL
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/handle_bar_chasis.STL
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/reaction_motor.STL
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/rotational_plate.STL
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_base_1.dae
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_base_1.stl
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_base_2.dae
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_base_2.stl
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_scan.dae
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/VLP16_scan.stl
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/d435.dae
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/gps.stl
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/imu.stl
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/max_sonar_ez4.dae
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/realsense.dae
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/meshes/sensors/realsense.stl
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/rviz/escooter.rviz
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/urdf/e-scooter.gazebo.xacro
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/urdf/e-scooter.ros2_control.xacro
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/urdf/e-scooter.urdf.xacro
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/urdf/e-scooter_gazebo.csv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/worlds/escooter_empty.sdf
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/worlds/escooter_empty.world
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/escooter_simulation/xacro_to_urdf.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/escooter_simulation/start_simulation.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/escooter_simulation/export_isaac_urdf.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/lib/escooter_simulation/escooter_rl_controller.py
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/escooter_simulation.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/ament_index/resource_index/package_run_dependencies/escooter_simulation
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/ament_index/resource_index/parent_prefix_path/escooter_simulation
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/ament_prefix_path.sh
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/ament_prefix_path.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/path.sh
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/environment/path.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/local_setup.bash
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/local_setup.sh
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/local_setup.zsh
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/local_setup.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.dsv
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/ament_index/resource_index/packages/escooter_simulation
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/cmake/escooter_simulationConfig.cmake
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/cmake/escooter_simulationConfig-version.cmake
+-- Symlinking: /home/hong-son/Autonomous_E-Scooter_Simulation/install/escooter_simulation/share/escooter_simulation/package.xml
