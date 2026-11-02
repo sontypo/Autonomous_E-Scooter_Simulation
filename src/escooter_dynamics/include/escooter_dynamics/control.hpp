@@ -105,18 +105,12 @@ private:
   // Convert cmd_vel.linear.x [m/s] into a front wheel rate [rad/s].
   bool WHEEL_RATE_FROM_SPEED{true};
   // Steer-to-balance: roll torque gains, in N.m/rad and N.m/(rad/s).
-  double STEER_BALANCE_KP{0.0};
-  double STEER_BALANCE_KD{0.0};
-  double STEER_BALANCE_MAX{0.35};   // rad of steering it may add
-  double STEER_BALANCE_MIN_SPEED{1.0};   // fades in from here
-  double STEER_BALANCE_FULL_SPEED{2.0};  // ...to full authority here
   // Needed to turn a wanted roll torque into a steering angle.
   double WHOLE_BODY_WEIGHT{18.90654};
   double COM_POS_Z{0.392};
   double rider_delta_ = 0.0;        // the operator's steering request
   double rider_speed_ = 0.0;        // the operator's speed request
   double MAX_LINEAR_ACCEL{1.5};     // m/s^2 the speed command may change at
-  double balance_delta_ = 0.0;      // what steer-to-balance added, for logging
   int NUMBER_OF_JOINTS{3};
   double pose_x_ = 0.0;   // pose odometry
   double pose_y_ = 0.0;   // pose odometry

@@ -114,20 +114,6 @@ class EScooterRLController(Node):
         # Empty means estimate it here. It must never be the topic this node
         # publishes on, or it listens to its own output.
         self.declare_parameter("odom_topic", "")
-        # Isaac Lab's ImplicitActuator for the reaction plate applies
-        #     tau = stiffness*(q_des - q) + damping*(qd_des - qd) + effort_target
-        # with stiffness 0 and damping 0.2, so the plate always felt an extra
-        # -0.2*omega on top of the policy's torque - 30 N.m at the 150 rad/s the
-        # flywheel actually runs at, half the 60 N.m action scale.
-        #
-        # LEAVE THIS AT 0.0. Subtracting the term here was measured to make
-        # things worse, not better: peak lean went from 91 to 117 degrees. A
-        # velocity-proportional term delayed by the 20 ms control period is
-        # positive feedback, which is not what the plant does. The damping now
-        # lives where it belongs, as <dynamics damping> on rotational_plate_joint
-        # under the "isaac" actuator profile, so Gazebo applies it at the 1 kHz
-        # physics rate. Setting this non-zero on top of that double counts it.
-        self.declare_parameter("plate_damping", 0.0)   # N.m.s/rad
         # Log the full observation vector and the UNCLIPPED policy output at
         # debug_obs_rate Hz. The policy's steering head is close to unbounded in
         # the reaction_plate_vel input, so a raw action far outside [-1, 1] is
@@ -156,7 +142,6 @@ class EScooterRLController(Node):
         self.joint_vel_order = self.get_parameter(
             "joint_vel_order").get_parameter_value().string_value
         self.odom_topic = self.get_parameter("odom_topic").get_parameter_value().string_value
-        self.plate_damping = self.get_parameter("plate_damping").get_parameter_value().double_value
         self.debug_obs = self.get_parameter("debug_obs").get_parameter_value().bool_value
         self.debug_obs_rate = self.get_parameter("debug_obs_rate").get_parameter_value().double_value
         self._debug_every = max(1, int(round(
@@ -671,12 +656,12 @@ class EScooterRLController(Node):
         # Steering angle target (radians); matches JointPositionActionCfg with
         # use_default_offset=True and a default steering position of 0.
         steer_target = float(actions[0] * self.steering_scale)
-        # Reaction wheel effort (torque, N*m), including the implicit-actuator
-        # damping the policy was trained against.
-        plate_torque = float(
-            actions[1] * self.reaction_plate_scale
-            - self.plate_damping * self.reaction_plate_vel
-        )
+        # Reaction wheel effort (torque, N*m). The implicit-actuator damping
+        # the policy trains against is applied by the simulator, as
+        # <dynamics damping> on rotational_plate_joint under the "isaac"
+        # actuator profile; emulating it here at the 50 Hz control rate was
+        # measured to make things worse and is gone.
+        plate_torque = float(actions[1] * self.reaction_plate_scale)
         # Front drive wheel speed (rad/s)
         drive_speed = float(actions[2] * self.drive_wheel_scale * self.drive_wheel_sign)
 

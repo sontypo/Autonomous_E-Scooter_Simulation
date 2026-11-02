@@ -66,11 +66,6 @@ Control::Control(const rclcpp::Node::SharedPtr & node)
   getParam(node_, "STEERING_MIN_SPEED", STEERING_MIN_SPEED);
   getParam(node_, "MAX_STEERING_RATE", MAX_STEERING_RATE);
   getParam(node_, "WHEEL_RATE_FROM_SPEED", WHEEL_RATE_FROM_SPEED);
-  getParam(node_, "STEER_BALANCE_KP", STEER_BALANCE_KP);
-  getParam(node_, "STEER_BALANCE_KD", STEER_BALANCE_KD);
-  getParam(node_, "STEER_BALANCE_MAX", STEER_BALANCE_MAX);
-  getParam(node_, "STEER_BALANCE_MIN_SPEED", STEER_BALANCE_MIN_SPEED);
-  getParam(node_, "STEER_BALANCE_FULL_SPEED", STEER_BALANCE_FULL_SPEED);
   getParam(node_, "MAX_LINEAR_ACCEL", MAX_LINEAR_ACCEL);
   getParam(node_, "WHOLE_BODY_WEIGHT", WHOLE_BODY_WEIGHT);
   getParam(node_, "COM_POS_Z", COM_POS_Z);
@@ -355,58 +350,8 @@ void Control::updateSteering()
   joints_.front_wheel = (WHEEL_RATE_FROM_SPEED && WHEEL_RADIUS > 0.0) ?
     (Vx_ / WHEEL_RADIUS) : Vx_;
 
-  // Steer-to-balance.
-  //
-  // A reaction wheel can only trade a fixed amount of momentum, so it cannot
-  // hold a rolling bicycle up for long - measured, the scooter stayed within a
-  // few tenths of a degree for about 1.6 s and then went from 0.5 to 19 degrees
-  // in 400 ms. Bicycles stay up by steering into the fall instead: the turn
-  // throws the contact patch under the centre of mass.
-  //
-  // Steering generates a roll torque of M*h*v^2*tan(delta)/L, so the angle that
-  // delivers a wanted torque is delta = atan(L*tau/(M*h*v^2)). Writing it that
-  // way makes the term scale with speed on its own: it asks for little at
-  // 3 m/s and saturates at walking pace, which is honest - a bicycle cannot be
-  // balanced by steering when it is barely moving, and the reaction plate has
-  // to carry it there.
-  //
-  // Sign: positive delta turns the front wheel to +Y, the scooter yaws left, and
-  // the centre of mass is thrown right, which is positive roll. Correcting a
-  // positive roll therefore needs a negative steering angle.
-  balance_delta_ = 0.0;
-  const double speed = std::abs(Vx_);
-  // Authority fades in with speed. The roll torque steering can produce goes
-  // with v^2, so below walking pace the law asks for angles it cannot usefully
-  // reach: measured at 0.25 m/s it pinned the bars at the 20 degree stop for a
-  // one degree lean and drove the scooter over. Under
-  // STEER_BALANCE_MIN_SPEED the reaction plate carries the scooter alone.
-  double authority = 0.0;
-  if (STEER_BALANCE_FULL_SPEED > STEER_BALANCE_MIN_SPEED) {
-    authority = (speed - STEER_BALANCE_MIN_SPEED) /
-      (STEER_BALANCE_FULL_SPEED - STEER_BALANCE_MIN_SPEED);
-    authority = std::clamp(authority, 0.0, 1.0);
-  } else if (speed >= STEER_BALANCE_MIN_SPEED) {
-    authority = 1.0;
-  }
-
-  if (authority > 0.0 && (STEER_BALANCE_KP != 0.0 || STEER_BALANCE_KD != 0.0)) {
-    const double theta = body_frame_.orientation.roll;
-    const double tau_wanted = -(STEER_BALANCE_KP * theta + STEER_BALANCE_KD * body_roll_rate_);
-
-    const double lateral = WHOLE_BODY_WEIGHT * COM_POS_Z * speed * speed;
-    if (lateral > 0.0) {
-      balance_delta_ = authority *
-        std::atan(WHEEL_SEPARATION_DIS * tau_wanted / lateral);
-      balance_delta_ = std::clamp(balance_delta_, -STEER_BALANCE_MAX, STEER_BALANCE_MAX);
-      // Reversing throws the mass the other way, so the correction flips too.
-      if (Vx_ < 0.0) {
-        balance_delta_ = -balance_delta_;
-      }
-    }
-  }
-
   const double target =
-    std::clamp(rider_delta_ + balance_delta_, -MAX_STEERING_ANGLE, MAX_STEERING_ANGLE);
+    std::clamp(rider_delta_, -MAX_STEERING_ANGLE, MAX_STEERING_ANGLE);
 
   // Slew limit so the bars move quickly but not instantly.
   if (MAX_STEERING_RATE > 0.0 && dt > 0.0) {

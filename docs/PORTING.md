@@ -886,3 +886,65 @@ that sets it; the Ignition file declares the argument and ignores it, so
 The reaction plate rails at 200 rad/s on Ignition exactly as it does on
 Classic, which is the expected result: 15(b) is a property of the policy, not
 of a simulator.
+
+## 17. Teaching the flywheel to unload, and clearing out what did not work
+
+### Why the first attempt failed
+
+Section 16 added `reaction_plate_centering` as `1 - exp(-(w/20)^2)` at -0.6. It
+kept the plate near 3 rad/s in training and did nothing at all in deployment.
+Two reasons, and they compound:
+
+* **The shape is flat where it matters.** Above about 50 rad/s the exponential
+  has saturated, so once the plate got there the reward said nothing about
+  coming back. All of its gradient sits in a band the plate never left anyway.
+* **The plate never visited those speeds.** `reset_escooter_joints` started it
+  within +-5 rad/s and the episode held it there. A reward cannot teach a reflex
+  for a state that never occurs.
+
+So the policy arrived with the opposite reflex - commanded torque rising with
+plate speed, -2.3 N.m at 0 rad/s to +40.8 at 200 - and any persistent bias ran
+it to the limit.
+
+### What replaces it
+
+`reaction_plate_centering` is now clamped-linear, `min(|w| / 60, 3)` at -0.5:
+
+| plate speed | cost | against upright = 3.0 |
+|---|---|---|
+| 3 rad/s | 0.025 | 0.8 % |
+| 20 | 0.167 | 5.6 % |
+| 60 | 0.5 | 17 % |
+| 180 and up | 1.5 (capped) | 50 % |
+
+The same gradient at every speed, so there is always a reason to bleed momentum
+out; the cap stops it outweighing staying upright.
+
+And the plate now visits the range it has to learn:
+
+* `reset_escooter_joints` starts it anywhere in +-150 rad/s, was +-5.
+* `spin_reaction_plate`, a new interval event every 4 to 8 s, throws it to a
+  random speed in +-180 mid-episode. It is the flywheel's `push_robot`. Both
+  PLAY configs switch it off, like the pushes.
+
+Watch `Episode_Reward/reaction_plate_centering` while training. It should
+settle near zero; parked near -1.5 means the plate is sitting on its limit and
+the weight needs raising.
+
+### Removed
+
+* **`reaction_plate_speed_penalty`**, the `-0.0001 * w^2` term. Worth 1.6 % of
+  the upright reward at 22 rad/s and only biting above 100, it never shaped
+  anything the clamped-linear term does not now cover across the whole range.
+* **`plate_damping`** in `escooter_rl_controller.py`. Emulating the actuator
+  damping in the command at 50 Hz was measured to make things worse (peak lean
+  117 deg against 91); the damping has lived in the URDF since section 12, so
+  the parameter was dead and setting it would have double counted.
+* **steer-to-balance** in `escooter_dynamics` - `STEER_BALANCE_KP/KD/MAX/
+  MIN_SPEED/FULL_SPEED`, `balance_delta_` and the law that used them. It never
+  worked, shipped with its gains at zero, and was 23 references of dead weight
+  across working C++. The classical controller still holds +-0.62 deg with it
+  gone.
+
+`action_saturation_penalty` stays. It is the only thing bounding the raw policy
+output, and `scripts/check_policy_range.py` gates on exactly that.
